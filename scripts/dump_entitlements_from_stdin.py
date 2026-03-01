@@ -21,6 +21,64 @@ def resolve_output_path(input_path: Path, input_root_name: str, output_root: Pat
     return (output_root / relative_path).with_name(relative_path.name + ".xml")
 
 
+def _extract_plist_documents(raw_xml: bytes) -> list[bytes]:
+    docs: list[bytes] = []
+    search_from = 0
+    plist_open = b"<plist"
+    plist_close = b"</plist>"
+    xml_open = b"<?xml"
+    xml_close = b"?>"
+
+    while True:
+        plist_start = raw_xml.find(plist_open, search_from)
+        if plist_start == -1:
+            break
+
+        plist_end = raw_xml.find(plist_close, plist_start)
+        if plist_end == -1:
+            break
+
+        plist_end += len(plist_close)
+
+        xml_start = raw_xml.rfind(xml_open, 0, plist_start)
+        if xml_start != -1:
+            xml_end = raw_xml.find(xml_close, xml_start)
+            if xml_end != -1 and xml_end <= plist_start:
+                doc_start = xml_start
+            else:
+                doc_start = plist_start
+        else:
+            doc_start = plist_start
+
+        doc = raw_xml[doc_start:plist_end].strip()
+        if doc:
+            docs.append(doc)
+
+        search_from = plist_end
+
+    if docs:
+        return docs
+
+    normalized = raw_xml.strip()
+    return [normalized] if normalized else []
+
+
+def normalize_entitlements_xml(raw_xml: bytes) -> bytes:
+    documents = _extract_plist_documents(raw_xml)
+    if not documents:
+        raise RuntimeError("ldid returned empty entitlements")
+
+    unique_docs: list[bytes] = []
+    seen: set[bytes] = set()
+    for doc in documents:
+        if doc in seen:
+            continue
+        seen.add(doc)
+        unique_docs.append(doc)
+
+    return unique_docs[0] + b"\n"
+
+
 def dump_entitlements(binary_path: Path) -> bytes:
     result = subprocess.run(
         ["ldid", "-e", str(binary_path)],
@@ -36,7 +94,7 @@ def dump_entitlements(binary_path: Path) -> bytes:
     if not result.stdout.strip():
         raise RuntimeError("ldid returned empty entitlements")
 
-    return result.stdout
+    return normalize_entitlements_xml(result.stdout)
 
 
 def iter_input_paths() -> list[Path]:
