@@ -17,7 +17,20 @@
         <h1 id="title">Mach-O Path</h1>
       </header>
       <section class="card">
-        <p id="summary" class="summary"></p>
+        <div class="summary-row">
+          <p id="summary" class="summary"></p>
+          <button
+            id="download-plist"
+            class="summary-action-btn"
+            type="button"
+            title="Download plist"
+            aria-label="Download plist"
+            hidden
+            disabled
+          >
+            ⬇️
+          </button>
+        </div>
         <ul id="results" class="result-list"></ul>
       </section>
     </main>

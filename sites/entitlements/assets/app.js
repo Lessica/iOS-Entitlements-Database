@@ -153,6 +153,40 @@ function formatGeneratedAt(isoText) {
   return date.toISOString().replace('T', ' ').replace('.000Z', ' UTC').replace('Z', ' UTC');
 }
 
+function sanitizeFilePart(text) {
+  return String(text).replace(/[^a-zA-Z0-9._-]+/g, '_').replace(/^_+|_+$/g, '') || 'entitlements';
+}
+
+function plistDownloadFilename(path, versionId) {
+  const baseName = path.split('/').filter(Boolean).pop() || 'entitlements';
+  const safeName = sanitizeFilePart(baseName);
+  const safeVersion = sanitizeFilePart(versionId || 'current');
+  return `${safeName}__${safeVersion}.plist`;
+}
+
+function buildRootPlistText(data) {
+  return [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">',
+    '<plist version="1.0">',
+    plistFragment(data, 1),
+    '</plist>',
+    '',
+  ].join('\n');
+}
+
+function triggerTextDownload(text, filename, mimeType) {
+  const blob = new Blob([text], { type: mimeType });
+  const objectUrl = URL.createObjectURL(blob);
+  const anchor = document.createElement('a');
+  anchor.href = objectUrl;
+  anchor.download = filename;
+  document.body.appendChild(anchor);
+  anchor.click();
+  anchor.remove();
+  setTimeout(() => URL.revokeObjectURL(objectUrl), 0);
+}
+
 function setQueryParam(name, value) {
   const url = new URL(window.location.href);
   url.searchParams.set(name, value);
@@ -1288,11 +1322,16 @@ export function initPathDetailPage() {
     const title = document.getElementById('title');
     const summary = document.getElementById('summary');
     const results = document.getElementById('results');
+    const downloadButton = document.getElementById('download-plist');
 
     const targetPath = queryParam('path').trim();
     const requestedVersionId = queryParam('version').trim();
     if (!targetPath) {
       renderNoData(summary, results, 'Missing query parameter: path');
+      if (downloadButton) {
+        downloadButton.hidden = true;
+        downloadButton.disabled = true;
+      }
       return;
     }
 
@@ -1319,6 +1358,33 @@ export function initPathDetailPage() {
       version_ids: entry.version_ids ?? [],
       values_by_version: entry.values_by_version ?? {},
     }));
+
+    const buildEntitlementsForVersion = (versionId) => {
+      const entitlements = {};
+      for (const entry of entries) {
+        const payload = entry.values_by_version?.[versionId];
+        if (!payload || !Object.prototype.hasOwnProperty.call(payload, 'value')) {
+          continue;
+        }
+        entitlements[entry.name] = payload.value;
+      }
+      return entitlements;
+    };
+
+    if (downloadButton) {
+      downloadButton.hidden = false;
+      downloadButton.disabled = false;
+      downloadButton.addEventListener('click', () => {
+        const versionId = currentVersionParam() || defaultVersionId;
+        const entitlements = buildEntitlementsForVersion(versionId);
+        const plistText = buildRootPlistText(entitlements);
+        triggerTextDownload(
+          plistText,
+          plistDownloadFilename(targetPath, versionId),
+          'application/x-plist+xml;charset=utf-8',
+        );
+      });
+    }
 
     let rowVersionControllers = [];
     const syncPageVersion = (versionId, anchorEl = null) => {
@@ -1375,6 +1441,11 @@ export function initPathDetailPage() {
     refreshVersionLinks(currentVersionParam());
   })().catch((error) => {
     const summary = document.getElementById('summary');
+    const downloadButton = document.getElementById('download-plist');
     summary.textContent = String(error);
+    if (downloadButton) {
+      downloadButton.hidden = true;
+      downloadButton.disabled = true;
+    }
   });
 }
