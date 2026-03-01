@@ -200,6 +200,13 @@ function renderNoData(summaryEl, listEl, message) {
   syncResultsVisibility(listEl);
 }
 
+function renderLoading(summaryEl, listEl) {
+  summaryEl.textContent = 'Loading…';
+  summaryEl.hidden = false;
+  listEl.innerHTML = '';
+  syncResultsVisibility(listEl);
+}
+
 function syncResultsVisibility(listEl) {
   listEl.hidden = listEl.childElementCount === 0;
 }
@@ -939,6 +946,8 @@ async function initSearchPage({ indexFile, linkBuilder, summaryPrefix, historyHr
   const summary = document.getElementById('summary');
   const results = document.getElementById('results');
 
+  renderLoading(summary, results);
+
   input.setAttribute('spellcheck', 'false');
 
   const runSearch = (query) => {
@@ -1088,6 +1097,8 @@ async function initDetailPage({ indexFile, queryKey, itemHrefBuilder, historyHre
   const pagePrefix = queryKey === 'key' ? 'Entitlement Key' : 'Mach-O Path';
   document.title = `${pagePrefix}: ${targetName}`;
 
+  renderLoading(summary, results);
+
   const { byName, versionLabelById, versionRankById } = await loadCoreData(indexFile);
   const entries = byName.get(targetName) ?? [];
 
@@ -1115,12 +1126,13 @@ export async function initHistoryPage() {
 
   const path = queryParam('path').trim();
   const key = queryParam('key').trim();
-  summary.hidden = true;
 
   if (!path || !key) {
     renderNoData(summary, results, 'Missing query parameters: path and key are required.');
     return;
   }
+
+  renderLoading(summary, results);
 
   if (nav) {
     nav.innerHTML = '';
@@ -1254,6 +1266,8 @@ export function initKeyDetailPage() {
       return;
     }
 
+    renderLoading(summary, results);
+
     document.title = `Entitlement Key: ${targetKey}`;
 
     const [versions, keyRecord] = await Promise.all([
@@ -1360,6 +1374,8 @@ export function initPathDetailPage() {
       }
       return;
     }
+
+    renderLoading(summary, results);
 
     document.title = `Mach-O Path: ${targetPath}`;
 
