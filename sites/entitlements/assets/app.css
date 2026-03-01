@@ -93,6 +93,21 @@ h2 {
   margin: 10px 0 0;
 }
 
+.home-summary-section {
+  margin-top: 18px;
+}
+
+.home-list {
+  list-style: disc;
+  margin: 12px 0 0;
+  padding-left: 40px;
+}
+
+.home-list li {
+  padding: 3px 0;
+  font-size: 0.94rem;
+}
+
 .top-nav {
   margin-bottom: 10px;
   font-size: 0.93rem;

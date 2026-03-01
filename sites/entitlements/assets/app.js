@@ -133,6 +133,26 @@ function runWithStableViewport(updateFn, anchorEl = null) {
   });
 }
 
+function formatCount(value) {
+  if (typeof value !== 'number' || Number.isNaN(value)) {
+    return 'unknown';
+  }
+  return new Intl.NumberFormat('en-US').format(value);
+}
+
+function formatGeneratedAt(isoText) {
+  if (!isoText) {
+    return 'unknown';
+  }
+
+  const date = new Date(isoText);
+  if (Number.isNaN(date.getTime())) {
+    return String(isoText);
+  }
+
+  return date.toISOString().replace('T', ' ').replace('.000Z', ' UTC').replace('Z', ' UTC');
+}
+
 function setQueryParam(name, value) {
   const url = new URL(window.location.href);
   url.searchParams.set(name, value);
@@ -1090,6 +1110,47 @@ export async function initHistoryPage() {
 export function initHomePage() {
   initThemeToggle();
   refreshVersionLinks();
+
+  const status = document.getElementById('home-summary-status');
+  const list = document.getElementById('home-summary-list');
+  if (!status || !list) {
+    return;
+  }
+
+  (async () => {
+    const [metadata, versions] = await Promise.all([
+      fetchJson('metadata.json'),
+      fetchJson('versions.json'),
+    ]);
+
+    const newest = versions[0] ?? null;
+    const oldest = versions[versions.length - 1] ?? null;
+    const rangeLabel = newest && oldest
+      ? `${oldest.ios_version} (${oldest.build}) → ${newest.ios_version} (${newest.build})`
+      : 'unknown';
+
+    const rows = [
+      ['Total Versions', formatCount(Number(metadata.total_versions ?? versions.length))],
+      ['Total Entitlement Keys', formatCount(Number(metadata.total_keys))],
+      ['Total Mach-O Paths', formatCount(Number(metadata.total_paths))],
+      ['Version Range', rangeLabel],
+      ['Generated At (UTC)', formatGeneratedAt(metadata.generated_at_utc)],
+    ];
+
+    list.innerHTML = '';
+    for (const [label, value] of rows) {
+      const item = document.createElement('li');
+      item.textContent = `${label}: ${value}`;
+      list.appendChild(item);
+    }
+
+    status.hidden = true;
+    list.hidden = false;
+  })().catch((error) => {
+    status.hidden = false;
+    status.textContent = `Failed to load dataset summary: ${String(error)}`;
+    list.hidden = true;
+  });
 }
 
 export function initSearchByKeyPage() {
