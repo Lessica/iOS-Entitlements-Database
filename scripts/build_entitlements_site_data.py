@@ -285,13 +285,19 @@ def main() -> None:
     key_index_dir = v2_dir / "key_index"
     path_index_dir = v2_dir / "path_index"
     buckets_dir = v2_dir / "buckets"
+    path_detail_dir = v2_dir / "path_detail_shards"
+    key_detail_dir = v2_dir / "key_detail_shards"
     key_index_dir.mkdir(parents=True, exist_ok=True)
     path_index_dir.mkdir(parents=True, exist_ok=True)
     buckets_dir.mkdir(parents=True, exist_ok=True)
+    path_detail_dir.mkdir(parents=True, exist_ok=True)
+    key_detail_dir.mkdir(parents=True, exist_ok=True)
 
     key_shards: dict[str, dict[str, list[dict[str, str]]]] = defaultdict(lambda: defaultdict(list))
     path_shards: dict[str, dict[str, list[dict[str, str]]]] = defaultdict(lambda: defaultdict(list))
     bucket_shards: dict[str, dict[str, dict[str, Any]]] = defaultdict(dict)
+    path_details: dict[str, dict[str, dict[str, Any]]] = defaultdict(dict)
+    key_details: dict[str, dict[str, dict[str, Any]]] = defaultdict(dict)
 
     pair_count = 0
     for path, key in sorted(pair_histories.keys()):
@@ -319,6 +325,28 @@ def main() -> None:
             "history": timeline,
         }
 
+        values_by_version = {
+            item["version_id"]: {
+                "value_hash": item["value_hash"],
+                "value": item["value"],
+            }
+            for item in timeline
+        }
+
+        path_details[path][key] = {
+            "key": key,
+            "pair_id": pair_id,
+            "version_ids": [item["version_id"] for item in timeline],
+            "values_by_version": values_by_version,
+        }
+
+        key_details[key][path] = {
+            "path": path,
+            "pair_id": pair_id,
+            "version_ids": [item["version_id"] for item in timeline],
+            "values_by_version": values_by_version,
+        }
+
     for prefix, payload in key_shards.items():
         normalized_items = {
             key: sorted(items, key=lambda entry: (entry["path"], entry["pair_id"]))
@@ -338,6 +366,34 @@ def main() -> None:
         max_bucket_pairs = max(max_bucket_pairs, len(pairs))
         write_json(buckets_dir / f"{prefix}.json", {"pairs": pairs})
 
+    path_detail_shards: dict[str, dict[str, dict[str, Any]]] = defaultdict(dict)
+    for path, key_map in sorted(path_details.items()):
+        prefix = shard_prefix(path)
+        entries = [
+            key_map[key]
+            for key in sorted(key_map.keys())
+        ]
+        path_detail_shards[prefix][path] = {"entries": entries}
+
+    max_paths_in_path_detail_shard = 0
+    for prefix, items in path_detail_shards.items():
+        max_paths_in_path_detail_shard = max(max_paths_in_path_detail_shard, len(items))
+        write_json(path_detail_dir / f"{prefix}.json", {"items": items})
+
+    key_detail_shards: dict[str, dict[str, dict[str, Any]]] = defaultdict(dict)
+    for key, path_map in sorted(key_details.items()):
+        prefix = shard_prefix(key)
+        entries = [
+            path_map[path]
+            for path in sorted(path_map.keys())
+        ]
+        key_detail_shards[prefix][key] = {"entries": entries}
+
+    max_keys_in_key_detail_shard = 0
+    for prefix, items in key_detail_shards.items():
+        max_keys_in_key_detail_shard = max(max_keys_in_key_detail_shard, len(items))
+        write_json(key_detail_dir / f"{prefix}.json", {"items": items})
+
     v2_metadata = {
         "generated_at_utc": metadata["generated_at_utc"],
         "canon_version": "v1",
@@ -346,6 +402,12 @@ def main() -> None:
         "path_shard_files": len(path_shards),
         "bucket_files": len(bucket_shards),
         "max_pairs_in_bucket": max_bucket_pairs,
+        "path_detail_shard_files": len(path_detail_shards),
+        "path_detail_schema_version": "v1",
+        "max_paths_in_path_detail_shard": max_paths_in_path_detail_shard,
+        "key_detail_shard_files": len(key_detail_shards),
+        "key_detail_schema_version": "v1",
+        "max_keys_in_key_detail_shard": max_keys_in_key_detail_shard,
     }
     write_json(v2_dir / "metadata.json", v2_metadata, pretty=True)
 

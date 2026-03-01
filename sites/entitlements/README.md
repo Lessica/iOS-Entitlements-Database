@@ -26,6 +26,8 @@ Generated files:
 - `sites/entitlements/data/v2/key_index/*.json`
 - `sites/entitlements/data/v2/path_index/*.json`
 - `sites/entitlements/data/v2/buckets/*.json`
+- `sites/entitlements/data/v2/path_detail_shards/*.json`
+- `sites/entitlements/data/v2/key_detail_shards/*.json`
 
 ## Preview static site
 

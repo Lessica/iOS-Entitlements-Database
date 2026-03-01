@@ -1,5 +1,57 @@
 const DATA_BASE = './data';
 const V2_BASE = `${DATA_BASE}/v2`;
+const THEME_STORAGE_KEY = 'entitlements-theme';
+let themeToggleInitialized = false;
+
+function resolvedTheme() {
+  const stored = localStorage.getItem(THEME_STORAGE_KEY);
+  if (stored === 'light' || stored === 'dark') {
+    return stored;
+  }
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+}
+
+function toggleTheme(current) {
+  return current === 'dark' ? 'light' : 'dark';
+}
+
+function buttonLabel(theme) {
+  return theme === 'dark' ? '☀️ Light' : '🌙 Dark';
+}
+
+export function initThemeToggle() {
+  if (themeToggleInitialized) {
+    return;
+  }
+  themeToggleInitialized = true;
+
+  const initialTheme = resolvedTheme();
+  applyTheme(initialTheme);
+
+  let button = document.getElementById('theme-toggle');
+  if (!button) {
+    button = document.createElement('button');
+    button.id = 'theme-toggle';
+    button.className = 'theme-toggle';
+    button.type = 'button';
+    document.body.appendChild(button);
+  }
+
+  button.textContent = buttonLabel(initialTheme);
+  button.setAttribute('aria-label', 'Toggle light and dark theme');
+
+  button.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme') || resolvedTheme();
+    const next = toggleTheme(current);
+    applyTheme(next);
+    localStorage.setItem(THEME_STORAGE_KEY, next);
+    button.textContent = buttonLabel(next);
+  });
+}
 
 async function fetchJson(name) {
   const response = await fetch(`${DATA_BASE}/${name}`);
@@ -22,6 +74,63 @@ async function fetchJsonOptional(url) {
 
 function queryParam(name) {
   return new URLSearchParams(window.location.search).get(name) ?? '';
+}
+
+function currentVersionParam() {
+  return queryParam('version').trim();
+}
+
+function withVersionParam(href, versionId = currentVersionParam()) {
+  if (!href || !versionId) {
+    return href;
+  }
+
+  try {
+    const url = new URL(href, window.location.href);
+    if (url.origin !== window.location.origin) {
+      return href;
+    }
+    url.searchParams.set('version', versionId);
+    return `${url.pathname}${url.search}${url.hash}`;
+  } catch {
+    return href;
+  }
+}
+
+function refreshVersionLinks(versionId = currentVersionParam()) {
+  if (!versionId) {
+    return;
+  }
+
+  const anchors = document.querySelectorAll('a[href]');
+  for (const anchor of anchors) {
+    const rawHref = anchor.getAttribute('href') ?? '';
+    if (!rawHref || rawHref.startsWith('#') || rawHref.startsWith('mailto:') || rawHref.startsWith('tel:')) {
+      continue;
+    }
+
+    const updatedHref = withVersionParam(rawHref, versionId);
+    anchor.setAttribute('href', updatedHref);
+  }
+}
+
+function runWithStableViewport(updateFn, anchorEl = null) {
+  const scrollX = window.scrollX;
+  const scrollY = window.scrollY;
+  const anchorTop = anchorEl?.getBoundingClientRect().top ?? null;
+
+  updateFn();
+
+  requestAnimationFrame(() => {
+    if (anchorEl && anchorTop !== null) {
+      const nextTop = anchorEl.getBoundingClientRect().top;
+      const delta = nextTop - anchorTop;
+      window.scrollBy(0, delta);
+      return;
+    }
+
+    window.scrollTo(scrollX, scrollY);
+  });
 }
 
 function setQueryParam(name, value) {
@@ -49,11 +158,30 @@ function buildHistoryUrl({ path = '', key = '' }) {
   if (key) {
     params.set('key', key);
   }
+  const versionId = currentVersionParam();
+  if (versionId) {
+    params.set('version', versionId);
+  }
   const suffix = params.toString();
   return suffix ? `./history.html?${suffix}` : './history.html';
 }
 
-function createResultItem(targetHref, title, versionLabels, historyHref = '') {
+function createResultItem(
+  targetHref,
+  title,
+  versionLabels,
+  historyHref = '',
+  extraElement = null,
+  itemOptions = {},
+) {
+  const {
+    selectablePills = false,
+    activeVersionId = '',
+    onVersionSelect = null,
+    onVersionClick = null,
+    shouldShowActiveMarker = null,
+  } = itemOptions;
+
   const item = document.createElement('li');
   item.className = 'result-item';
 
@@ -62,14 +190,14 @@ function createResultItem(targetHref, title, versionLabels, historyHref = '') {
 
   const main = document.createElement('a');
   main.className = 'item-main';
-  main.href = targetHref;
+  main.href = withVersionParam(targetHref);
   main.textContent = title;
   head.appendChild(main);
 
   if (historyHref) {
     const historyLink = document.createElement('a');
     historyLink.className = 'history-link';
-    historyLink.href = historyHref;
+    historyLink.href = withVersionParam(historyHref);
     historyLink.title = 'View value history';
     historyLink.setAttribute('aria-label', 'View value history');
     historyLink.textContent = '🕘';
@@ -78,9 +206,58 @@ function createResultItem(targetHref, title, versionLabels, historyHref = '') {
 
   const versions = document.createElement('div');
   versions.className = 'version-list';
+  const pillNodes = [];
+  const movingActiveMarker = selectablePills
+    ? (() => {
+        const marker = document.createElement('span');
+        marker.className = 'version-pill-part version-pill-active-marker';
+        marker.textContent = '↓';
+        return marker;
+      })()
+    : null;
+
+  const setActivePill = (versionId) => {
+    for (const node of pillNodes) {
+      node.classList.toggle('version-pill-active', node.dataset.versionId === versionId);
+    }
+
+    if (movingActiveMarker) {
+      const activePill = pillNodes.find((node) => node.dataset.versionId === versionId) ?? null;
+      if (activePill) {
+        const shouldShow =
+          typeof shouldShowActiveMarker === 'function'
+            ? shouldShowActiveMarker(versionId)
+            : true;
+        if (shouldShow) {
+          activePill.appendChild(movingActiveMarker);
+        } else {
+          movingActiveMarker.remove();
+        }
+      }
+    }
+  };
+
+  const applyVersionSelection = (versionId) => {
+    setActivePill(versionId);
+    if (typeof onVersionSelect === 'function') {
+      onVersionSelect(versionId);
+    }
+  };
+
   for (const version of versionLabels) {
-    const pill = document.createElement('span');
-    pill.className = 'version-pill';
+    const pill = selectablePills ? document.createElement('button') : document.createElement('span');
+    pill.className = selectablePills ? 'version-pill version-pill-interactive' : 'version-pill';
+    if (selectablePills) {
+      pill.type = 'button';
+      pill.dataset.versionId = version.versionId;
+      pill.setAttribute('aria-label', `Show value for ${version.iosVersion} (${version.build})`);
+      pill.addEventListener('click', () => {
+        applyVersionSelection(version.versionId);
+        if (typeof onVersionClick === 'function') {
+          onVersionClick(version.versionId, item);
+        }
+      });
+    }
     pill.style.setProperty('--pill-hue', String(stableHue(version.versionId)));
 
     const versionPart = document.createElement('span');
@@ -96,10 +273,31 @@ function createResultItem(targetHref, title, versionLabels, historyHref = '') {
     buildPart.textContent = version.build;
 
     pill.append(versionPart, separator, buildPart);
+    if (!selectablePills && version.isPrimaryMarker) {
+      const primaryMarker = document.createElement('span');
+      primaryMarker.className = 'version-pill-part version-pill-active-marker';
+      primaryMarker.textContent = '↓';
+      pill.appendChild(primaryMarker);
+    }
+
+    pillNodes.push(pill);
     versions.appendChild(pill);
   }
 
+  if (selectablePills) {
+    const fallback = versionLabels[0]?.versionId ?? '';
+    const selectedId = activeVersionId || fallback;
+    if (selectedId) {
+      applyVersionSelection(selectedId);
+    }
+
+    item.applyVersionSelection = applyVersionSelection;
+  }
+
   item.append(head, versions);
+  if (extraElement) {
+    item.appendChild(extraElement);
+  }
   return item;
 }
 
@@ -407,10 +605,124 @@ function plistFragment(value, depth = 0) {
   return `${indent}<string>${escapeXml(String(value))}</string>`;
 }
 
+function highlightPlist(plistText) {
+  const lines = plistText.split('\n');
+
+  return lines
+    .map((line) => {
+      const tagPattern = /<\/?[a-zA-Z0-9:-]+\s*\/?>/g;
+      let output = '';
+      let lastIndex = 0;
+      let inKey = false;
+
+      for (const match of line.matchAll(tagPattern)) {
+        const tag = match[0];
+        const index = match.index ?? 0;
+
+        const textPart = line.slice(lastIndex, index)
+          .replaceAll('<', '&lt;')
+          .replaceAll('>', '&gt;');
+
+        if (textPart.trim() === '') {
+          output += textPart;
+        } else if (inKey) {
+          output += `<span class="xml-key">${textPart}</span>`;
+        } else {
+          output += `<span class="xml-text">${textPart}</span>`;
+        }
+
+        const isClosing = tag.startsWith('</');
+        const isSelfClosing = tag.endsWith('/>');
+        const nameMatch = tag.match(/^<\/?([a-zA-Z0-9:-]+)/);
+        const tagName = nameMatch ? nameMatch[1] : '';
+
+        const renderedTag = `&lt;${isClosing ? '/' : ''}${tagName}${isSelfClosing && !isClosing ? '/' : ''}&gt;`;
+        output += `<span class="xml-tag">${renderedTag}</span>`;
+
+        if (!isClosing && !isSelfClosing && tagName === 'key') {
+          inKey = true;
+        }
+        if (isClosing && tagName === 'key') {
+          inKey = false;
+        }
+
+        lastIndex = index + tag.length;
+      }
+
+      const tail = line.slice(lastIndex)
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;');
+
+      if (tail.trim() === '') {
+        output += tail;
+      } else if (inKey) {
+        output += `<span class="xml-key">${tail}</span>`;
+      } else {
+        output += `<span class="xml-text">${tail}</span>`;
+      }
+
+      return output;
+    })
+    .join('\n');
+}
+
 function historyVersionLabel(version) {
   const iosVersion = version.ios_version ?? version.version_id;
   const build = version.build ?? '';
   return build ? `${iosVersion} (${build})` : String(iosVersion);
+}
+
+async function loadPathDetailRecord(path) {
+  const shard = fnvShardPrefix(path);
+  const data = await fetchJsonOptional(`${V2_BASE}/path_detail_shards/${shard}.json`);
+  if (!data || !data.items) {
+    return null;
+  }
+  return data.items[path] ?? null;
+}
+
+async function loadKeyDetailRecord(key) {
+  const shard = fnvShardPrefix(key);
+  const data = await fetchJsonOptional(`${V2_BASE}/key_detail_shards/${shard}.json`);
+  if (!data || !data.items) {
+    return null;
+  }
+  return data.items[key] ?? null;
+}
+
+function createVersionSwitchableValueElement(valuesByVersion, initialVersionId) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'latest-value-block';
+
+  const missing = document.createElement('div');
+  missing.className = 'history-body';
+  missing.textContent = 'Entitlement is not present in this version.';
+  missing.hidden = true;
+
+  const pre = document.createElement('pre');
+  pre.className = 'history-value latest-value';
+  wrapper.append(missing, pre);
+
+  const renderVersion = (versionId) => {
+    const payload = valuesByVersion?.[versionId];
+    if (!payload) {
+      missing.hidden = false;
+      pre.hidden = true;
+      pre.textContent = '';
+      return;
+    }
+
+    missing.hidden = true;
+    pre.hidden = false;
+    pre.innerHTML = highlightPlist(plistFragment(payload.value));
+  };
+
+  renderVersion(initialVersionId);
+
+  return {
+    element: wrapper,
+    onVersionSelect: renderVersion,
+  };
 }
 
 function createHistoryTimelineItem(versionLabel, status, value) {
@@ -438,7 +750,7 @@ function createHistoryTimelineItem(versionLabel, status, value) {
   } else {
     const pre = document.createElement('pre');
     pre.className = 'history-value';
-    pre.textContent = plistFragment(value);
+    pre.innerHTML = highlightPlist(plistFragment(value));
     body.appendChild(pre);
   }
   item.appendChild(body);
@@ -624,14 +936,26 @@ async function initSearchPage({ indexFile, linkBuilder, summaryPrefix, historyHr
   }
 }
 
-function renderDetail({ titleEl, summaryEl, listEl, targetName, entries, versionLabelById, itemHrefBuilder, historyHrefBuilder }) {
+function renderDetail({
+  titleEl,
+  summaryEl,
+  listEl,
+  targetName,
+  entries,
+  versionLabelById,
+  itemHrefBuilder,
+  historyHrefBuilder,
+  extraElementBuilder,
+}) {
+  const rowVersionControllers = [];
+
   titleEl.textContent = targetName;
 
   if (!entries || entries.length === 0) {
     summaryEl.textContent = 'No records found.';
     listEl.innerHTML = '';
     syncResultsVisibility(listEl);
-    return;
+    return rowVersionControllers;
   }
 
   summaryEl.textContent = `${entries.length} linked item(s)`;
@@ -639,12 +963,39 @@ function renderDetail({ titleEl, summaryEl, listEl, targetName, entries, version
 
   for (const entry of entries) {
     const versionLabels = toVersionLabels(entry.version_ids, versionLabelById);
+    if (extraElementBuilder && versionLabels.length > 0) {
+      versionLabels[0].isPrimaryMarker = true;
+    }
     const historyHref = historyHrefBuilder ? historyHrefBuilder(entry.name, targetName) : '';
-    const item = createResultItem(itemHrefBuilder(entry.name), entry.name, versionLabels, historyHref);
+    let extraElement = null;
+    let itemOptions = {};
+    const extraRender = extraElementBuilder ? extraElementBuilder(entry, versionLabels) : null;
+
+    if (extraRender && typeof extraRender === 'object' && 'element' in extraRender) {
+      extraElement = extraRender.element ?? null;
+      itemOptions = extraRender.itemOptions ?? {};
+    } else {
+      extraElement = extraRender;
+    }
+
+    const item = createResultItem(
+      itemHrefBuilder(entry.name),
+      entry.name,
+      versionLabels,
+      historyHref,
+      extraElement,
+      itemOptions,
+    );
+
+    if (typeof item.applyVersionSelection === 'function') {
+      rowVersionControllers.push(item.applyVersionSelection);
+    }
+
     listEl.appendChild(item);
   }
 
   syncResultsVisibility(listEl);
+  return rowVersionControllers;
 }
 
 async function initDetailPage({ indexFile, queryKey, itemHrefBuilder, historyHrefBuilder }) {
@@ -677,6 +1028,9 @@ async function initDetailPage({ indexFile, queryKey, itemHrefBuilder, historyHre
 }
 
 export async function initHistoryPage() {
+  initThemeToggle();
+  refreshVersionLinks();
+
   const title = document.getElementById('title');
   const summary = document.getElementById('summary');
   const results = document.getElementById('results');
@@ -695,7 +1049,7 @@ export async function initHistoryPage() {
     nav.innerHTML = '';
 
     const home = document.createElement('a');
-    home.href = './index.html';
+    home.href = withVersionParam('./index.html');
     home.textContent = '← Home';
 
     const sep1 = document.createElement('span');
@@ -703,7 +1057,7 @@ export async function initHistoryPage() {
     sep1.textContent = '·';
 
     const keyDetail = document.createElement('a');
-    keyDetail.href = `./key.html?key=${encodeURIComponent(key)}`;
+    keyDetail.href = withVersionParam(`./key.html?key=${encodeURIComponent(key)}`);
     keyDetail.textContent = 'Back to Key Detail';
 
     const sep2 = document.createElement('span');
@@ -711,7 +1065,7 @@ export async function initHistoryPage() {
     sep2.textContent = '·';
 
     const pathDetail = document.createElement('a');
-    pathDetail.href = `./path.html?path=${encodeURIComponent(path)}`;
+    pathDetail.href = withVersionParam(`./path.html?path=${encodeURIComponent(path)}`);
     pathDetail.textContent = 'Back to Path Detail';
 
     nav.append(home, sep1, keyDetail, sep2, pathDetail);
@@ -733,7 +1087,15 @@ export async function initHistoryPage() {
   });
 }
 
+export function initHomePage() {
+  initThemeToggle();
+  refreshVersionLinks();
+}
+
 export function initSearchByKeyPage() {
+  initThemeToggle();
+  refreshVersionLinks();
+
   initSearchPage({
     indexFile: 'index_by_key.json',
     linkBuilder: (key) => `./key.html?key=${encodeURIComponent(key)}`,
@@ -745,6 +1107,9 @@ export function initSearchByKeyPage() {
 }
 
 export function initSearchByPathPage() {
+  initThemeToggle();
+  refreshVersionLinks();
+
   initSearchPage({
     indexFile: 'index_by_path.json',
     linkBuilder: (path) => `./path.html?path=${encodeURIComponent(path)}`,
@@ -756,24 +1121,198 @@ export function initSearchByPathPage() {
 }
 
 export function initKeyDetailPage() {
-  initDetailPage({
-    indexFile: 'index_by_key.json',
-    queryKey: 'key',
-    itemHrefBuilder: (path) => `./path.html?path=${encodeURIComponent(path)}`,
-    historyHrefBuilder: (path, currentKey) => buildHistoryUrl({ path, key: currentKey }),
-  }).catch((error) => {
+  initThemeToggle();
+  refreshVersionLinks();
+
+  (async () => {
+    const title = document.getElementById('title');
+    const summary = document.getElementById('summary');
+    const results = document.getElementById('results');
+
+    const targetKey = queryParam('key').trim();
+    const requestedVersionId = queryParam('version').trim();
+    if (!targetKey) {
+      renderNoData(summary, results, 'Missing query parameter: key');
+      return;
+    }
+
+    document.title = `Entitlement Key: ${targetKey}`;
+
+    const [versions, keyRecord] = await Promise.all([
+      loadVersions(),
+      loadKeyDetailRecord(targetKey),
+    ]);
+
+    const versionLabelById = new Map();
+    for (const version of versions) {
+      versionLabelById.set(version.version_id, {
+        iosVersion: version.ios_version,
+        build: version.build,
+      });
+    }
+
+    const defaultVersionId = requestedVersionId || versions[0]?.version_id || '';
+
+    const entries = (keyRecord?.entries ?? []).map((entry) => ({
+      name: entry.path,
+      pair_id: entry.pair_id,
+      version_ids: entry.version_ids ?? [],
+      values_by_version: entry.values_by_version ?? {},
+    }));
+
+    let rowVersionControllers = [];
+    const syncPageVersion = (versionId, anchorEl = null) => {
+      if (!versionId) {
+        return;
+      }
+
+      runWithStableViewport(() => {
+        for (const applyVersionSelection of rowVersionControllers) {
+          applyVersionSelection(versionId);
+        }
+        setQueryParam('version', versionId);
+        refreshVersionLinks(versionId);
+      }, anchorEl);
+    };
+
+    rowVersionControllers = renderDetail({
+      titleEl: title,
+      summaryEl: summary,
+      listEl: results,
+      targetName: targetKey,
+      entries,
+      versionLabelById,
+      itemHrefBuilder: (path) => `./path.html?path=${encodeURIComponent(path)}`,
+      historyHrefBuilder: (path, currentKey) => buildHistoryUrl({ path, key: currentKey }),
+      extraElementBuilder: (entry) => {
+        const latestVersionId = entry.version_ids?.[0] ?? '';
+        if (!latestVersionId) {
+          return null;
+        }
+
+        const initialVersionId = defaultVersionId || latestVersionId;
+        const valueController = createVersionSwitchableValueElement(
+          entry.values_by_version,
+          initialVersionId,
+        );
+
+        return {
+          element: valueController.element,
+          itemOptions: {
+            selectablePills: true,
+            activeVersionId: initialVersionId,
+            onVersionSelect: valueController.onVersionSelect,
+            onVersionClick: syncPageVersion,
+            shouldShowActiveMarker: (versionId) => Boolean(entry.values_by_version?.[versionId]),
+          },
+        };
+      },
+    });
+
+    if (defaultVersionId) {
+      syncPageVersion(defaultVersionId);
+    }
+    refreshVersionLinks(currentVersionParam());
+  })().catch((error) => {
     const summary = document.getElementById('summary');
     summary.textContent = String(error);
   });
 }
 
 export function initPathDetailPage() {
-  initDetailPage({
-    indexFile: 'index_by_path.json',
-    queryKey: 'path',
-    itemHrefBuilder: (key) => `./key.html?key=${encodeURIComponent(key)}`,
-    historyHrefBuilder: (key, currentPath) => buildHistoryUrl({ path: currentPath, key }),
-  }).catch((error) => {
+  initThemeToggle();
+  refreshVersionLinks();
+
+  (async () => {
+    const title = document.getElementById('title');
+    const summary = document.getElementById('summary');
+    const results = document.getElementById('results');
+
+    const targetPath = queryParam('path').trim();
+    const requestedVersionId = queryParam('version').trim();
+    if (!targetPath) {
+      renderNoData(summary, results, 'Missing query parameter: path');
+      return;
+    }
+
+    document.title = `Mach-O Path: ${targetPath}`;
+
+    const [versions, pathRecord] = await Promise.all([
+      loadVersions(),
+      loadPathDetailRecord(targetPath),
+    ]);
+
+    const versionLabelById = new Map();
+    for (const version of versions) {
+      versionLabelById.set(version.version_id, {
+        iosVersion: version.ios_version,
+        build: version.build,
+      });
+    }
+
+    const defaultVersionId = requestedVersionId || versions[0]?.version_id || '';
+
+    const entries = (pathRecord?.entries ?? []).map((entry) => ({
+      name: entry.key,
+      pair_id: entry.pair_id,
+      version_ids: entry.version_ids ?? [],
+      values_by_version: entry.values_by_version ?? {},
+    }));
+
+    let rowVersionControllers = [];
+    const syncPageVersion = (versionId, anchorEl = null) => {
+      if (!versionId) {
+        return;
+      }
+
+      runWithStableViewport(() => {
+        for (const applyVersionSelection of rowVersionControllers) {
+          applyVersionSelection(versionId);
+        }
+        setQueryParam('version', versionId);
+        refreshVersionLinks(versionId);
+      }, anchorEl);
+    };
+
+    rowVersionControllers = renderDetail({
+      titleEl: title,
+      summaryEl: summary,
+      listEl: results,
+      targetName: targetPath,
+      entries,
+      versionLabelById,
+      itemHrefBuilder: (key) => `./key.html?key=${encodeURIComponent(key)}`,
+      historyHrefBuilder: (key, currentPath) => buildHistoryUrl({ path: currentPath, key }),
+      extraElementBuilder: (entry) => {
+        const latestVersionId = entry.version_ids?.[0] ?? '';
+        if (!latestVersionId) {
+          return null;
+        }
+
+        const initialVersionId = defaultVersionId || latestVersionId;
+        const valueController = createVersionSwitchableValueElement(
+          entry.values_by_version,
+          initialVersionId,
+        );
+
+        return {
+          element: valueController.element,
+          itemOptions: {
+            selectablePills: true,
+            activeVersionId: initialVersionId,
+            onVersionSelect: valueController.onVersionSelect,
+            onVersionClick: syncPageVersion,
+            shouldShowActiveMarker: (versionId) => Boolean(entry.values_by_version?.[versionId]),
+          },
+        };
+      },
+    });
+
+    if (defaultVersionId) {
+      syncPageVersion(defaultVersionId);
+    }
+    refreshVersionLinks(currentVersionParam());
+  })().catch((error) => {
     const summary = document.getElementById('summary');
     summary.textContent = String(error);
   });
