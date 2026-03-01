@@ -112,6 +112,27 @@ h2 {
   padding: 12px 2px;
 }
 
+.result-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.history-link {
+  text-decoration: none;
+  border: 1px solid #8884;
+  border-radius: 999px;
+  padding: 1px 7px;
+  font-size: 0.82rem;
+  line-height: 1.2;
+  opacity: 0.85;
+}
+
+.history-link:hover {
+  opacity: 1;
+}
+
 .result-item:first-child {
   border-top: 1px solid #8883;
 }
@@ -172,4 +193,124 @@ h2 {
 .sep {
   opacity: 0.5;
   padding: 0 4px;
+}
+
+.history-item {
+  padding: 12px 2px;
+}
+
+.history-page .result-item {
+  border-bottom: none;
+}
+
+.history-page .result-item:first-child {
+  border-top: none;
+}
+
+.history-page .result-list {
+  margin: 0;
+}
+
+.history-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.history-version {
+  font-weight: 620;
+}
+
+.history-badge {
+  border: 1px solid #8885;
+  border-radius: 999px;
+  padding: 1px 8px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  min-width: 84px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.history-added {
+  border-color: #31a24c99;
+}
+
+.history-removed {
+  border-color: #c9505099;
+}
+
+.history-changed {
+  border-color: #b77f1799;
+}
+
+.history-unchanged,
+.history-missing {
+  border-color: #8885;
+}
+
+.history-body {
+  margin-top: 8px;
+  font-size: 0.88rem;
+  opacity: 0.88;
+}
+
+.history-value {
+  margin: 0;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #8884;
+  overflow: auto;
+  max-height: 240px;
+  background: color-mix(in srgb, Canvas 96%, #ffffff 4%);
+}
+
+.history-collapsed {
+  padding: 12px 2px;
+}
+
+.history-collapsed-details {
+  border: none;
+  border-radius: 0;
+  padding: 0;
+}
+
+.history-collapsed-summary {
+  cursor: pointer;
+  font-size: inherit;
+  font-weight: inherit;
+  opacity: 0.86;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  list-style: none;
+}
+
+.history-collapsed-summary::-webkit-details-marker {
+  display: none;
+}
+
+.history-collapsed-summary::marker {
+  content: '';
+}
+
+.history-collapsed-range {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.history-collapsed-list {
+  margin: 8px 0 0;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px dashed #8886;
+}
+
+.history-collapsed-entry {
+  font-size: 0.84rem;
+  opacity: 0.82;
+  margin: 2px 0;
 }

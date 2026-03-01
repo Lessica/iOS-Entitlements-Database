@@ -5,9 +5,11 @@ import argparse
 from collections import defaultdict
 from dataclasses import dataclass
 from datetime import datetime, timezone
+import hashlib
 import json
 from pathlib import Path
 import plistlib
+import shutil
 import sys
 from typing import Any
 from xml.parsers.expat import ExpatError
@@ -118,18 +120,53 @@ def sort_versions(versions: dict[str, VersionInfo]) -> list[VersionInfo]:
     )
 
 
-def extract_key_list(xml_file: Path) -> list[str]:
+def extract_entitlements(xml_file: Path) -> dict[str, Any]:
     data = read_plist(xml_file)
-
-    key_list: list[str] = []
-    for key in data.keys():
+    entitlements: dict[str, Any] = {}
+    for key, value in data.items():
         if isinstance(key, str):
-            key_list.append(key)
-    return key_list
+            entitlements[key] = value
+    return entitlements
 
 
 def normalize_path(path_without_ext: Path) -> str:
     return "/" + path_without_ext.as_posix().lstrip("/")
+
+
+def canonicalize_value(value: Any) -> Any:
+    if isinstance(value, dict):
+        normalized: dict[str, Any] = {}
+        for key in sorted(value.keys(), key=str):
+            normalized[str(key)] = canonicalize_value(value[key])
+        return normalized
+
+    if isinstance(value, list):
+        return [canonicalize_value(item) for item in value]
+
+    if isinstance(value, (str, int, float, bool)) or value is None:
+        return value
+
+    if isinstance(value, bytes):
+        return value.hex()
+
+    return str(value)
+
+
+def canonical_string(value: Any) -> str:
+    return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+
+
+def shard_prefix(text: str) -> str:
+    hash_value = 2166136261
+    for byte in text.encode("utf-8"):
+        hash_value ^= byte
+        hash_value = (hash_value * 16777619) & 0xFFFFFFFF
+    return f"{hash_value % 256:02x}"
+
+
+def pair_id_for(path: str, key: str) -> str:
+    raw = f"{path}\n{key}".encode("utf-8")
+    return hashlib.sha256(raw).hexdigest()[:16]
 
 
 def to_sorted_records(
@@ -149,6 +186,14 @@ def to_sorted_records(
     return records
 
 
+def write_json(path: Path, data: Any, *, pretty: bool = False) -> None:
+    if pretty:
+        text = json.dumps(data, ensure_ascii=False, indent=2)
+    else:
+        text = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
+    path.write_text(text, encoding="utf-8")
+
+
 def main() -> None:
     args = parse_args()
 
@@ -161,6 +206,7 @@ def main() -> None:
 
     key_index: dict[str, dict[str, set[str]]] = defaultdict(lambda: defaultdict(set))
     path_index: dict[str, dict[str, set[str]]] = defaultdict(lambda: defaultdict(set))
+    pair_histories: dict[tuple[str, str], dict[str, dict[str, Any]]] = defaultdict(dict)
     versions_by_id: dict[str, VersionInfo] = {}
     issues: list[Issue] = []
 
@@ -177,14 +223,22 @@ def main() -> None:
             binary_path = normalize_path(binary_relative)
 
             try:
-                key_list = extract_key_list(xml_file)
+                entitlements = extract_entitlements(xml_file)
             except (OSError, plistlib.InvalidFileException, ExpatError, ValueError) as exc:
                 issues.append(Issue(path=xml_file, reason=str(exc)))
                 continue
 
-            for key_name in key_list:
+            for key_name, raw_value in entitlements.items():
                 key_index[key_name][binary_path].add(version.version_id)
                 path_index[binary_path][key_name].add(version.version_id)
+
+                normalized_value = canonicalize_value(raw_value)
+                value_text = canonical_string(normalized_value)
+                value_hash = hashlib.sha256(value_text.encode("utf-8")).hexdigest()[:16]
+                pair_histories[(binary_path, key_name)][version.version_id] = {
+                    "value_hash": value_hash,
+                    "value": normalized_value,
+                }
 
     if issues:
         for issue in issues:
@@ -219,23 +273,87 @@ def main() -> None:
     key_index_json = to_sorted_records(key_index, version_rank)
     path_index_json = to_sorted_records(path_index, version_rank)
 
-    (output_dir / "metadata.json").write_text(
-        json.dumps(metadata, ensure_ascii=False, indent=2), encoding="utf-8"
-    )
-    (output_dir / "versions.json").write_text(
-        json.dumps(versions_json, ensure_ascii=False, indent=2), encoding="utf-8"
-    )
-    (output_dir / "index_by_key.json").write_text(
-        json.dumps(key_index_json, ensure_ascii=False), encoding="utf-8"
-    )
-    (output_dir / "index_by_path.json").write_text(
-        json.dumps(path_index_json, ensure_ascii=False), encoding="utf-8"
-    )
+    write_json(output_dir / "metadata.json", metadata, pretty=True)
+    write_json(output_dir / "versions.json", versions_json, pretty=True)
+    write_json(output_dir / "index_by_key.json", key_index_json)
+    write_json(output_dir / "index_by_path.json", path_index_json)
+
+    v2_dir = output_dir / "v2"
+    if v2_dir.exists():
+        shutil.rmtree(v2_dir)
+
+    key_index_dir = v2_dir / "key_index"
+    path_index_dir = v2_dir / "path_index"
+    buckets_dir = v2_dir / "buckets"
+    key_index_dir.mkdir(parents=True, exist_ok=True)
+    path_index_dir.mkdir(parents=True, exist_ok=True)
+    buckets_dir.mkdir(parents=True, exist_ok=True)
+
+    key_shards: dict[str, dict[str, list[dict[str, str]]]] = defaultdict(lambda: defaultdict(list))
+    path_shards: dict[str, dict[str, list[dict[str, str]]]] = defaultdict(lambda: defaultdict(list))
+    bucket_shards: dict[str, dict[str, dict[str, Any]]] = defaultdict(dict)
+
+    pair_count = 0
+    for path, key in sorted(pair_histories.keys()):
+        history_by_version = pair_histories[(path, key)]
+        pair_id = pair_id_for(path, key)
+        pair_count += 1
+
+        key_shards[shard_prefix(key)][key].append({"path": path, "pair_id": pair_id})
+        path_shards[shard_prefix(path)][path].append({"key": key, "pair_id": pair_id})
+
+        timeline = []
+        for version_id in sorted(history_by_version.keys(), key=lambda item: version_rank[item]):
+            payload = history_by_version[version_id]
+            timeline.append(
+                {
+                    "version_id": version_id,
+                    "value_hash": payload["value_hash"],
+                    "value": payload["value"],
+                }
+            )
+
+        bucket_shards[pair_id[:2]][pair_id] = {
+            "path": path,
+            "key": key,
+            "history": timeline,
+        }
+
+    for prefix, payload in key_shards.items():
+        normalized_items = {
+            key: sorted(items, key=lambda entry: (entry["path"], entry["pair_id"]))
+            for key, items in sorted(payload.items())
+        }
+        write_json(key_index_dir / f"{prefix}.json", {"items": normalized_items})
+
+    for prefix, payload in path_shards.items():
+        normalized_items = {
+            path: sorted(items, key=lambda entry: (entry["key"], entry["pair_id"]))
+            for path, items in sorted(payload.items())
+        }
+        write_json(path_index_dir / f"{prefix}.json", {"items": normalized_items})
+
+    max_bucket_pairs = 0
+    for prefix, pairs in bucket_shards.items():
+        max_bucket_pairs = max(max_bucket_pairs, len(pairs))
+        write_json(buckets_dir / f"{prefix}.json", {"pairs": pairs})
+
+    v2_metadata = {
+        "generated_at_utc": metadata["generated_at_utc"],
+        "canon_version": "v1",
+        "total_pairs": pair_count,
+        "key_shard_files": len(key_shards),
+        "path_shard_files": len(path_shards),
+        "bucket_files": len(bucket_shards),
+        "max_pairs_in_bucket": max_bucket_pairs,
+    }
+    write_json(v2_dir / "metadata.json", v2_metadata, pretty=True)
 
     print(f"Generated data into: {output_dir}")
     print(f"Versions: {len(sorted_versions)}")
     print(f"Entitlement keys: {len(key_index)}")
     print(f"Mach-O paths: {len(path_index)}")
+    print(f"Value-diff pairs: {pair_count}")
 
 
 if __name__ == "__main__":

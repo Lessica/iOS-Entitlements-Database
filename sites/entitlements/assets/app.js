@@ -1,9 +1,21 @@
 const DATA_BASE = './data';
+const V2_BASE = `${DATA_BASE}/v2`;
 
 async function fetchJson(name) {
   const response = await fetch(`${DATA_BASE}/${name}`);
   if (!response.ok) {
     throw new Error(`Failed to load ${name}: ${response.status}`);
+  }
+  return await response.json();
+}
+
+async function fetchJsonOptional(url) {
+  const response = await fetch(url);
+  if (response.status === 404) {
+    return null;
+  }
+  if (!response.ok) {
+    throw new Error(`Failed to load ${url}: ${response.status}`);
   }
   return await response.json();
 }
@@ -20,6 +32,7 @@ function setQueryParam(name, value) {
 
 function renderNoData(summaryEl, listEl, message) {
   summaryEl.textContent = message;
+  summaryEl.hidden = !message;
   listEl.innerHTML = '';
   syncResultsVisibility(listEl);
 }
@@ -28,14 +41,40 @@ function syncResultsVisibility(listEl) {
   listEl.hidden = listEl.childElementCount === 0;
 }
 
-function createResultItem(targetHref, title, versionLabels) {
+function buildHistoryUrl({ path = '', key = '' }) {
+  const params = new URLSearchParams();
+  if (path) {
+    params.set('path', path);
+  }
+  if (key) {
+    params.set('key', key);
+  }
+  const suffix = params.toString();
+  return suffix ? `./history.html?${suffix}` : './history.html';
+}
+
+function createResultItem(targetHref, title, versionLabels, historyHref = '') {
   const item = document.createElement('li');
   item.className = 'result-item';
+
+  const head = document.createElement('div');
+  head.className = 'result-head';
 
   const main = document.createElement('a');
   main.className = 'item-main';
   main.href = targetHref;
   main.textContent = title;
+  head.appendChild(main);
+
+  if (historyHref) {
+    const historyLink = document.createElement('a');
+    historyLink.className = 'history-link';
+    historyLink.href = historyHref;
+    historyLink.title = 'View value history';
+    historyLink.setAttribute('aria-label', 'View value history');
+    historyLink.textContent = '🕘';
+    head.appendChild(historyLink);
+  }
 
   const versions = document.createElement('div');
   versions.className = 'version-list';
@@ -60,7 +99,7 @@ function createResultItem(targetHref, title, versionLabels) {
     versions.appendChild(pill);
   }
 
-  item.append(main, versions);
+  item.append(head, versions);
   return item;
 }
 
@@ -71,6 +110,16 @@ function stableHue(text) {
     hash = Math.imul(hash, 16777619);
   }
   return Math.abs(hash) % 360;
+}
+
+function fnvShardPrefix(text) {
+  let hash = 2166136261;
+  for (let index = 0; index < text.length; index += 1) {
+    hash ^= text.charCodeAt(index);
+    hash = Math.imul(hash, 16777619) >>> 0;
+  }
+  const shard = hash % 256;
+  return shard.toString(16).padStart(2, '0');
 }
 
 async function loadCoreData(indexFile) {
@@ -93,6 +142,10 @@ async function loadCoreData(indexFile) {
   }
 
   return { versionLabelById, byName };
+}
+
+async function loadVersions() {
+  return await fetchJson('versions.json');
 }
 
 function normalizeForFilter(text) {
@@ -194,6 +247,12 @@ function attachRealtimeHints(input, allNames, onSelect) {
 
   input.addEventListener('input', updateHints);
   input.addEventListener('change', maybeTriggerImmediateSearch);
+
+  return {
+    dismissHints: () => {
+      datalist.innerHTML = '';
+    },
+  };
 }
 
 function filterNames(allNames, keyword) {
@@ -226,13 +285,277 @@ function toVersionLabels(versionIds, versionLabelById) {
   return labels;
 }
 
-async function initSearchPage({ indexFile, linkBuilder, summaryPrefix }) {
+async function loadHistoryEntries(kind, name) {
+  const shard = fnvShardPrefix(name);
+  const data = await fetchJsonOptional(`${V2_BASE}/${kind}/${shard}.json`);
+  if (!data || !data.items) {
+    return [];
+  }
+  return data.items[name] ?? [];
+}
+
+const historyBucketCache = new Map();
+
+async function loadHistoryBucket(bucketPrefix) {
+  if (historyBucketCache.has(bucketPrefix)) {
+    return historyBucketCache.get(bucketPrefix);
+  }
+
+  const payload = await fetchJsonOptional(`${V2_BASE}/buckets/${bucketPrefix}.json`);
+  historyBucketCache.set(bucketPrefix, payload);
+  return payload;
+}
+
+async function loadPairRecord(path, key) {
+  const candidates = await loadHistoryEntries('key_index', key);
+  const pair = candidates.find((item) => item.path === path);
+  if (!pair) {
+    return null;
+  }
+
+  const bucketPrefix = String(pair.pair_id).slice(0, 2);
+  const bucket = await loadHistoryBucket(bucketPrefix);
+  if (!bucket || !bucket.pairs) {
+    return null;
+  }
+
+  return bucket.pairs[pair.pair_id] ?? null;
+}
+
+function statusForHistory(current, previous) {
+  if (!current && !previous) {
+    return 'missing';
+  }
+  if (current && !previous) {
+    return 'added';
+  }
+  if (!current && previous) {
+    return 'removed';
+  }
+  if (!current || !previous) {
+    return 'missing';
+  }
+  if (current.value_hash === previous.value_hash) {
+    return 'unchanged';
+  }
+  return 'changed';
+}
+
+function escapeXml(text) {
+  return String(text)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&apos;');
+}
+
+function plistIndent(depth) {
+  return '  '.repeat(depth);
+}
+
+function plistFragment(value, depth = 0) {
+  const indent = plistIndent(depth);
+
+  if (value === null || value === undefined) {
+    return `${indent}<string></string>`;
+  }
+
+  if (typeof value === 'boolean') {
+    return value ? `${indent}<true/>` : `${indent}<false/>`;
+  }
+
+  if (typeof value === 'number') {
+    if (Number.isInteger(value)) {
+      return `${indent}<integer>${value}</integer>`;
+    }
+    return `${indent}<real>${value}</real>`;
+  }
+
+  if (typeof value === 'string') {
+    return `${indent}<string>${escapeXml(value)}</string>`;
+  }
+
+  if (Array.isArray(value)) {
+    if (value.length === 0) {
+      return `${indent}<array/>`;
+    }
+
+    const lines = [`${indent}<array>`];
+    for (const item of value) {
+      lines.push(plistFragment(item, depth + 1));
+    }
+    lines.push(`${indent}</array>`);
+    return lines.join('\n');
+  }
+
+  if (typeof value === 'object') {
+    const entries = Object.entries(value);
+    if (entries.length === 0) {
+      return `${indent}<dict/>`;
+    }
+
+    const lines = [`${indent}<dict>`];
+    for (const [key, item] of entries) {
+      lines.push(`${plistIndent(depth + 1)}<key>${escapeXml(key)}</key>`);
+      lines.push(plistFragment(item, depth + 1));
+    }
+    lines.push(`${indent}</dict>`);
+    return lines.join('\n');
+  }
+
+  return `${indent}<string>${escapeXml(String(value))}</string>`;
+}
+
+function historyVersionLabel(version) {
+  const iosVersion = version.ios_version ?? version.version_id;
+  const build = version.build ?? '';
+  return build ? `${iosVersion} (${build})` : String(iosVersion);
+}
+
+function createHistoryTimelineItem(versionLabel, status, value) {
+  const item = document.createElement('li');
+  item.className = 'result-item history-item';
+
+  const head = document.createElement('div');
+  head.className = 'history-head';
+
+  const label = document.createElement('span');
+  label.className = 'history-version';
+  label.textContent = versionLabel;
+
+  const badge = document.createElement('span');
+  badge.className = `history-badge history-${status}`;
+  badge.textContent = status;
+
+  head.append(label, badge);
+  item.appendChild(head);
+
+  const body = document.createElement('div');
+  body.className = 'history-body';
+  if (value === null || value === undefined) {
+    body.textContent = 'Entitlement is not present in this version.';
+  } else {
+    const pre = document.createElement('pre');
+    pre.className = 'history-value';
+    pre.textContent = plistFragment(value);
+    body.appendChild(pre);
+  }
+  item.appendChild(body);
+
+  return item;
+}
+
+function createCollapsedStatusItem(entries, status) {
+  const item = document.createElement('li');
+  item.className = 'result-item history-collapsed';
+
+  const details = document.createElement('details');
+  details.className = 'history-collapsed-details';
+
+  const summary = document.createElement('summary');
+  summary.className = 'history-collapsed-summary';
+
+  const first = entries[0];
+  const last = entries[entries.length - 1];
+
+  const range = document.createElement('span');
+  range.className = 'history-version history-collapsed-range';
+  range.textContent = `${last.versionLabel} → ${first.versionLabel}`;
+
+  const badge = document.createElement('span');
+  badge.className = `history-badge history-${status}`;
+  badge.textContent = status.toUpperCase();
+
+  summary.append(range, badge);
+
+  const list = document.createElement('ul');
+  list.className = 'history-collapsed-list';
+  for (const entry of entries) {
+    const row = document.createElement('li');
+    row.className = 'history-collapsed-entry';
+    row.textContent = entry.versionLabel;
+    list.appendChild(row);
+  }
+
+  details.append(summary, list);
+  item.appendChild(details);
+  return item;
+}
+
+function renderHistoryPairTimeline({ titleEl, summaryEl, listEl, versions, path, key, record }) {
+  titleEl.textContent = `${path} · ${key}`;
+
+  if (!record) {
+    renderNoData(summaryEl, listEl, 'No value timeline found for this path/key pair.');
+    return;
+  }
+
+  summaryEl.textContent = '';
+  summaryEl.hidden = true;
+  listEl.innerHTML = '';
+
+  const historyMap = new Map();
+  for (const item of record.history ?? []) {
+    historyMap.set(item.version_id, item);
+  }
+
+  const chronologicalVersions = [...versions].reverse();
+  const timelineEntries = [];
+
+  let previous = null;
+  for (const version of chronologicalVersions) {
+    const current = historyMap.get(version.version_id) ?? null;
+    const status = statusForHistory(current, previous);
+    timelineEntries.push({
+      versionLabel: historyVersionLabel(version),
+      status,
+      value: current?.value ?? null,
+    });
+    previous = current;
+  }
+
+  const displayEntries = [...timelineEntries].reverse();
+
+  let index = 0;
+  while (index < displayEntries.length) {
+    const entry = displayEntries[index];
+    if (entry.status !== 'unchanged' && entry.status !== 'missing') {
+      const timelineItem = createHistoryTimelineItem(entry.versionLabel, entry.status, entry.value);
+      listEl.appendChild(timelineItem);
+      index += 1;
+      continue;
+    }
+
+    let end = index;
+    while (end + 1 < displayEntries.length && displayEntries[end + 1].status === entry.status) {
+      end += 1;
+    }
+
+    const run = displayEntries.slice(index, end + 1);
+    if (run.length >= 2) {
+      listEl.appendChild(createCollapsedStatusItem(run, entry.status));
+    } else {
+      const timelineItem = createHistoryTimelineItem(entry.versionLabel, entry.status, entry.value);
+      listEl.appendChild(timelineItem);
+    }
+
+    index = end + 1;
+  }
+
+  syncResultsVisibility(listEl);
+}
+
+async function initSearchPage({ indexFile, linkBuilder, summaryPrefix, historyHrefBuilder }) {
   const form = document.getElementById('search-form');
   const input = document.getElementById('query');
   const summary = document.getElementById('summary');
   const results = document.getElementById('results');
 
+  input.setAttribute('spellcheck', 'false');
+
   const runSearch = (query) => {
+    hintController?.dismissHints();
     const normalizedQuery = query.trim();
     setQueryParam('q', normalizedQuery);
     render(normalizedQuery);
@@ -240,7 +563,7 @@ async function initSearchPage({ indexFile, linkBuilder, summaryPrefix }) {
 
   const { byName, versionLabelById } = await loadCoreData(indexFile);
   const allNames = [...byName.keys()].sort();
-  attachRealtimeHints(input, allNames, runSearch);
+  const hintController = attachRealtimeHints(input, allNames, runSearch);
 
   const initial = queryParam('q');
   if (initial) {
@@ -251,6 +574,14 @@ async function initSearchPage({ indexFile, linkBuilder, summaryPrefix }) {
   }
 
   form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    runSearch(input.value);
+  });
+
+  input.addEventListener('keydown', (event) => {
+    if (event.key !== 'Enter' || event.isComposing) {
+      return;
+    }
     event.preventDefault();
     runSearch(input.value);
   });
@@ -284,7 +615,8 @@ async function initSearchPage({ indexFile, linkBuilder, summaryPrefix }) {
       }
 
       const versionLabels = toVersionLabels([...distinctVersionIds], versionLabelById);
-      const item = createResultItem(linkBuilder(name), name, versionLabels);
+      const historyHref = historyHrefBuilder ? historyHrefBuilder(name) : '';
+      const item = createResultItem(linkBuilder(name), name, versionLabels, historyHref);
       results.appendChild(item);
     }
 
@@ -292,7 +624,7 @@ async function initSearchPage({ indexFile, linkBuilder, summaryPrefix }) {
   }
 }
 
-function renderDetail({ titleEl, summaryEl, listEl, targetName, entries, versionLabelById, itemHrefBuilder }) {
+function renderDetail({ titleEl, summaryEl, listEl, targetName, entries, versionLabelById, itemHrefBuilder, historyHrefBuilder }) {
   titleEl.textContent = targetName;
 
   if (!entries || entries.length === 0) {
@@ -307,14 +639,15 @@ function renderDetail({ titleEl, summaryEl, listEl, targetName, entries, version
 
   for (const entry of entries) {
     const versionLabels = toVersionLabels(entry.version_ids, versionLabelById);
-    const item = createResultItem(itemHrefBuilder(entry.name), entry.name, versionLabels);
+    const historyHref = historyHrefBuilder ? historyHrefBuilder(entry.name, targetName) : '';
+    const item = createResultItem(itemHrefBuilder(entry.name), entry.name, versionLabels, historyHref);
     listEl.appendChild(item);
   }
 
   syncResultsVisibility(listEl);
 }
 
-async function initDetailPage({ indexFile, queryKey, itemHrefBuilder }) {
+async function initDetailPage({ indexFile, queryKey, itemHrefBuilder, historyHrefBuilder }) {
   const title = document.getElementById('title');
   const summary = document.getElementById('summary');
   const results = document.getElementById('results');
@@ -324,6 +657,9 @@ async function initDetailPage({ indexFile, queryKey, itemHrefBuilder }) {
     renderNoData(summary, results, `Missing query parameter: ${queryKey}`);
     return;
   }
+
+  const pagePrefix = queryKey === 'key' ? 'Entitlement Key' : 'Mach-O Path';
+  document.title = `${pagePrefix}: ${targetName}`;
 
   const { byName, versionLabelById } = await loadCoreData(indexFile);
   const entries = byName.get(targetName) ?? [];
@@ -336,6 +672,64 @@ async function initDetailPage({ indexFile, queryKey, itemHrefBuilder }) {
     entries,
     versionLabelById,
     itemHrefBuilder,
+    historyHrefBuilder,
+  });
+}
+
+export async function initHistoryPage() {
+  const title = document.getElementById('title');
+  const summary = document.getElementById('summary');
+  const results = document.getElementById('results');
+  const nav = document.getElementById('history-nav');
+
+  const path = queryParam('path').trim();
+  const key = queryParam('key').trim();
+  summary.hidden = true;
+
+  if (!path || !key) {
+    renderNoData(summary, results, 'Missing query parameters: path and key are required.');
+    return;
+  }
+
+  if (nav) {
+    nav.innerHTML = '';
+
+    const home = document.createElement('a');
+    home.href = './index.html';
+    home.textContent = '← Home';
+
+    const sep1 = document.createElement('span');
+    sep1.className = 'sep';
+    sep1.textContent = '·';
+
+    const keyDetail = document.createElement('a');
+    keyDetail.href = `./key.html?key=${encodeURIComponent(key)}`;
+    keyDetail.textContent = 'Back to Key Detail';
+
+    const sep2 = document.createElement('span');
+    sep2.className = 'sep';
+    sep2.textContent = '·';
+
+    const pathDetail = document.createElement('a');
+    pathDetail.href = `./path.html?path=${encodeURIComponent(path)}`;
+    pathDetail.textContent = 'Back to Path Detail';
+
+    nav.append(home, sep1, keyDetail, sep2, pathDetail);
+  }
+
+  document.title = `Value History: ${path} · ${key}`;
+
+  const versions = await loadVersions();
+
+  const record = await loadPairRecord(path, key);
+  renderHistoryPairTimeline({
+    titleEl: title,
+    summaryEl: summary,
+    listEl: results,
+    versions,
+    path,
+    key,
+    record,
   });
 }
 
@@ -366,6 +760,7 @@ export function initKeyDetailPage() {
     indexFile: 'index_by_key.json',
     queryKey: 'key',
     itemHrefBuilder: (path) => `./path.html?path=${encodeURIComponent(path)}`,
+    historyHrefBuilder: (path, currentKey) => buildHistoryUrl({ path, key: currentKey }),
   }).catch((error) => {
     const summary = document.getElementById('summary');
     summary.textContent = String(error);
@@ -377,6 +772,7 @@ export function initPathDetailPage() {
     indexFile: 'index_by_path.json',
     queryKey: 'path',
     itemHrefBuilder: (key) => `./key.html?key=${encodeURIComponent(key)}`,
+    historyHrefBuilder: (key, currentPath) => buildHistoryUrl({ path: currentPath, key }),
   }).catch((error) => {
     const summary = document.getElementById('summary');
     summary.textContent = String(error);

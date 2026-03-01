@@ -22,6 +22,10 @@ Generated files:
 - `sites/entitlements/data/versions.json`
 - `sites/entitlements/data/index_by_key.json`
 - `sites/entitlements/data/index_by_path.json`
+- `sites/entitlements/data/v2/metadata.json`
+- `sites/entitlements/data/v2/key_index/*.json`
+- `sites/entitlements/data/v2/path_index/*.json`
+- `sites/entitlements/data/v2/buckets/*.json`
 
 ## Preview static site
 
@@ -39,3 +43,4 @@ Then open `http://127.0.0.1:8000`.
 - `search-path.html`: search by Mach-O path
 - `key.html`: key detail page (links to path pages)
 - `path.html`: path detail page (links to key pages)
+- `history.html`: value-level history and version diff page

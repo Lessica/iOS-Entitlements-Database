@@ -3,19 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mach-O Path Detail</title>
+    <title>Entitlement History</title>
     <link rel="stylesheet" href="./assets/app.css" />
   </head>
-  <body>
+  <body class="history-page">
     <main class="container">
       <header class="page-header">
-        <nav class="top-nav">
+        <nav id="history-nav" class="top-nav">
           <a href="./index.html">← Home</a>
-          <span class="sep">·</span>
-          <a href="./search-path.html">Search by Path</a>
         </nav>
-        <h1 id="title">Mach-O Path</h1>
+        <h1 id="title">Entitlement History</h1>
       </header>
+
       <section class="card">
         <p id="summary" class="summary"></p>
         <ul id="results" class="result-list"></ul>
@@ -23,8 +22,8 @@
     </main>
 
     <script type="module">
-      import { initPathDetailPage } from './assets/app.js';
-      initPathDetailPage();
+      import { initHistoryPage } from './assets/app.js';
+      initHistoryPage();
     </script>
   </body>
 </html>
