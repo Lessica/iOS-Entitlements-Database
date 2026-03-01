@@ -97,6 +97,20 @@ h2 {
   margin-top: 18px;
 }
 
+.home-copyright-section {
+  margin-top: 18px;
+}
+
+.home-copyright-list {
+  margin: 12px 0 0;
+  padding-left: 40px;
+}
+
+.home-copyright-list li {
+  padding: 3px 0;
+  font-size: 0.94rem;
+}
+
 .home-list {
   list-style: disc;
   margin: 12px 0 0;
@@ -296,6 +310,12 @@ html[data-theme='dark'] .version-pill {
   border: 1px solid hsl(var(--pill-hue) 65% 48% / 0.55);
   background: hsl(var(--pill-hue) 70% 42% / 0.14);
   color: hsl(var(--pill-hue) 80% 75%);
+}
+
+html[data-theme='dark'] .version-pill-active {
+  border-color: hsl(var(--pill-hue) 88% 68% / 0.95);
+  background: hsl(var(--pill-hue) 72% 54% / 0.3);
+  box-shadow: 0 0 0 1px hsl(var(--pill-hue) 92% 78% / 0.22);
 }
 
 .version-pill-part {

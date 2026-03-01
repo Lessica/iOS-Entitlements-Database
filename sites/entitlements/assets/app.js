@@ -381,7 +381,9 @@ async function loadCoreData(indexFile) {
   ]);
 
   const versionLabelById = new Map();
+  const versionRankById = new Map();
   for (const version of versions) {
+    versionRankById.set(version.version_id, versionRankById.size);
     versionLabelById.set(version.version_id, {
       iosVersion: version.ios_version,
       build: version.build,
@@ -393,7 +395,7 @@ async function loadCoreData(indexFile) {
     byName.set(row.name, row.entries);
   }
 
-  return { versionLabelById, byName };
+  return { versionLabelById, versionRankById, byName };
 }
 
 async function loadVersions() {
@@ -450,6 +452,15 @@ function findHintCandidates(nameEntries, keyword, limit) {
 }
 
 function attachRealtimeHints(input, allNames, onSelect) {
+  const disableHintsOnSmallScreen = window.matchMedia('(max-width: 768px)').matches;
+  if (disableHintsOnSmallScreen) {
+    input.removeAttribute('list');
+    input.setAttribute('autocomplete', 'off');
+    return {
+      dismissHints: () => {},
+    };
+  }
+
   const datalistId = `${input.id}-hints`;
   let datalist = document.getElementById(datalistId);
   if (!datalist) {
@@ -477,7 +488,7 @@ function attachRealtimeHints(input, allNames, onSelect) {
 
   const updateHints = debounce(() => {
     const keyword = normalizeForFilter(input.value);
-    const hints = findHintCandidates(nameEntries, keyword, 50);
+    const hints = findHintCandidates(nameEntries, keyword, 15);
 
     datalist.innerHTML = '';
     if (hints.length === 0) {
@@ -514,9 +525,19 @@ function filterNames(allNames, keyword) {
   return allNames.filter((name) => name.toLowerCase().includes(keyword));
 }
 
-function toVersionLabels(versionIds, versionLabelById) {
+function toVersionLabels(versionIds, versionLabelById, versionRankById = null) {
+  const sortedVersionIds = [...versionIds];
+  if (versionRankById instanceof Map) {
+    sortedVersionIds.sort((left, right) => {
+      const leftRank = versionRankById.get(left);
+      const rightRank = versionRankById.get(right);
+      const fallbackRank = Number.MAX_SAFE_INTEGER;
+      return (leftRank ?? fallbackRank) - (rightRank ?? fallbackRank);
+    });
+  }
+
   const labels = [];
-  for (const id of versionIds) {
+  for (const id of sortedVersionIds) {
     const versionInfo = versionLabelById.get(id);
     if (versionInfo) {
       labels.push({
@@ -927,7 +948,7 @@ async function initSearchPage({ indexFile, linkBuilder, summaryPrefix, historyHr
     render(normalizedQuery);
   };
 
-  const { byName, versionLabelById } = await loadCoreData(indexFile);
+  const { byName, versionLabelById, versionRankById } = await loadCoreData(indexFile);
   const allNames = [...byName.keys()].sort();
   const hintController = attachRealtimeHints(input, allNames, runSearch);
 
@@ -980,7 +1001,7 @@ async function initSearchPage({ indexFile, linkBuilder, summaryPrefix, historyHr
         }
       }
 
-      const versionLabels = toVersionLabels([...distinctVersionIds], versionLabelById);
+      const versionLabels = toVersionLabels([...distinctVersionIds], versionLabelById, versionRankById);
       const historyHref = historyHrefBuilder ? historyHrefBuilder(name) : '';
       const item = createResultItem(linkBuilder(name), name, versionLabels, historyHref);
       results.appendChild(item);
@@ -997,6 +1018,7 @@ function renderDetail({
   targetName,
   entries,
   versionLabelById,
+  versionRankById,
   itemHrefBuilder,
   historyHrefBuilder,
   extraElementBuilder,
@@ -1016,7 +1038,7 @@ function renderDetail({
   listEl.innerHTML = '';
 
   for (const entry of entries) {
-    const versionLabels = toVersionLabels(entry.version_ids, versionLabelById);
+    const versionLabels = toVersionLabels(entry.version_ids, versionLabelById, versionRankById);
     if (extraElementBuilder && versionLabels.length > 0) {
       versionLabels[0].isPrimaryMarker = true;
     }
@@ -1066,7 +1088,7 @@ async function initDetailPage({ indexFile, queryKey, itemHrefBuilder, historyHre
   const pagePrefix = queryKey === 'key' ? 'Entitlement Key' : 'Mach-O Path';
   document.title = `${pagePrefix}: ${targetName}`;
 
-  const { byName, versionLabelById } = await loadCoreData(indexFile);
+  const { byName, versionLabelById, versionRankById } = await loadCoreData(indexFile);
   const entries = byName.get(targetName) ?? [];
 
   renderDetail({
@@ -1076,6 +1098,7 @@ async function initDetailPage({ indexFile, queryKey, itemHrefBuilder, historyHre
     targetName,
     entries,
     versionLabelById,
+    versionRankById,
     itemHrefBuilder,
     historyHrefBuilder,
   });
@@ -1239,7 +1262,9 @@ export function initKeyDetailPage() {
     ]);
 
     const versionLabelById = new Map();
+    const versionRankById = new Map();
     for (const version of versions) {
+      versionRankById.set(version.version_id, versionRankById.size);
       versionLabelById.set(version.version_id, {
         iosVersion: version.ios_version,
         build: version.build,
@@ -1277,6 +1302,7 @@ export function initKeyDetailPage() {
       targetName: targetKey,
       entries,
       versionLabelById,
+      versionRankById,
       itemHrefBuilder: (path) => `./path.html?path=${encodeURIComponent(path)}`,
       historyHrefBuilder: (path, currentKey) => buildHistoryUrl({ path, key: currentKey }),
       extraElementBuilder: (entry) => {
@@ -1343,7 +1369,9 @@ export function initPathDetailPage() {
     ]);
 
     const versionLabelById = new Map();
+    const versionRankById = new Map();
     for (const version of versions) {
+      versionRankById.set(version.version_id, versionRankById.size);
       versionLabelById.set(version.version_id, {
         iosVersion: version.ios_version,
         build: version.build,
@@ -1408,6 +1436,7 @@ export function initPathDetailPage() {
       targetName: targetPath,
       entries,
       versionLabelById,
+      versionRankById,
       itemHrefBuilder: (key) => `./key.html?key=${encodeURIComponent(key)}`,
       historyHrefBuilder: (key, currentPath) => buildHistoryUrl({ path: currentPath, key }),
       extraElementBuilder: (entry) => {
