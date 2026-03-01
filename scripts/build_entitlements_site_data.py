@@ -46,7 +46,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--output-dir",
         type=Path,
-        default=Path("site/data"),
+        default=Path("sites/entitlements/data"),
         help="Output directory for generated JSON files",
     )
     parser.add_argument(

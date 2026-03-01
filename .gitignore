@@ -1,6 +1,7 @@
-entitlements/
-files/
-firmwares/
+/entitlements
+/files
+/firmwares
+/sites/entitlements/data
 *.dmg
 
 # Created by https://www.toptal.com/developers/gitignore/api/python

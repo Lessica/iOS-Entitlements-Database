@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search by Mach-O Path</title>
+    <link rel="stylesheet" href="./assets/app.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="page-header">
+        <nav class="top-nav"><a href="./index.html">← Home</a></nav>
+        <h1>Search by Mach-O Path</h1>
+      </header>
+
+      <section class="card">
+        <form id="search-form" class="search-form">
+          <label for="query">Mach-O path</label>
+          <input id="query" name="q" type="text" placeholder="/usr/libexec/nfcd" required />
+          <button type="submit">Search</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <p id="summary" class="summary"></p>
+        <ul id="results" class="result-list"></ul>
+      </section>
+    </main>
+
+    <script type="module">
+      import { initSearchByPathPage } from './assets/app.js';
+      initSearchByPathPage();
+    </script>
+  </body>
+</html>

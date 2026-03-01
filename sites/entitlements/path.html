@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mach-O Path Detail</title>
+    <link rel="stylesheet" href="./assets/app.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="page-header">
+        <nav class="top-nav">
+          <a href="./index.html">Home</a>
+          <span class="sep">·</span>
+          <a href="./search-path.html">Search by Path</a>
+        </nav>
+        <h1 id="title">Mach-O Path</h1>
+      </header>
+      <section class="card">
+        <p id="summary" class="summary"></p>
+        <ul id="results" class="result-list"></ul>
+      </section>
+    </main>
+
+    <script type="module">
+      import { initPathDetailPage } from './assets/app.js';
+      initPathDetailPage();
+    </script>
+  </body>
+</html>
