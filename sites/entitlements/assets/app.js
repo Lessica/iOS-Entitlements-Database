@@ -270,11 +270,11 @@ function createResultItem(
   const pillNodes = [];
   const movingActiveMarker = selectablePills
     ? (() => {
-        const marker = document.createElement('span');
-        marker.className = 'version-pill-part version-pill-active-marker';
-        marker.textContent = '↓';
-        return marker;
-      })()
+      const marker = document.createElement('span');
+      marker.className = 'version-pill-part version-pill-active-marker';
+      marker.textContent = '↓';
+      return marker;
+    })()
     : null;
 
   const setActivePill = (versionId) => {
@@ -284,16 +284,19 @@ function createResultItem(
 
     if (movingActiveMarker) {
       const activePill = pillNodes.find((node) => node.dataset.versionId === versionId) ?? null;
-      if (activePill) {
-        const shouldShow =
-          typeof shouldShowActiveMarker === 'function'
-            ? shouldShowActiveMarker(versionId)
-            : true;
-        if (shouldShow) {
-          activePill.appendChild(movingActiveMarker);
-        } else {
-          movingActiveMarker.remove();
-        }
+      if (!activePill) {
+        movingActiveMarker.remove();
+        return;
+      }
+
+      const shouldShow =
+        typeof shouldShowActiveMarker === 'function'
+          ? shouldShowActiveMarker(versionId)
+          : true;
+      if (shouldShow) {
+        activePill.appendChild(movingActiveMarker);
+      } else {
+        movingActiveMarker.remove();
       }
     }
   };
@@ -464,7 +467,7 @@ function attachRealtimeHints(input, allNames, onSelect) {
     input.removeAttribute('list');
     input.setAttribute('autocomplete', 'off');
     return {
-      dismissHints: () => {},
+      dismissHints: () => { },
     };
   }
 
