@@ -810,7 +810,9 @@ function createVersionSwitchableValueElement(valuesByVersion, initialVersionId) 
   };
 }
 
-function createHistoryTimelineItem(versionLabel, status, value) {
+function createHistoryTimelineItem(versionLabel, status, value, options = {}) {
+  const { hideValueBody = false } = options;
+
   const item = document.createElement('li');
   item.className = 'result-item history-item';
 
@@ -827,6 +829,10 @@ function createHistoryTimelineItem(versionLabel, status, value) {
 
   head.append(label, badge);
   item.appendChild(head);
+
+  if (hideValueBody) {
+    return item;
+  }
 
   const body = document.createElement('div');
   body.className = 'history-body';
@@ -933,7 +939,9 @@ function renderHistoryPairTimeline({ titleEl, summaryEl, listEl, versions, path,
     if (run.length >= 2) {
       listEl.appendChild(createCollapsedStatusItem(run, entry.status));
     } else {
-      const timelineItem = createHistoryTimelineItem(entry.versionLabel, entry.status, entry.value);
+      const timelineItem = createHistoryTimelineItem(entry.versionLabel, entry.status, entry.value, {
+        hideValueBody: entry.status === 'unchanged',
+      });
       listEl.appendChild(timelineItem);
     }
 
@@ -1099,6 +1107,7 @@ async function initDetailPage({ indexFile, queryKey, itemHrefBuilder, historyHre
 
   const pagePrefix = queryKey === 'key' ? 'Entitlement Key' : 'Mach-O Path';
   document.title = `${pagePrefix}: ${targetName}`;
+  title.textContent = targetName;
 
   renderLoading(summary, results);
 
@@ -1135,6 +1144,7 @@ export async function initHistoryPage() {
     return;
   }
 
+  title.textContent = `${path} · ${key}`;
   renderLoading(summary, results);
 
   if (nav) {
@@ -1269,6 +1279,7 @@ export function initKeyDetailPage() {
       return;
     }
 
+    title.textContent = targetKey;
     renderLoading(summary, results);
 
     document.title = `Entitlement Key: ${targetKey}`;
@@ -1378,6 +1389,7 @@ export function initPathDetailPage() {
       return;
     }
 
+    title.textContent = targetPath;
     renderLoading(summary, results);
 
     document.title = `Mach-O Path: ${targetPath}`;
