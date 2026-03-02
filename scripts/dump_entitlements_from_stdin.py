@@ -103,6 +103,8 @@ def iter_input_paths() -> list[Path]:
         line = raw.strip()
         if not line:
             continue
+        if "/tmp/" in line:
+            continue
         paths.append(Path(line))
     return paths
 
