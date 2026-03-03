@@ -76,24 +76,9 @@ def run_command(command: list[str]) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
         command,
         check=False,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        text=True,
-        encoding="utf-8",
-        errors="replace",
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
     )
-
-
-def last_error_line(result: subprocess.CompletedProcess[str]) -> str | None:
-    merged = f"{result.stdout}\n{result.stderr}"
-    lines = [line.strip() for line in merged.splitlines() if line.strip()]
-    if not lines:
-        return None
-
-    line = lines[-1]
-    if line.startswith("⨯"):
-        line = line[1:].strip()
-    return line
 
 
 def resolve_targets(args: argparse.Namespace) -> list[Path]:
@@ -160,9 +145,6 @@ def run_cache_mode(args: argparse.Namespace) -> tuple[int, int, int, int]:
             succeeded += 1
         else:
             failed += 1
-            message = last_error_line(result)
-            if message:
-                print(message, file=sys.stderr)
             print(
                 f"[FAIL] Firmware {firmware_dir.name} exited with code {result.returncode}",
                 file=sys.stderr,
@@ -269,9 +251,6 @@ def run_stdin_mode(args: argparse.Namespace) -> tuple[int, int, int, int]:
             remove_empty_binary_output_dir(out_dir / binary_relpath.name)
         else:
             failed += 1
-            message = last_error_line(result)
-            if message:
-                print(message, file=sys.stderr)
             print(
                 f"[FAIL] Executable {raw_path} exited with code {result.returncode}",
                 file=sys.stderr,
