@@ -72,6 +72,30 @@ def quote_command(parts: list[str]) -> str:
     return " ".join(shlex.quote(part) for part in parts)
 
 
+def run_command(command: list[str]) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(
+        command,
+        check=False,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+    )
+
+
+def last_error_line(result: subprocess.CompletedProcess[str]) -> str | None:
+    merged = f"{result.stdout}\n{result.stderr}"
+    lines = [line.strip() for line in merged.splitlines() if line.strip()]
+    if not lines:
+        return None
+
+    line = lines[-1]
+    if line.startswith("⨯"):
+        line = line[1:].strip()
+    return line
+
+
 def resolve_targets(args: argparse.Namespace) -> list[Path]:
     firmwares_root: Path = args.firmwares_root
 
@@ -131,11 +155,14 @@ def run_cache_mode(args: argparse.Namespace) -> tuple[int, int, int, int]:
             succeeded += 1
             continue
 
-        result = subprocess.run(command, check=False)
+        result = run_command(command)
         if result.returncode == 0:
             succeeded += 1
         else:
             failed += 1
+            message = last_error_line(result)
+            if message:
+                print(message, file=sys.stderr)
             print(
                 f"[FAIL] Firmware {firmware_dir.name} exited with code {result.returncode}",
                 file=sys.stderr,
@@ -154,6 +181,7 @@ def run_stdin_mode(args: argparse.Namespace) -> tuple[int, int, int, int]:
         raise SystemExit(f"Invalid firmwares root: {args.firmwares_root}")
 
     lines = [line.strip() for line in sys.stdin if line.strip()]
+    lines = [line for line in lines if "/tmp/" not in line]
     if not lines:
         raise SystemExit("No executable paths received from stdin")
 
@@ -161,6 +189,23 @@ def run_stdin_mode(args: argparse.Namespace) -> tuple[int, int, int, int]:
     succeeded = 0
     skipped = 0
     failed = 0
+
+    def remove_empty_binary_output_dir(path: Path) -> None:
+        if not path.exists() or not path.is_dir():
+            return
+        try:
+            next(path.iterdir())
+            return
+        except StopIteration:
+            pass
+        except OSError:
+            return
+
+        try:
+            path.rmdir()
+            print(f"[CLEAN] Removed empty output dir: {path}")
+        except OSError:
+            return
 
     for raw_path in lines:
         total += 1
@@ -218,11 +263,15 @@ def run_stdin_mode(args: argparse.Namespace) -> tuple[int, int, int, int]:
             succeeded += 1
             continue
 
-        result = subprocess.run(command, check=False)
+        result = run_command(command)
         if result.returncode == 0:
             succeeded += 1
+            remove_empty_binary_output_dir(out_dir / binary_relpath.name)
         else:
             failed += 1
+            message = last_error_line(result)
+            if message:
+                print(message, file=sys.stderr)
             print(
                 f"[FAIL] Executable {raw_path} exited with code {result.returncode}",
                 file=sys.stderr,
