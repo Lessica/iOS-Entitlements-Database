@@ -4,6 +4,7 @@
 /firmwares
 /headers
 /sites/entitlements/data
+/sites/ios-headers/data
 *.dmg
 
 # Created by https://www.toptal.com/developers/gitignore/api/python
