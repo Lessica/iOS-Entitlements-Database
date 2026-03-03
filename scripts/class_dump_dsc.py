@@ -65,9 +65,6 @@ def parse_args() -> argparse.Namespace:
     if args.all and args.firmware_name is not None:
         parser.error("Do not provide firmware_name when using --all")
 
-    if not args.all and args.firmware_name is None:
-        parser.error("Either provide firmware_name or use --all")
-
     return args
 
 
@@ -93,9 +90,7 @@ def resolve_targets(args: argparse.Namespace) -> list[Path]:
     return [firmware_dir]
 
 
-def main() -> None:
-    args = parse_args()
-
+def run_cache_mode(args: argparse.Namespace) -> tuple[int, int, int, int]:
     output_root: Path = args.output_root
     cache_relpath: Path = args.cache_relpath
 
@@ -147,6 +142,109 @@ def main() -> None:
             )
             if not args.continue_on_error:
                 raise SystemExit(result.returncode)
+
+    return total, succeeded, skipped, failed
+
+
+def run_stdin_mode(args: argparse.Namespace) -> tuple[int, int, int, int]:
+    output_root: Path = args.output_root
+    firmwares_root_abs = args.firmwares_root.resolve()
+
+    if not args.firmwares_root.exists() or not args.firmwares_root.is_dir():
+        raise SystemExit(f"Invalid firmwares root: {args.firmwares_root}")
+
+    lines = [line.strip() for line in sys.stdin if line.strip()]
+    if not lines:
+        raise SystemExit("No executable paths received from stdin")
+
+    total = 0
+    succeeded = 0
+    skipped = 0
+    failed = 0
+
+    for raw_path in lines:
+        total += 1
+
+        executable_path_input = Path(raw_path)
+        command_input_path = str(executable_path_input)
+        if executable_path_input.is_absolute():
+            executable_path = executable_path_input.resolve()
+            command_input_path = str(executable_path)
+        else:
+            executable_path = (Path.cwd() / executable_path_input).resolve()
+
+        if not executable_path.is_file():
+            skipped += 1
+            print(f"[SKIP] Missing executable: {raw_path}", file=sys.stderr)
+            continue
+
+        try:
+            rel_to_root = executable_path.relative_to(firmwares_root_abs)
+        except ValueError:
+            skipped += 1
+            print(
+                (
+                    "[SKIP] Executable is outside --firmwares-root: "
+                    f"{raw_path} (firmwares_root={args.firmwares_root})"
+                ),
+                file=sys.stderr,
+            )
+            continue
+
+        parts = rel_to_root.parts
+        if len(parts) < 2:
+            skipped += 1
+            print(f"[SKIP] Invalid executable path under root: {raw_path}", file=sys.stderr)
+            continue
+
+        firmware_name = parts[0]
+        binary_relpath = Path(*parts[1:])
+        out_dir = output_root / firmware_name / binary_relpath.parent
+        out_dir.mkdir(parents=True, exist_ok=True)
+
+        command = [
+            "ipsw",
+            "class-dump",
+            "--demangle",
+            "--headers",
+            "--refs",
+            "-o",
+            str(out_dir),
+            command_input_path,
+        ]
+
+        print(f"[RUN ] {quote_command(command)}")
+        if args.dry_run:
+            succeeded += 1
+            continue
+
+        result = subprocess.run(command, check=False)
+        if result.returncode == 0:
+            succeeded += 1
+        else:
+            failed += 1
+            print(
+                f"[FAIL] Executable {raw_path} exited with code {result.returncode}",
+                file=sys.stderr,
+            )
+            if not args.continue_on_error:
+                raise SystemExit(result.returncode)
+
+    return total, succeeded, skipped, failed
+
+
+def main() -> None:
+    args = parse_args()
+
+    use_cache_mode = args.all or args.firmware_name is not None
+    has_stdin_input = not sys.stdin.isatty()
+
+    if use_cache_mode:
+        total, succeeded, skipped, failed = run_cache_mode(args)
+    else:
+        if not has_stdin_input:
+            raise SystemExit("Provide firmware_name / --all, or pipe executable paths from stdin")
+        total, succeeded, skipped, failed = run_stdin_mode(args)
 
     print(
         f"Done. total={total} succeeded={succeeded} skipped={skipped} failed={failed}",
