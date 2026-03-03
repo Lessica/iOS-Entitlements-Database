@@ -2,6 +2,7 @@
 /entitlements
 /files
 /firmwares
+/headers
 /sites/entitlements/data
 *.dmg
 
