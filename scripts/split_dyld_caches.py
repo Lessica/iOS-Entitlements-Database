@@ -7,6 +7,11 @@ import shlex
 import subprocess
 import sys
 
+DEFAULT_CACHE_RELPATH = Path("System/Library/Caches/com.apple.dyld/dyld_shared_cache_arm64e")
+DEFAULT_DRIVERKIT_CACHE_RELPATH = Path(
+    "System/DriverKit/System/Library/dyld/dyld_shared_cache_arm64e"
+)
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
@@ -29,10 +34,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--cache-relpath",
         type=Path,
-        default=Path("System/Library/Caches/com.apple.dyld/dyld_shared_cache_arm64e"),
+        default=None,
         help=(
-            "Relative path of dyld shared cache inside each firmware "
-            "(default: System/Library/Caches/com.apple.dyld/dyld_shared_cache_arm64e)"
+            "Relative path of dyld shared cache inside each firmware. "
+            "When omitted, uses standard path by default or DriverKit path with --driverkit."
+        ),
+    )
+    parser.add_argument(
+        "--driverkit",
+        action="store_true",
+        help=(
+            "Split DriverKit dyld shared cache from each firmware "
+            "(default relpath: System/DriverKit/System/Library/dyld/dyld_shared_cache_arm64e)"
         ),
     )
     parser.add_argument(
@@ -57,7 +70,12 @@ def main() -> None:
 
     firmwares_root: Path = args.firmwares_root
     output_root: Path = args.output_root
-    cache_relpath: Path = args.cache_relpath
+    if args.cache_relpath is not None:
+        cache_relpath = args.cache_relpath
+    elif args.driverkit:
+        cache_relpath = DEFAULT_DRIVERKIT_CACHE_RELPATH
+    else:
+        cache_relpath = DEFAULT_CACHE_RELPATH
 
     if not firmwares_root.exists() or not firmwares_root.is_dir():
         raise SystemExit(f"Invalid firmwares root: {firmwares_root}")
