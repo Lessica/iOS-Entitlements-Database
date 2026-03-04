@@ -240,7 +240,6 @@ function createResultItem(
     activeVersionId = '',
     onVersionSelect = null,
     onVersionClick = null,
-    shouldShowActiveMarker = null,
   } = itemOptions;
 
   const item = document.createElement('li');
@@ -268,36 +267,10 @@ function createResultItem(
   const versions = document.createElement('div');
   versions.className = 'version-list';
   const pillNodes = [];
-  const movingActiveMarker = selectablePills
-    ? (() => {
-      const marker = document.createElement('span');
-      marker.className = 'version-pill-part version-pill-active-marker';
-      marker.textContent = '↓';
-      return marker;
-    })()
-    : null;
 
   const setActivePill = (versionId) => {
     for (const node of pillNodes) {
       node.classList.toggle('version-pill-active', node.dataset.versionId === versionId);
-    }
-
-    if (movingActiveMarker) {
-      const activePill = pillNodes.find((node) => node.dataset.versionId === versionId) ?? null;
-      if (!activePill) {
-        movingActiveMarker.remove();
-        return;
-      }
-
-      const shouldShow =
-        typeof shouldShowActiveMarker === 'function'
-          ? shouldShowActiveMarker(versionId)
-          : true;
-      if (shouldShow) {
-        activePill.appendChild(movingActiveMarker);
-      } else {
-        movingActiveMarker.remove();
-      }
     }
   };
 
@@ -311,6 +284,8 @@ function createResultItem(
   for (const version of versionLabels) {
     const pill = selectablePills ? document.createElement('button') : document.createElement('span');
     pill.className = selectablePills ? 'version-pill version-pill-interactive' : 'version-pill';
+    const buildHint = `Build: ${version.build}`;
+    pill.title = buildHint;
     if (selectablePills) {
       pill.type = 'button';
       pill.dataset.versionId = version.versionId;
@@ -328,21 +303,7 @@ function createResultItem(
     versionPart.className = 'version-pill-part';
     versionPart.textContent = version.iosVersion;
 
-    const separator = document.createElement('span');
-    separator.className = 'version-pill-separator';
-    separator.setAttribute('aria-hidden', 'true');
-
-    const buildPart = document.createElement('span');
-    buildPart.className = 'version-pill-part version-pill-build';
-    buildPart.textContent = version.build;
-
-    pill.append(versionPart, separator, buildPart);
-    if (!selectablePills && version.isPrimaryMarker) {
-      const primaryMarker = document.createElement('span');
-      primaryMarker.className = 'version-pill-part version-pill-active-marker';
-      primaryMarker.textContent = '↓';
-      pill.appendChild(primaryMarker);
-    }
+    pill.append(versionPart);
 
     pillNodes.push(pill);
     versions.appendChild(pill);
@@ -358,10 +319,11 @@ function createResultItem(
     item.applyVersionSelection = applyVersionSelection;
   }
 
-  item.append(head, versions);
+  item.append(head);
   if (extraElement) {
     item.appendChild(extraElement);
   }
+  item.appendChild(versions);
   return item;
 }
 
@@ -777,15 +739,15 @@ async function loadKeyDetailRecord(key) {
 
 function createVersionSwitchableValueElement(valuesByVersion, initialVersionId) {
   const wrapper = document.createElement('div');
-  wrapper.className = 'latest-value-block';
+  wrapper.className = 'active-value-block';
 
   const missing = document.createElement('div');
-  missing.className = 'history-body';
+  missing.className = 'history-body history-missing-text';
   missing.textContent = 'Entitlement is not present in this version.';
   missing.hidden = true;
 
   const pre = document.createElement('pre');
-  pre.className = 'history-value latest-value';
+  pre.className = 'history-value active-value';
   wrapper.append(missing, pre);
 
   const renderVersion = (versionId) => {
@@ -837,6 +799,7 @@ function createHistoryTimelineItem(versionLabel, status, value, options = {}) {
   const body = document.createElement('div');
   body.className = 'history-body';
   if (value === null || value === undefined) {
+    body.classList.add('history-missing-text');
     body.textContent = 'Entitlement is not present in this version.';
   } else {
     const pre = document.createElement('pre');
@@ -1059,9 +1022,6 @@ function renderDetail({
 
   for (const entry of entries) {
     const versionLabels = toVersionLabels(entry.version_ids, versionLabelById, versionRankById);
-    if (extraElementBuilder && versionLabels.length > 0) {
-      versionLabels[0].isPrimaryMarker = true;
-    }
     const historyHref = historyHrefBuilder ? historyHrefBuilder(entry.name, targetName) : '';
     let extraElement = null;
     let itemOptions = {};
@@ -1352,7 +1312,6 @@ export function initKeyDetailPage() {
             activeVersionId: initialVersionId,
             onVersionSelect: valueController.onVersionSelect,
             onVersionClick: syncPageVersion,
-            shouldShowActiveMarker: (versionId) => Boolean(entry.values_by_version?.[versionId]),
           },
         };
       },
@@ -1489,7 +1448,6 @@ export function initPathDetailPage() {
             activeVersionId: initialVersionId,
             onVersionSelect: valueController.onVersionSelect,
             onVersionClick: syncPageVersion,
-            shouldShowActiveMarker: (versionId) => Boolean(entry.values_by_version?.[versionId]),
           },
         };
       },

@@ -267,7 +267,7 @@ h2 {
 }
 
 .version-list {
-  margin-top: 7px;
+  margin-top: 8px;
   font-size: 0.84rem;
   opacity: 0.85;
   display: flex;
@@ -321,17 +321,6 @@ html[data-theme='dark'] .version-pill-active {
 .version-pill-part {
   display: inline-flex;
   align-items: center;
-}
-
-.version-pill-build {
-  opacity: 0.92;
-}
-
-.version-pill-separator {
-  width: 1px;
-  height: 0.8em;
-  background: currentColor;
-  opacity: 0.5;
 }
 
 .sep {
@@ -397,9 +386,14 @@ html[data-theme='dark'] .version-pill-active {
 }
 
 .history-body {
-  margin-top: 8px;
+  margin: 8px 0 8px 0;
   font-size: 0.88rem;
   opacity: 0.88;
+}
+
+.history-missing-text {
+  opacity: 0.62;
+  font-style: italic;
 }
 
 .history-value {
@@ -412,19 +406,12 @@ html[data-theme='dark'] .version-pill-active {
   background: var(--code-bg);
 }
 
-.latest-value-block {
-  margin-top: 8px;
+.active-value-block {
+  margin: 8px 0 8px 0;
 }
 
-.latest-value {
+.active-value {
   max-height: 180px;
-}
-
-.version-pill-active-marker {
-  margin-left: 2px;
-  opacity: 0.78;
-  font-size: 0.82em;
-  font-weight: 700;
 }
 
 .xml-tag {
