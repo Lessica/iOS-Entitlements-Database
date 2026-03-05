@@ -160,7 +160,7 @@ def build_version_info(
     appledb_version_cache: dict[tuple[str, str], str | None],
 ) -> VersionInfo:
     fallback_build = bundle_name.split("__", maxsplit=1)[0]
-    fallback_version = "unknown"
+    appledb_version: str | None = None
 
     lookup_device = infer_lookup_device(bundle_name)
     if lookup_device is not None:
@@ -170,25 +170,38 @@ def build_version_info(
                 fallback_build,
                 lookup_device,
             )
-        fallback_version = appledb_version_cache[lookup_key] or fallback_version
+        appledb_version = appledb_version_cache[lookup_key]
 
     metadata_dir = files_root / bundle_name
     metadata = None
 
-    system_version_plist = metadata_dir / "SystemVersion.plist"
-    restore_plist = metadata_dir / "Restore.plist"
+    plist_candidates = [
+        metadata_dir / "SystemVersion.plist",
+        metadata_dir / "Restore.plist",
+        metadata_dir / "System/Library/CoreServices/SystemVersion.plist",
+    ]
 
-    if system_version_plist.exists():
-        metadata = try_read_plist(system_version_plist, issues)
-    if metadata is None and restore_plist.exists():
-        metadata = try_read_plist(restore_plist, issues)
+    for plist_path in plist_candidates:
+        if plist_path.exists():
+            metadata = try_read_plist(plist_path, issues)
+            if metadata is not None:
+                break
 
-    ios_version = fallback_version
+    ios_version = appledb_version
     build = fallback_build
 
     if metadata is not None:
-        ios_version = str(metadata.get("ProductVersion", fallback_version))
+        product_version = metadata.get("ProductVersion")
+        if product_version is not None:
+            ios_version = str(product_version)
         build = str(metadata.get("ProductBuildVersion", fallback_build))
+
+    if ios_version is None:
+        checked_paths = ", ".join(str(path) for path in plist_candidates)
+        raise RuntimeError(
+            "Unable to determine iOS version for bundle "
+            f"{bundle_name}. Checked AppleDB lookup and plist paths: {checked_paths}"
+        )
 
     version_id = f"{ios_version}|{build}"
     label = f"iOS {ios_version} ({build})"
