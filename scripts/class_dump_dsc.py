@@ -25,6 +25,12 @@ def parse_args() -> argparse.Namespace:
         ),
     )
     parser.add_argument(
+        "--ipsw-path",
+        type=Path,
+        default=Path("ipsw"),
+        help="Path to the ipsw executable (default: ipsw from PATH)",
+    )
+    parser.add_argument(
         "--firmwares-root",
         type=Path,
         default=Path("files"),
@@ -76,6 +82,7 @@ def run_command(command: list[str]) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
         command,
         check=False,
+        text=True,
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
     )
@@ -100,6 +107,7 @@ def resolve_targets(args: argparse.Namespace) -> list[Path]:
 
 
 def run_cache_mode(args: argparse.Namespace) -> tuple[int, int, int, int]:
+    ipsw_path = str(args.ipsw_path)
     output_root: Path = args.output_root
     cache_relpath: Path = args.cache_relpath
 
@@ -123,7 +131,7 @@ def run_cache_mode(args: argparse.Namespace) -> tuple[int, int, int, int]:
         out_dir.mkdir(parents=True, exist_ok=True)
 
         command = [
-            "ipsw",
+            ipsw_path,
             "class-dump",
             "--all",
             "--demangle",
@@ -156,6 +164,7 @@ def run_cache_mode(args: argparse.Namespace) -> tuple[int, int, int, int]:
 
 
 def run_stdin_mode(args: argparse.Namespace) -> tuple[int, int, int, int]:
+    ipsw_path = str(args.ipsw_path)
     output_root: Path = args.output_root
     firmwares_root_abs = args.firmwares_root.resolve()
 
@@ -230,7 +239,7 @@ def run_stdin_mode(args: argparse.Namespace) -> tuple[int, int, int, int]:
         out_dir.mkdir(parents=True, exist_ok=True)
 
         command = [
-            "ipsw",
+            ipsw_path,
             "class-dump",
             "--demangle",
             "--headers",
