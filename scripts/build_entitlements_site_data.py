@@ -9,7 +9,9 @@ import hashlib
 import json
 from pathlib import Path
 import plistlib
+import re
 import shutil
+import subprocess
 import sys
 from typing import Any
 from xml.parsers.expat import ExpatError
@@ -75,9 +77,100 @@ def try_read_plist(path: Path, issues: list[Issue]) -> dict[str, Any] | None:
         return None
 
 
-def build_version_info(bundle_name: str, files_root: Path, issues: list[Issue]) -> VersionInfo:
+def infer_lookup_device(bundle_name: str) -> str | None:
+    match = re.search(r"iPhone\d+,\d+", bundle_name)
+    if match is None:
+        return None
+    return match.group(0)
+
+
+def parse_version_from_appledb_json(stdout: str, build: str) -> str | None:
+    json_start = stdout.find("[")
+    json_end = stdout.rfind("]")
+    if json_start < 0 or json_end < 0 or json_end <= json_start:
+        return None
+
+    try:
+        payload = json.loads(stdout[json_start : json_end + 1])
+    except json.JSONDecodeError:
+        return None
+
+    if not isinstance(payload, list):
+        return None
+
+    pattern = re.compile(rf"_(\d+(?:\.\d+)*)_{re.escape(build)}_Restore\.ipsw$")
+
+    for item in payload:
+        if not isinstance(item, dict):
+            continue
+        links = item.get("links")
+        if not isinstance(links, list):
+            continue
+        for link in links:
+            if not isinstance(link, dict):
+                continue
+            url = link.get("url")
+            if not isinstance(url, str):
+                continue
+            filename = Path(url).name
+            match = pattern.search(filename)
+            if match is not None:
+                return match.group(1)
+
+    return None
+
+
+def lookup_ios_version_from_appledb(build: str, device: str) -> str | None:
+    command = [
+        "ipsw",
+        "download",
+        "appledb",
+        "--os",
+        "iOS",
+        "--build",
+        build,
+        "--type",
+        "ipsw",
+        "--device",
+        device,
+        "--release",
+        "--json",
+    ]
+
+    try:
+        result = subprocess.run(
+            command,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+    except OSError:
+        return None
+
+    if result.returncode != 0:
+        return None
+
+    return parse_version_from_appledb_json(result.stdout, build)
+
+
+def build_version_info(
+    bundle_name: str,
+    files_root: Path,
+    issues: list[Issue],
+    appledb_version_cache: dict[tuple[str, str], str | None],
+) -> VersionInfo:
     fallback_build = bundle_name.split("__", maxsplit=1)[0]
     fallback_version = "unknown"
+
+    lookup_device = infer_lookup_device(bundle_name)
+    if lookup_device is not None:
+        lookup_key = (fallback_build, lookup_device)
+        if lookup_key not in appledb_version_cache:
+            appledb_version_cache[lookup_key] = lookup_ios_version_from_appledb(
+                fallback_build,
+                lookup_device,
+            )
+        fallback_version = appledb_version_cache[lookup_key] or fallback_version
 
     metadata_dir = files_root / bundle_name
     metadata = None
@@ -208,12 +301,18 @@ def main() -> None:
     path_index: dict[str, dict[str, set[str]]] = defaultdict(lambda: defaultdict(set))
     pair_histories: dict[tuple[str, str], dict[str, dict[str, Any]]] = defaultdict(dict)
     versions_by_id: dict[str, VersionInfo] = {}
+    appledb_version_cache: dict[tuple[str, str], str | None] = {}
     issues: list[Issue] = []
 
     bundle_dirs = sorted([item for item in entitlements_root.iterdir() if item.is_dir()])
 
     for bundle_dir in bundle_dirs:
-        version = build_version_info(bundle_dir.name, files_root, issues)
+        version = build_version_info(
+            bundle_dir.name,
+            files_root,
+            issues,
+            appledb_version_cache,
+        )
         versions_by_id[version.version_id] = version
 
         xml_files = sorted(bundle_dir.rglob("*.xml"))
