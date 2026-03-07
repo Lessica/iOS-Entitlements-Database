@@ -111,6 +111,10 @@ h2 {
   font-size: 0.94rem;
 }
 
+.home-links-section {
+  margin-top: 18px;
+}
+
 .home-list {
   list-style: disc;
   margin: 12px 0 0;
