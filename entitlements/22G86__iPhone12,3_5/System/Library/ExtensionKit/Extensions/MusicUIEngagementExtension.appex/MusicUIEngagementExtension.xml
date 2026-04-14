@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.amp.MusicUI.MusicUIEngagementExtension</string>
+	<key>com.apple.accounts.appleaccount.fullaccess</key>
+	<true/>
+	<key>com.apple.application-identifier</key>
+	<string>com.apple.amp.MusicUI.MusicUIEngagementExtension</string>
+	<key>com.apple.private.applemediaservices</key>
+	<true/>
+	<key>com.apple.private.controlcenter.service.moduleidentifiers</key>
+	<array>
+		<string>com.apple.shazamkit.controlcenter.ShazamModule</string>
+	</array>
+	<key>com.apple.private.coreservices.canmaplsdatabase</key>
+	<true/>
+	<key>com.apple.private.tcc.allow</key>
+	<array>
+		<string>kTCCServiceMediaLibrary</string>
+	</array>
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<key>com.apple.security.application-groups</key>
+	<array>
+		<string>com.apple.MusicUI.engagement</string>
+		<string>group.com.apple.Music</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.lsd.xpc</string>
+		<string>com.apple.controlcenter.remoteservice</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.SocialLayer</string>
+		<string>com.apple.mediaplaybackcore</string>
+		<string>com.apple.videos-preferences</string>
+		<string>com.apple.mobileipod</string>
+		<string>com.apple.Music</string>
+		<string>com.apple.Fuse</string>
+		<string>com.apple.itunesstored</string>
+		<string>com.apple.homesharing</string>
+		<string>com.apple.mediaremote</string>
+		<string>com.apple.MediaSocial</string>
+		<string>com.apple.restrictionspassword</string>
+		<string>com.apple.itunescloudd</string>
+		<string>com.apple.medialibrary</string>
+		<string>com.apple.itunescloud</string>
+		<string>com.apple.itunescloud.internal</string>
+		<string>com.apple.AppleMediaServices</string>
+		<string>com.apple.springboard</string>
+		<string>com.apple.ClarityUI.Music</string>
+	</array>
+	<key>com.apple.security.network.client</key>
+	<true/>
+</dict>
+</plist>

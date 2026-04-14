@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.intents.extension.discovery</key>
+	<true/>
+	<key>com.apple.runningboard.launchprocess</key>
+	<true/>
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<key>com.apple.security.exception.files.absolute-path.read-only</key>
+	<array>
+		<string>/private/var/MobileAsset/AssetsV2/com_apple_MobileAsset_CoreSuggestions/</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-only</key>
+	<string>com.apple.AppSupport</string>
+	<key>com.apple.trial.client</key>
+	<array>
+		<string>601</string>
+	</array>
+</dict>
+</plist>

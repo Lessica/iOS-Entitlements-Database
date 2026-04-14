@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>aps-connection-initiate</key>
+	<true/>
+	<key>com.apple.CommCenter.fine-grained</key>
+	<array>
+		<string>apple-safety-alert</string>
+		<string>spi</string>
+	</array>
+	<key>com.apple.apsd.ios-device-push-token</key>
+	<true/>
+	<key>com.apple.driver.AppleConvergedIPCBB.user-access</key>
+	<true/>
+	<key>com.apple.driver.AppleConvergedIPCBBControl.user-access</key>
+	<true/>
+	<key>com.apple.driver.AppleConvergedIPCICEBB.user-access</key>
+	<true/>
+	<key>com.apple.driver.AppleConvergedIPCICEBBControl.user-access</key>
+	<true/>
+	<key>com.apple.locationd.effective_bundle</key>
+	<true/>
+	<key>com.apple.locationd.spectator</key>
+	<true/>
+	<key>com.apple.nano.nanoregistry.generalaccess</key>
+	<true/>
+	<key>com.apple.networkrelay.deviceMonitor</key>
+	<true/>
+	<key>com.apple.networkrelay.devices.read</key>
+	<true/>
+	<key>com.apple.private.assets.accessible-asset-types</key>
+	<array>
+		<string>com.apple.MobileAsset.SafetyAlertsConfig</string>
+	</array>
+	<key>com.apple.security.iokit-user-client-class</key>
+	<array>
+		<string>IOAppleConvergedIPCICEBBControlUserClient</string>
+		<string>IOAppleConvergedIPCICEBBUserClient</string>
+		<string>IOAppleConvergedIPCBBUserClient</string>
+		<string>IOAppleConvergedIPCBBControlUserClient</string>
+	</array>
+	<key>com.apple.security.network.client</key>
+	<true/>
+	<key>com.apple.symptom_diagnostics.report</key>
+	<true/>
+</dict>
+</plist>

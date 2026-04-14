@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.swtransparencyd</string>
+	<key>com.apple.TapToRadarKit.service-access</key>
+	<true/>
+	<key>com.apple.application-identifier</key>
+	<string>com.apple.swtransparencyd</string>
+	<key>com.apple.private.cloudtelemetry</key>
+	<true/>
+	<key>com.apple.private.followup</key>
+	<true/>
+	<key>com.apple.private.osanalytics.defaults.allow</key>
+	<true/>
+	<key>com.apple.private.security.restricted-application-groups</key>
+	<array>
+		<string>group.com.apple.swtransparency</string>
+	</array>
+	<key>com.apple.private.security.storage.SFAnalytics</key>
+	<true/>
+	<key>com.apple.privatecloudcompute.serverEnvironment</key>
+	<true/>
+	<key>com.apple.security.application-groups</key>
+	<array>
+		<string>group.com.apple.swtransparency</string>
+	</array>
+	<key>com.apple.security.system-groups</key>
+	<array>
+		<string>systemgroup.com.apple.osanalytics</string>
+	</array>
+</dict>
+</plist>

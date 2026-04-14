@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.app-sandbox.read</key>
+	<true/>
+	<key>com.apple.assistant.settings</key>
+	<true/>
+	<key>com.apple.chrono.effectiveContainerBundleIdentifier</key>
+	<string>com.apple.Preferences</string>
+	<key>com.apple.donotdisturb.service</key>
+	<true/>
+	<key>com.apple.donotdisturb.service.non-launching</key>
+	<true/>
+	<key>com.apple.private.appintents-attribution-override</key>
+	<true/>
+	<key>com.apple.private.usernotifications.settings</key>
+	<array>
+		<string>read</string>
+		<string>write</string>
+	</array>
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.assistant.settings</string>
+		<string>com.apple.usernotifications.usernotificationsettingsservice</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.voicetrigger</string>
+		<string>com.apple.assistant.settings</string>
+		<string>com.apple.assistant.backedup</string>
+		<string>com.apple.Accessibility</string>
+		<string>com.apple.TelephonyUtilities</string>
+	</array>
+	<key>com.apple.usernotifications.usernotificationsettingsservice</key>
+	<true/>
+</dict>
+</plist>

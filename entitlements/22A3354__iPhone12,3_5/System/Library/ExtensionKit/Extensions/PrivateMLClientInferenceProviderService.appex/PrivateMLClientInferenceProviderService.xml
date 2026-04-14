@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.privatemlclient.inferenceproviderservice</string>
+	<key>com.apple.PerfPowerServices.data-donation</key>
+	<true/>
+	<key>com.apple.modelcatalog.full-access</key>
+	<true/>
+	<key>com.apple.private.biome.client-identifier</key>
+	<string>com.apple.privatemlclient.inferenceproviderservice</string>
+	<key>com.apple.private.biome.read-write</key>
+	<array>
+		<string>GenerativeModels.GenerativeFunctions.Instrumentation</string>
+		<string>GenerativeExperiences.TransparencyLog</string>
+	</array>
+	<key>com.apple.private.xpc.launchd.per-user-lookup</key>
+	<true/>
+	<key>com.apple.privatecloudcompute.admin</key>
+	<true/>
+	<key>com.apple.privatecloudcompute.bundleIdentifierOverride</key>
+	<true/>
+	<key>com.apple.privatecloudcompute.prefetchRequest</key>
+	<true/>
+	<key>com.apple.privatecloudcompute.requests</key>
+	<true/>
+	<key>com.apple.security.attestation.access</key>
+	<true/>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.privatecloudcompute</string>
+		<string>com.apple.modelcatalog.catalog</string>
+		<string>com.apple.PerfPowerTelemetryClientRegistrationService</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-only</key>
+	<array>
+		<string>com.apple.tokengeneration</string>
+		<string>com.apple.privatemlclient</string>
+		<string>com.apple.privatecloudcompute</string>
+	</array>
+	<key>com.apple.security.temporary-exception.files.absolute-path.read-only</key>
+	<array>
+		<string>/Library/Preferences/com.apple.tokengeneration.plist</string>
+		<string>/Library/Preferences/com.apple.privatemlclient.plist</string>
+	</array>
+	<key>com.apple.security.temporary-exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.privatecloudcompute</string>
+		<string>com.apple.modelcatalog.catalog</string>
+		<string>com.apple.PerfPowerTelemetryClientRegistrationService</string>
+	</array>
+	<key>com.apple.security.temporary-exception.shared-preference.read-only</key>
+	<array>
+		<string>com.apple.tokengeneration</string>
+		<string>com.apple.privatemlclient</string>
+		<string>com.apple.privatecloudcompute</string>
+	</array>
+</dict>
+</plist>

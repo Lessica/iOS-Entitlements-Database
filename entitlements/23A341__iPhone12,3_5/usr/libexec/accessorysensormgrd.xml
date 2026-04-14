@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.AudioAccessoryServices</key>
+	<true/>
+	<key>com.apple.application-identifier</key>
+	<string>com.apple.accessorysensormgrd</string>
+	<key>com.apple.bluetooth.system</key>
+	<true/>
+	<key>com.apple.polaris.client</key>
+	<true/>
+	<key>com.apple.polaris.producer.all-streams</key>
+	<true/>
+	<key>com.apple.private.exclaves.conclave-host</key>
+	<true/>
+	<key>com.apple.private.tcc.allow</key>
+	<array>
+		<string>kTTCServiceBluetoothPeripheral</string>
+		<string>kTCCServiceBluetoothAlways</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.AudioAccessoryServices</string>
+		<string>com.apple.polaris.systemgraph_v2</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.AccessorySensorManager</string>
+	</array>
+	<key>com.apple.security.temporary-exception.files.absolute-path.read-write</key>
+	<array>
+		<string>/var/tmp/</string>
+	</array>
+	<key>com.apple.security.ts.tmpdir</key>
+	<string>com.apple.AccessorySensorManager</string>
+	<key>com.apple.systemstatus.publisher.domains</key>
+	<array>
+		<string>media</string>
+	</array>
+	<key>seatbelt-profiles</key>
+	<array>
+		<string>temporary-sandbox</string>
+	</array>
+</dict>
+</plist>

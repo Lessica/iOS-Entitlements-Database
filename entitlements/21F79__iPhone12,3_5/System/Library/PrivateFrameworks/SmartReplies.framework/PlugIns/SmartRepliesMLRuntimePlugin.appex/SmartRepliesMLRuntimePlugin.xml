@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.SmartReplies.SmartRepliesMLRuntimePlugin</string>
+	<key>com.apple.aned.private.allow</key>
+	<true/>
+	<key>com.apple.application-identifier</key>
+	<string>com.apple.SmartReplies.SmartRepliesMLRuntimePlugin</string>
+	<key>com.apple.camera.iokit-user-access</key>
+	<true/>
+	<key>com.apple.developer.siri</key>
+	<true/>
+	<key>com.apple.intelligenceplatform.EntityResolution</key>
+	<true/>
+	<key>com.apple.intelligenceplatform.View</key>
+	<true/>
+	<key>com.apple.intents.extension.discovery</key>
+	<true/>
+	<key>com.apple.private.assets.accessible-asset-types</key>
+	<array>
+		<string>com.apple.MobileAsset.ImageCaptionModel</string>
+	</array>
+	<key>com.apple.private.intelligenceplatform.views.read-only</key>
+	<array>
+		<string>visualIdentifier</string>
+		<string>people</string>
+	</array>
+	<key>com.apple.proactive.eventtracker</key>
+	<true/>
+	<key>com.apple.runningboard.launchprocess</key>
+	<true/>
+	<key>com.apple.security.app-sandbox</key>
+	<false/>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.triald.namespace-management</string>
+		<string>com.apple.intelligenceplatform.EntityResolution</string>
+		<string>com.apple.intelligenceplatform.View</string>
+	</array>
+	<key>com.apple.security.iokit-user-client-class</key>
+	<array>
+		<string>AGXDeviceUserClient</string>
+		<string>IOSurfaceRootUserClient</string>
+		<string>AGXSharedUserClient</string>
+		<string>AGXCommandQueue</string>
+		<string>AGXDevice</string>
+		<string>H11ANEInDirectPathClient</string>
+	</array>
+	<key>com.apple.security.network.client</key>
+	<true/>
+	<key>com.apple.trial.client</key>
+	<array>
+		<string>1470</string>
+		<string>SMART_REPLY_ACTIONS_EN</string>
+	</array>
+</dict>
+</plist>

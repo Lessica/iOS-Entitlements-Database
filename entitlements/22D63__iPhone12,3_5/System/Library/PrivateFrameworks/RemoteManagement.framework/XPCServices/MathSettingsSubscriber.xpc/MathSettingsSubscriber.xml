@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.remotemanagement.MathSettingsSubscriber</string>
+	<key>com.apple.managedconfiguration.profiled.set</key>
+	<array>
+		<string>ClientRestrictions</string>
+	</array>
+	<key>com.apple.private.remotemanagement.subscriber</key>
+	<true/>
+	<key>com.apple.private.sandbox.profile:embedded</key>
+	<string>temporary-sandbox</string>
+	<key>com.apple.security.exception.files.home-relative-path.read-only</key>
+	<array>
+		<string>/Library/UserConfigurationProfiles/</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.managedconfiguration.profiled</string>
+		<string>com.apple.remotemanagementd.store</string>
+		<string>com.apple.RemoteManagementAgent.store</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.remotemanagement.MathSettingsSubscriber</string>
+	</array>
+	<key>com.apple.security.system-groups</key>
+	<array>
+		<string>systemgroup.com.apple.configurationprofiles</string>
+	</array>
+	<key>com.apple.security.ts.tmpdir</key>
+	<array>
+		<string>com.apple.remotemanagement.MathSettingsSubscriber</string>
+	</array>
+</dict>
+</plist>

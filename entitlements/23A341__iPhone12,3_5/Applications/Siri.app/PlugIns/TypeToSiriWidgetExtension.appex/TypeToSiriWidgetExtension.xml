@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.siri.TypeToSiriWidget</string>
+	<key>com.apple.private.appintents-attribution-override</key>
+	<string>YES</string>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.familycircle.agent</string>
+		<string>com.apple.siri.activation.service</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.siri</string>
+	</array>
+	<key>com.apple.siri.activation.service</key>
+	<true/>
+</dict>
+</plist>

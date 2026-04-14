@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.parsec.SafariAssistantWorker</string>
+	<key>com.apple.private.feedbacklogger</key>
+	<true/>
+	<key>com.apple.private.intelligenceplatform.use-cases</key>
+	<dict>
+		<key>SafariBrowsingAssistantUploader</key>
+		<dict>
+			<key>Streams</key>
+			<array>
+				<string>Safari.Browsing.Assistant</string>
+			</array>
+		</dict>
+	</dict>
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.biome.access.user</string>
+		<string>com.apple.feedbacklogger</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.parsecd</string>
+	</array>
+</dict>
+</plist>

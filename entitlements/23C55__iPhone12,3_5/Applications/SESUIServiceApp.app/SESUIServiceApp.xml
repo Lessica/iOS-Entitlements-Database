@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>SESUIServiceApp</string>
+	<key>com.apple.QuartzCore.secure-mode</key>
+	<true/>
+	<key>com.apple.payment.all-access</key>
+	<true/>
+	<key>com.apple.peerpayment.all-access</key>
+	<true/>
+	<key>com.apple.private.coreservices.canmaplsdatabase</key>
+	<true/>
+	<key>com.apple.runningboard.assertions.angeltarget</key>
+	<true/>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.passd.payment</string>
+		<string>com.apple.surfboard.applicationservice</string>
+		<string>com.apple.surfboard.scenesessionservice</string>
+		<string>com.apple.surfboard.placementservice</string>
+		<string>com.apple.passd.peer-payment</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.seserviced</string>
+	</array>
+	<key>com.apple.surfboard.application-service-client</key>
+	<true/>
+	<key>com.apple.surfboard.scenesession-updates</key>
+	<integer>1</integer>
+	<key>platform-application</key>
+	<true/>
+</dict>
+</plist>

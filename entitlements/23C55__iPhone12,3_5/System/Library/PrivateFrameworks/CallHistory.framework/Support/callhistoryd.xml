@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.callhistoryd</string>
+	<key>com.apple.CallHistory.sync.allow</key>
+	<true/>
+	<key>com.apple.CallKit.call-directory</key>
+	<array>
+		<string>query-identification-entries</string>
+	</array>
+	<key>com.apple.Contacts.database-allow</key>
+	<true/>
+	<key>com.apple.application-identifier</key>
+	<string>com.apple.callhistoryd</string>
+	<key>com.apple.appprotectiond.read.access</key>
+	<true/>
+	<key>com.apple.private.CallHistory.read-write</key>
+	<true/>
+	<key>com.apple.private.assets.accessible-asset-types</key>
+	<array>
+		<string>com.apple.MobileAsset.phoneNumberResolver</string>
+	</array>
+	<key>com.apple.private.sandbox.profile</key>
+	<string>temporary-sandbox</string>
+	<key>com.apple.private.security.restricted-application-groups</key>
+	<array>
+		<string>group.com.apple.callhistoryd</string>
+	</array>
+	<key>com.apple.private.security.storage.CallHistory</key>
+	<true/>
+	<key>com.apple.security.application-groups</key>
+	<array>
+		<string>group.com.apple.callhistoryd</string>
+	</array>
+	<key>com.apple.security.exception.files.home-relative-path.read-write</key>
+	<array>
+		<string>/Library/CallHistoryDB/</string>
+		<string>/Library/Logs/CallHistory/</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.suggestd.contacts</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.callhistoryd</string>
+	</array>
+	<key>com.apple.security.personal-information.addressbook</key>
+	<true/>
+	<key>com.apple.security.ts.tmpdir</key>
+	<string>com.apple.callhistoryd</string>
+</dict>
+</plist>

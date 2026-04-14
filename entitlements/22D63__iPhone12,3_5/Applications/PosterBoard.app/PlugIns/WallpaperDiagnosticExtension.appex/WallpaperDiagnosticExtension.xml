@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.DiagnosticExtensions.extension</key>
+	<true/>
+	<key>com.apple.posterboardservices.data-store</key>
+	<true/>
+	<key>com.apple.posterboardservices.data-store.archiveDataStore</key>
+	<true/>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.posterboardservices.dataModel</string>
+		<string>com.apple.posterboardservices.services</string>
+	</array>
+</dict>
+</plist>

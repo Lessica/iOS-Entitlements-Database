@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.seld</string>
+	<key>aps-connection-initiate</key>
+	<true/>
+	<key>com.apple.developer.hardened-process</key>
+	<true/>
+	<key>com.apple.duet.activityscheduler.allow</key>
+	<true/>
+	<key>com.apple.internal.seserviced.all.endpoints.and.cas</key>
+	<true/>
+	<key>com.apple.internal.seserviced.fido</key>
+	<true/>
+	<key>com.apple.nano.nanoregistry.generalaccess</key>
+	<true/>
+	<key>com.apple.nfcd.hwmanager</key>
+	<true/>
+	<key>com.apple.nfcd.session.reader.internal</key>
+	<true/>
+	<key>com.apple.nfcd.session.se</key>
+	<true/>
+	<key>com.apple.private.ids.messaging</key>
+	<array>
+		<string>com.apple.private.alloy.passbook.remoteadmin</string>
+	</array>
+	<key>com.apple.private.ids.messaging.high-priority</key>
+	<array>
+		<string>com.apple.private.alloy.passbook.remoteadmin</string>
+	</array>
+	<key>com.apple.private.ids.nearby</key>
+	<true/>
+	<key>com.apple.private.power.notifications</key>
+	<true/>
+	<key>com.apple.private.power.notifications-temp</key>
+	<true/>
+	<key>com.apple.private.sandbox.profile:embedded</key>
+	<string>seld</string>
+	<key>com.apple.private.stockholm.allow</key>
+	<true/>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.seserviced</string>
+		<string>com.apple.duetactivityscheduler</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.stockholm.analytics</string>
+	</array>
+	<key>com.apple.security.system-groups</key>
+	<array>
+		<string>systemgroup.com.apple.osanalytics</string>
+	</array>
+	<key>com.apple.seserviced.key</key>
+	<true/>
+	<key>com.apple.seserviced.seendpoints</key>
+	<true/>
+</dict>
+</plist>

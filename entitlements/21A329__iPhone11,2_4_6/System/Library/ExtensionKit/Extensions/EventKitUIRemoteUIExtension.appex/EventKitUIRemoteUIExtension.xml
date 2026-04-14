@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.calendar.EventKitUIRemoteUIExtension</string>
+	<key>com.apple.CoreRoutine.LocationOfInterest</key>
+	<true/>
+	<key>com.apple.locationd.effective_bundle</key>
+	<true/>
+	<key>com.apple.locationd.usage_oracle</key>
+	<true/>
+	<key>com.apple.private.attribution.implicitly-assumed-identity</key>
+	<dict>
+		<key>type</key>
+		<string>bundleID</string>
+		<key>value</key>
+		<string>com.apple.mobilecal</string>
+	</dict>
+	<key>com.apple.private.calendar.eventkitui-remoteui-extension</key>
+	<true/>
+	<key>com.apple.private.calendar.managedConfigurationBundleIDOverride</key>
+	<true/>
+	<key>com.apple.private.corerecents</key>
+	<true/>
+	<key>com.apple.private.coreservices.canmaplsdatabase</key>
+	<true/>
+	<key>com.apple.private.tcc.allow</key>
+	<array>
+		<string>kTCCServiceReminders</string>
+		<string>kTCCServiceAddressBook</string>
+		<string>kTCCServiceCalendar</string>
+	</array>
+	<key>com.apple.private.tcc.manager.check-by-audit-token</key>
+	<array>
+		<string>kTCCServiceCalendar</string>
+		<string>kTCCServiceReminders</string>
+	</array>
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.corerecents.recentsd</string>
+		<string>com.apple.dataaccess.dataaccessd</string>
+		<string>com.apple.routined.registration</string>
+		<string>com.apple.lsd.xpc</string>
+		<string>com.apple.lsd.mapdb</string>
+	</array>
+	<key>com.apple.security.files.user-selected.read-write</key>
+	<true/>
+	<key>com.apple.security.network.client</key>
+	<true/>
+	<key>com.apple.security.personal-information.addressbook</key>
+	<true/>
+	<key>com.apple.security.personal-information.calendars</key>
+	<true/>
+</dict>
+</plist>

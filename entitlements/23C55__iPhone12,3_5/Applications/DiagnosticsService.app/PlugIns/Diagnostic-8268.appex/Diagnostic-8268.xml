@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.DiagnosticsKit.extension</key>
+	<true/>
+	<key>com.apple.keystore.sik.access</key>
+	<true/>
+	<key>com.apple.private.MobileGestalt.AllowedProtectedKeys</key>
+	<array>
+		<string>UniqueChipID</string>
+	</array>
+	<key>com.apple.private.ZhuGeSupport.CopyValue</key>
+	<true/>
+	<key>com.apple.private.applemesa.allow</key>
+	<true/>
+	<key>com.apple.private.applesepmanager.allow</key>
+	<true/>
+	<key>com.apple.private.corerepair.attestation</key>
+	<true/>
+	<key>com.apple.private.corerepair.xpc</key>
+	<true/>
+	<key>com.apple.private.img4.nonce.pdi</key>
+	<true/>
+	<key>com.apple.private.security.AppleImage4.user-client</key>
+	<true/>
+	<key>com.apple.private.security.disk-device-access</key>
+	<true/>
+	<key>com.apple.security.exception.files.absolute-path.read-only</key>
+	<array>
+		<string>/private/var/MobileSoftwareUpdate/</string>
+		<string>/private/var/hardware/FactoryData/</string>
+	</array>
+	<key>com.apple.security.exception.iokit-user-client-class</key>
+	<array>
+		<string>AppleBiometricServicesUserClient</string>
+		<string>AppleMobileApNonceUserClient</string>
+		<string>AppleSEPUserClient</string>
+		<string>AppleImage4UserClient</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.AppleDeviceQueryService</string>
+		<string>com.apple.corerepair.preflightControl</string>
+		<string>com.apple.diskimagecorerepair.preflightControl</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-only</key>
+	<array>
+		<string>com.apple.corerepaird.test</string>
+	</array>
+	<key>com.apple.system.diagnostics.iokit-properties</key>
+	<true/>
+</dict>
+</plist>

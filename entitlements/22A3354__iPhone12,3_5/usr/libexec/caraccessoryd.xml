@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.avfoundation.allow-system-wide-context</key>
+	<true/>
+	<key>com.apple.developer.carp</key>
+	<true/>
+	<key>com.apple.private.CarPlayUIServices.cluster-theme</key>
+	<true/>
+	<key>com.apple.private.carp</key>
+	<true/>
+	<key>com.apple.private.externalaccessory.showallaccessories</key>
+	<true/>
+	<key>com.apple.runningboard.caraccessoryd</key>
+	<true/>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.CarPlayApp.cluster-theme-service</string>
+		<string>com.apple.caraccessoryframework.cardata</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.CarAccessoryFramework</string>
+	</array>
+</dict>
+</plist>

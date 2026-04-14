@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.remotemanagement.SecuritySubscriber</string>
+	<key>com.apple.private.remotemanagement.subscriber</key>
+	<true/>
+	<key>com.apple.private.sandbox.profile:embedded</key>
+	<string>temporary-sandbox</string>
+	<key>com.apple.private.system-keychain</key>
+	<true/>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.mobile.keybagd.UserManager.xpc</string>
+		<string>com.apple.mobile.usermanagerd.xpc</string>
+		<string>com.apple.remotemanagementd.store</string>
+		<string>com.apple.RemoteManagementAgent.store</string>
+		<string>com.apple.securityd</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.remotemanagement.SecuritySubscriber</string>
+	</array>
+	<key>com.apple.security.ts.tmpdir</key>
+	<array>
+		<string>com.apple.remotemanagement.SecuritySubscriber</string>
+	</array>
+	<key>com.apple.usermanagerd.persona.background</key>
+	<true/>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>com.apple.managed.store</string>
+	</array>
+</dict>
+</plist>

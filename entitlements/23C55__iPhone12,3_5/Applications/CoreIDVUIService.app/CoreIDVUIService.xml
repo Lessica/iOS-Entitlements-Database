@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.coreidvd.mobile-document-provider-ui-callback</key>
+	<true/>
+	<key>com.apple.coreidvd.web-presentment-remote-alert</key>
+	<true/>
+	<key>com.apple.extensionkit.host.extension-point-identifiers</key>
+	<array>
+		<string>com.apple.identity-document-services.document-provider-ui</string>
+	</array>
+	<key>com.apple.identity-document-services.provider-extension-host</key>
+	<true/>
+	<key>com.apple.private.coreservices.canmaplsdatabase</key>
+	<true/>
+	<key>com.apple.private.security.container-required</key>
+	<true/>
+	<key>com.apple.runningboard.trustedtarget</key>
+	<true/>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.coreidvd.web-presentment-remote-alert.xpc</string>
+	</array>
+	<key>platform-application</key>
+	<true/>
+</dict>
+</plist>

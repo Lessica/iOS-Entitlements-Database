@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.gamecontroller.ConfigService</string>
+	<key>com.apple.application-identifier</key>
+	<string>com.apple.gamecontroller.ConfigService</string>
+	<key>com.apple.private.assets.accessible-asset-types</key>
+	<array>
+		<string>com.apple.MobileAsset.GameController.DB1</string>
+	</array>
+	<key>com.apple.private.sandbox.profile:embedded</key>
+	<string>temporary-sandbox</string>
+	<key>com.apple.security.ts.asset-access</key>
+	<true/>
+	<key>platform-application</key>
+	<true/>
+</dict>
+</plist>

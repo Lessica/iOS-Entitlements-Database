@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CHSDisableImplicitWidgetDiscovery</key>
+	<true/>
+	<key>com.apple.CommCenter.fine-grained</key>
+	<array>
+		<string>spi</string>
+	</array>
+	<key>com.apple.chrono.effectiveContainerBundleIdentifier</key>
+	<string>com.apple.Preferences</string>
+	<key>com.apple.private.appintents-attribution-override</key>
+	<true/>
+	<key>com.apple.private.appintents.attribution.bundle-identifier</key>
+	<string>com.apple.Preferences</string>
+	<key>com.apple.private.ids.registration</key>
+	<array>
+		<string>com.apple.ess</string>
+		<string>com.apple.private.ac</string>
+	</array>
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<key>com.apple.security.exception.files.absolute-path.read-only</key>
+	<array>
+		<string>/private/var/mobile/Library/CallDirectory/</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.identityservicesd.embedded.auth</string>
+		<string>com.apple.voicemail.vmd</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.TelephonyUtilities</string>
+	</array>
+	<key>com.apple.visualvoicemail.client</key>
+	<true/>
+</dict>
+</plist>

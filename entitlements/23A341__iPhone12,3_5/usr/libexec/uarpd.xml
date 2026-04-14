@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.uarpd</string>
+	<key>com.apple.CommCenter.fine-grained</key>
+	<array>
+		<string>spi</string>
+		<string>cellular-plan</string>
+		<string>public-cellular-plan</string>
+	</array>
+	<key>com.apple.application-identifier</key>
+	<string>com.apple.uarpd</string>
+	<key>com.apple.corespeech.xpc</key>
+	<true/>
+	<key>com.apple.private.osanalytics.write-logs.allow</key>
+	<true/>
+	<key>com.apple.private.sandbox.profile:embedded</key>
+	<string>temporary-sandbox</string>
+	<key>com.apple.private.tcc.allow</key>
+	<array>
+		<string>kTCCServiceListenEvent</string>
+	</array>
+	<key>com.apple.private.xpc.launchd.per-user-lookup</key>
+	<true/>
+	<key>com.apple.security.exception.files.absolute-path.read-write</key>
+	<array>
+		<string>/private/var/db/accessoryupdater/</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.SBUserNotification</string>
+		<string>com.apple.installerauthagent</string>
+		<string>com.apple.AppSSO.service-xpc</string>
+		<string>com.apple.uarpassetmanager.uarp</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.ist.ds.appleconnect.mobile.external</string>
+	</array>
+	<key>com.apple.security.network.client</key>
+	<true/>
+	<key>com.apple.security.ts.asset-access</key>
+	<true/>
+	<key>com.apple.security.ts.tmpdir</key>
+	<string>com.apple.MobileAccessoryUpdater</string>
+	<key>com.apple.softwareupdatesso.tokenaccessallowed</key>
+	<true/>
+	<key>com.apple.uarpassetmanager.uarp</key>
+	<true/>
+	<key>platform-application</key>
+	<true/>
+</dict>
+</plist>

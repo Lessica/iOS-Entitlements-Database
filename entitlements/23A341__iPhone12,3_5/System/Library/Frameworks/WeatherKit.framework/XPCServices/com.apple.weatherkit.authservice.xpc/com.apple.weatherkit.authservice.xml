@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>adi-client</key>
+	<string>628765583</string>
+	<key>com.apple.itunesstored.private</key>
+	<true/>
+	<key>com.apple.private.applemediaservices</key>
+	<true/>
+	<key>com.apple.private.sandbox.profile:embedded</key>
+	<string>temporary-sandbox</string>
+	<key>com.apple.security.exception.files.home-relative-path.read-write</key>
+	<array>
+		<string>/Library/Caches/com.apple.AppleMediaServices/</string>
+		<string>/Library/Caches/com.apple.weatherkit.authservice/</string>
+		<string>/Library/HTTPStorages/com.apple.weatherkit.authservice/</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.fairplayd.versioned</string>
+		<string>com.apple.adid</string>
+	</array>
+	<key>com.apple.security.network.client</key>
+	<true/>
+	<key>fairplay-client</key>
+	<string>511712240</string>
+	<key>platform-application</key>
+	<true/>
+</dict>
+</plist>

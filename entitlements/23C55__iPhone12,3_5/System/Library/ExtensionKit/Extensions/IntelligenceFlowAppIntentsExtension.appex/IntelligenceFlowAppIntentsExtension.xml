@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.intelligenceflow.IntelligenceFlowAppIntentsExtension</string>
+	<key>com.apple.application-identifier</key>
+	<string>com.apple.intelligenceflow.IntelligenceFlowAppIntentsExtension</string>
+	<key>com.apple.frontboard.launchapplications</key>
+	<true/>
+	<key>com.apple.locationd.effective_bundle</key>
+	<true/>
+	<key>com.apple.private.appintents-attribution-override</key>
+	<true/>
+	<key>com.apple.private.biome.read-write</key>
+	<array/>
+	<key>com.apple.private.coreservices.canmaplsdatabase</key>
+	<true/>
+	<key>com.apple.private.security.no-container</key>
+	<true/>
+	<key>com.apple.private.tcc.allow</key>
+	<array/>
+	<key>com.apple.security.exception.files.absolute-path.read-write</key>
+	<array>
+		<string>/private/var/mobile/Library/Caches/com.apple.intelligenceflow.IntelligenceFlowAppIntentsExtension/</string>
+		<string>/private/var/containers/Bundle/Application/</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.apsd</string>
+		<string>com.apple.cloudd</string>
+		<string>com.apple.CompanionLink</string>
+		<string>com.apple.locationd.synchronous</string>
+	</array>
+	<key>com.apple.security.iokit-user-client-class</key>
+	<array/>
+	<key>com.apple.security.temporary-exception.mach-lookup.global-name</key>
+	<array/>
+	<key>com.apple.springboard.opensensitiveurl</key>
+	<true/>
+	<key>platform-application</key>
+	<true/>
+</dict>
+</plist>

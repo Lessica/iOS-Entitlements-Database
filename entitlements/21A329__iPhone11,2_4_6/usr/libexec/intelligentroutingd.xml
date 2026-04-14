@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.CompanionLink</key>
+	<true/>
+	<key>com.apple.avfoundation.allow-system-wide-context</key>
+	<true/>
+	<key>com.apple.avfoundation.allows-access-to-device-list</key>
+	<true/>
+	<key>com.apple.frontboardservices.display-layout-monitor</key>
+	<true/>
+	<key>com.apple.locationd.milo_connection</key>
+	<true/>
+	<key>com.apple.locationd.pedestrianfencemanager</key>
+	<true/>
+	<key>com.apple.nearbyinteraction.background</key>
+	<true/>
+	<key>com.apple.private.accounts.allaccounts</key>
+	<true/>
+	<key>com.apple.private.assets.accessible-asset-types</key>
+	<array>
+		<string>com.apple.MobileAsset.IntelligentRouting</string>
+	</array>
+	<key>com.apple.private.assets.bypass-asset-types-check</key>
+	<true/>
+	<key>com.apple.private.biome.client-identifier</key>
+	<string>com.apple.intelligentroutingd</string>
+	<key>com.apple.private.biome.read-only</key>
+	<array>
+		<string>Device.Wireless.Bluetooth</string>
+		<string>Media.NowPlaying</string>
+		<string>Device.Wireless.WiFi</string>
+		<string>Location.Semantic</string>
+		<string>Motion.Activity</string>
+		<string>App.InFocus</string>
+		<string>Media.Route</string>
+		<string>FrontBoard.DisplayLayout</string>
+		<string>Device.Metadata</string>
+	</array>
+	<key>com.apple.private.nearbyinteraction.device-presence</key>
+	<true/>
+	<key>com.apple.private.nearbyinteraction.privileged</key>
+	<true/>
+	<key>com.apple.proximitycontrol</key>
+	<true/>
+	<key>com.apple.proximitycontrol.lockscreenControls</key>
+	<true/>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.nearbyd.xpc.nearbyinteraction.observer</string>
+		<string>com.apple.nearbyd.xpc.nearbyinteraction</string>
+	</array>
+</dict>
+</plist>

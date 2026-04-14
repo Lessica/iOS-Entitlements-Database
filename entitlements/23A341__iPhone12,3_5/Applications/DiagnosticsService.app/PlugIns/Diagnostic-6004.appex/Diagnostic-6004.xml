@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.DiagnosticsKit.extension</key>
+	<true/>
+	<key>com.apple.avfaudio.devicetest</key>
+	<true/>
+	<key>com.apple.avfaudio.devicetest.service</key>
+	<true/>
+	<key>com.apple.bluetooth.system</key>
+	<true/>
+	<key>com.apple.private.applesmc.user-access</key>
+	<true/>
+	<key>com.apple.private.coremedia.extensions.audiorecording.allow</key>
+	<true/>
+	<key>com.apple.private.exclaves.kernel-domain</key>
+	<true/>
+	<key>com.apple.private.mediaexperience.startrecordinginthebackground.allow</key>
+	<true/>
+	<key>com.apple.private.tcc.allow</key>
+	<array>
+		<string>kTCCServiceMicrophone</string>
+		<string>kTCCServiceCamera</string>
+	</array>
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<key>com.apple.security.exception.files.absolute-path.read-write</key>
+	<array>
+		<string>/private/var/tmp/</string>
+	</array>
+	<key>com.apple.security.exception.iokit-user-client-class</key>
+	<array>
+		<string>EXDisplayPipeUserClient</string>
+		<string>AppleSMCClient</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.avfaudio.devicetest.service</string>
+		<string>com.apple.audioanalyticsd</string>
+	</array>
+	<key>com.apple.security.exception.sysctl.read-only</key>
+	<array>
+		<string>kern.exclaves_status</string>
+		<string>sysctl.proc_translated</string>
+	</array>
+	<key>com.apple.security.iokit-user-client-class</key>
+	<array>
+		<string>AppleSMCClient</string>
+	</array>
+	<key>com.apple.security.system-groups</key>
+	<array>
+		<string>systemgroup.com.apple.DiagnosticsKit</string>
+	</array>
+</dict>
+</plist>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.private.biome.client-identifier</key>
+	<string>com.apple.anvil</string>
+	<key>com.apple.private.biome.read-write</key>
+	<array>
+		<string>GenerativeExperiences.TransparencyLog</string>
+		<string>GenerativeModels.GenerativeFunctions.Instrumentation</string>
+		<string>GenerativeModels.GenerativeFunctions.SystemInstrumentation</string>
+	</array>
+	<key>com.apple.private.network.system-token-fetch</key>
+	<true/>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.modelcatalog.catalog</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.anvil</string>
+	</array>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>com.apple.openai</string>
+		<string>com.apple.openai.xcode</string>
+	</array>
+</dict>
+</plist>

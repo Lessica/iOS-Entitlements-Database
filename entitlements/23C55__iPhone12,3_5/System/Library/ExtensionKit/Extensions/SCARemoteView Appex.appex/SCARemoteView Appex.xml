@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.QuartzCore.secure-mode</key>
+	<true/>
+	<key>com.apple.private.biome.writer</key>
+	<array>
+		<string>SensitiveContentAnalysis.UIInteraction</string>
+		<string>SensitiveContentAnalysis.MediaAnalysis</string>
+		<string>SensitiveContentAnalysis.ContentInteractionFlow</string>
+		<string>SensitiveContentAnalysis.ResourcesInteraction</string>
+	</array>
+	<key>com.apple.private.screen-time</key>
+	<true/>
+	<key>com.apple.private.screentime-communication</key>
+	<true/>
+	<key>com.apple.private.sensitivecontentanalysis.client</key>
+	<array>
+		<string>analyze</string>
+		<string>analysis-history-read</string>
+		<string>analysis-history-write</string>
+	</array>
+	<key>com.apple.private.tcc.allow</key>
+	<array>
+		<string>kTCCServiceAddressBook</string>
+	</array>
+	<key>com.apple.runningboard.screentimeunlock</key>
+	<true/>
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.contactsd</string>
+		<string>com.apple.biome.access.user</string>
+		<string>com.apple.biome.compute.source</string>
+		<string>com.apple.SensitiveContentAnalysis.analysishistory</string>
+		<string>com.apple.familycircle.agent</string>
+		<string>com.apple.ScreenTimeAgent.communication</string>
+		<string>com.apple.ScreenTimeAgent</string>
+		<string>com.apple.ManagedSettingsAgent</string>
+		<string>com.apple.ManagedSettingsAgent.publisher</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-only</key>
+	<array>
+		<string>com.apple.communicationSafetySettings</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.SensitiveContentAnalysis</string>
+	</array>
+	<key>com.apple.security.network.client</key>
+	<true/>
+	<key>com.apple.security.temporary-exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.contactsd</string>
+		<string>com.apple.biome.access.user</string>
+		<string>com.apple.biome.compute.source</string>
+		<string>com.apple.SensitiveContentAnalysis.analysishistory</string>
+		<string>com.apple.familycircle.agent</string>
+		<string>com.apple.ScreenTimeAgent.communication</string>
+		<string>com.apple.ScreenTimeAgent</string>
+		<string>com.apple.ManagedSettingsAgent</string>
+		<string>com.apple.ManagedSettingsAgent.publisher</string>
+	</array>
+</dict>
+</plist>

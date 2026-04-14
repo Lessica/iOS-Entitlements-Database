@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.ProactiveShareSheetLocalTrainer.ProactiveShareSheetLocalTrainerPlugin</string>
+	<key>com.apple.coreduetd.allow</key>
+	<true/>
+	<key>com.apple.intents.extension.discovery</key>
+	<true/>
+	<key>com.apple.private.biome.read-write</key>
+	<array>
+		<string>MLSE.ShareSheet.VirtualFeatureStore</string>
+	</array>
+	<key>com.apple.proactive.eventtracker</key>
+	<true/>
+	<key>com.apple.runningboard.launchprocess</key>
+	<true/>
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<key>com.apple.security.exception.files.absolute-path.read-write</key>
+	<array>
+		<string>/private/var/mobile/Library/Application Support/</string>
+		<string>/var/mobile/Library/Trial/Treatments/default_factors_214.pb</string>
+		<string>/private/var/mobile/Library/com.apple.LighthouseCoreMLModelStore</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.triald.namespace-management </string>
+		<string>com.apple.siri.analytics.assistant</string>
+	</array>
+	<key>com.apple.security.exception.process-info</key>
+	<true/>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.LighthouseCoreMLModelStore</string>
+	</array>
+	<key>com.apple.trial.client</key>
+	<array>
+		<string>214</string>
+	</array>
+</dict>
+</plist>

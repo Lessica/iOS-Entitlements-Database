@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.private.sandbox.profile:embedded</key>
+	<string>temporary-sandbox</string>
+	<key>com.apple.runningboard.process-state</key>
+	<true/>
+	<key>com.apple.security.exception.files.absolute-path.read-only</key>
+	<array>
+		<string>/private/preboot/cryptex1/current/os.dmg</string>
+		<string>/private/var/db/spindump/</string>
+	</array>
+	<key>com.apple.security.exception.files.absolute-path.read-write</key>
+	<array>
+		<string>/private/var/db/systemstats/</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.coresymbolicationd</string>
+		<string>com.apple.lsd.mapdb</string>
+		<string>com.apple.trustd</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.ecosystemanalyticsd</string>
+		<string>com.apple.ecosystemanalytics</string>
+	</array>
+	<key>com.apple.security.exception.sysctl.read-only</key>
+	<array>
+		<string>kern.wq_max_constrained_threads</string>
+		<string>kern.wq_max_threads</string>
+		<string>vm.pagesize</string>
+		<string>vm.vm_min_kernel_address</string>
+		<string>vm.vm_max_kernel_address</string>
+		<string>vm.pages</string>
+	</array>
+	<key>com.apple.security.ts.mach-task-name</key>
+	<true/>
+	<key>com.apple.security.ts.read-any-bundle</key>
+	<true/>
+	<key>platform-application</key>
+	<true/>
+</dict>
+</plist>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>aop2.gps-data.ent</key>
+	<true/>
+	<key>aop2.gps-debug</key>
+	<true/>
+	<key>com.apple.afk.shmem-user</key>
+	<true/>
+	<key>com.apple.afk.user</key>
+	<true/>
+	<key>com.apple.aonsensed.xpc</key>
+	<true/>
+	<key>com.apple.aop.hid-driver.user-client</key>
+	<dict>
+		<key>cma</key>
+		<dict>
+			<key>historical-memory</key>
+			<dict/>
+			<key>send-command</key>
+			<dict/>
+		</dict>
+	</dict>
+	<key>com.apple.bluetooth.internal</key>
+	<true/>
+	<key>com.apple.bluetooth.system</key>
+	<true/>
+	<key>com.apple.duet.activityscheduler.allow</key>
+	<true/>
+	<key>com.apple.private.biome.client-identifier</key>
+	<string>com.apple.aonsensed</string>
+	<key>com.apple.private.corewifi</key>
+	<true/>
+	<key>com.apple.private.corewifi.bssid</key>
+	<true/>
+	<key>com.apple.private.hid.client.event-monitor</key>
+	<true/>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.symptom_diagnostics</string>
+		<string>com.apple.private.corewifi-xpc</string>
+	</array>
+	<key>com.apple.security.iokit-user-client-class</key>
+	<array>
+		<string>AFKSharedMemoryUserClient</string>
+		<string>RootDomainUserClient</string>
+		<string>AFKMemoryDescriptorManagerUserClient</string>
+		<string>AFKEndpointInterfaceUserClient</string>
+		<string>AppleAOPAudioUserClient</string>
+		<string>IOHIDLibUserClient</string>
+		<string>AppleSPUFastpathDriverUserClient</string>
+	</array>
+	<key>staticregion</key>
+	<true/>
+	<key>trusted.trusted-data</key>
+	<true/>
+</dict>
+</plist>

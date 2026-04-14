@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.PhotoAnalysis.PhotoAnalysisLighthousePlugin</string>
+	<key>com.apple.coreduetd.allow</key>
+	<true/>
+	<key>com.apple.intents.extension.discovery</key>
+	<true/>
+	<key>com.apple.mediaanalysisd.client</key>
+	<true/>
+	<key>com.apple.photos.bourgeoisie</key>
+	<true/>
+	<key>com.apple.private.attribution.implicitly-assumed-identity</key>
+	<dict>
+		<key>type</key>
+		<string>path</string>
+		<key>value</key>
+		<string>/System/Library/PrivateFrameworks/PhotoAnalysis.framework/PlugIns/PhotoAnalysisLighthousePlugin.appex/PhotoAnalysisLighthousePlugin</string>
+	</dict>
+	<key>com.apple.private.dprivacyd.allow</key>
+	<true/>
+	<key>com.apple.private.dprivacyd.metadata.allow</key>
+	<true/>
+	<key>com.apple.private.photoanalysisd.access</key>
+	<true/>
+	<key>com.apple.private.photos.allowcollectionshare</key>
+	<true/>
+	<key>com.apple.private.tcc.allow</key>
+	<array>
+		<string>kTCCServicePhotos</string>
+	</array>
+	<key>com.apple.privatefederatedlearning.allowed</key>
+	<true/>
+	<key>com.apple.runningboard.launchprocess</key>
+	<true/>
+	<key>com.apple.security.exception.files.absolute-path.read-only</key>
+	<array>
+		<string>/var/mobile/Library/Trial/</string>
+		<string>/var/mobile/Library/Trial/Treatments/1130/</string>
+	</array>
+	<key>com.apple.security.exception.files.home-relative-path.read-write</key>
+	<array>
+		<string>Library/DES/SubmissionLogs/</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.photos.service</string>
+		<string>com.apple.photoanalysisd</string>
+		<string>com.apple.siri.analytics.assistant</string>
+		<string>com.apple.mediaanalysisd.analysis</string>
+	</array>
+	<key>com.apple.security.exception.process-info</key>
+	<true/>
+	<key>com.apple.trial.client</key>
+	<array>
+		<string>1130</string>
+		<string>1410</string>
+	</array>
+</dict>
+</plist>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.heartratecoordinatord</string>
+	<key>com.apple.AudioAccessoryServices</key>
+	<true/>
+	<key>com.apple.AudioAccessorySystemStateService</key>
+	<true/>
+	<key>com.apple.PerfPowerServices.data-donation</key>
+	<true/>
+	<key>com.apple.developer.healthkit</key>
+	<true/>
+	<key>com.apple.healthlite.spi</key>
+	<true/>
+	<key>com.apple.hid.heartrate-access</key>
+	<true/>
+	<key>com.apple.private.healthkit</key>
+	<true/>
+	<key>com.apple.private.healthkit.authorization_bypass</key>
+	<true/>
+	<key>com.apple.private.healthkit.source.identities</key>
+	<array>
+		<string>com.apple.BTLEServer</string>
+		<string>com.apple.heartratecoordinatord</string>
+		<string>com.apple.private.health.localdevice</string>
+	</array>
+	<key>com.apple.private.hid.client.event-monitor</key>
+	<true/>
+	<key>com.apple.private.sandbox.profile:embedded</key>
+	<string>temporary-sandbox</string>
+	<key>com.apple.security.application-groups</key>
+	<array>
+		<string>group.com.apple.heartratecoordinatord</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.PerfPowerTelemetryClientRegistrationService</string>
+		<string>com.apple.powerlog.plxpclogger.xpc</string>
+		<string>com.apple.PowerManagement.control</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.HeartRateCoordinator</string>
+	</array>
+	<key>platform-application</key>
+	<true/>
+</dict>
+</plist>

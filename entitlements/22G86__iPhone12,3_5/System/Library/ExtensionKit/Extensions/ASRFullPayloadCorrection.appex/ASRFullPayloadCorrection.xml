@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.generativeexperiences.textcomposition</key>
+	<true/>
+	<key>com.apple.private.intelligenceplatform.client-identifier</key>
+	<string>com.apple.lighthouse.ASRFullPayloadCorrection</string>
+	<key>com.apple.private.intelligenceplatform.use-cases</key>
+	<dict>
+		<key>ASRFullPayloadCorrection</key>
+		<dict>
+			<key>Streams</key>
+			<dict>
+				<key>Dictation.UserEdit</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.biome.access.user</string>
+		<string>com.apple.siri.analytics.assistant</string>
+		<string>com.apple.generativeexperiences.textcomposition</string>
+	</array>
+	<key>com.apple.siri.analytics.assistant</key>
+	<true/>
+</dict>
+</plist>

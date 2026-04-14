@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.TelephonyUtilities.FaceTimeMessageStoreIntentsExtension</string>
+	<key>com.apple.facetimemessagestored.service</key>
+	<array>
+		<string>access-facetime-messaging</string>
+	</array>
+	<key>com.apple.facetimemessagestored.videomessaging</key>
+	<array>
+		<string>access-facetime-messaging</string>
+	</array>
+	<key>com.apple.linkd.registry</key>
+	<true/>
+	<key>com.apple.linkd.transcript.privileged</key>
+	<true/>
+	<key>com.apple.private.appintents-attribution-override</key>
+	<true/>
+	<key>com.apple.private.appintents-bundle-absolute-paths</key>
+	<array>
+		<string>/System/Library/PrivateFrameworks/FaceTimeMessageStore.framework</string>
+	</array>
+	<key>com.apple.private.appintents.extension-host</key>
+	<true/>
+	<key>com.apple.private.sandbox.profile:embedded</key>
+	<string>temporary-sandbox</string>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.linkd.extension</string>
+		<string>com.apple.linkd.registry</string>
+		<string>com.apple.linkd.transcript</string>
+		<string>com.apple.facetimemessagestored.service</string>
+	</array>
+	<key>platform-application</key>
+	<true/>
+</dict>
+</plist>

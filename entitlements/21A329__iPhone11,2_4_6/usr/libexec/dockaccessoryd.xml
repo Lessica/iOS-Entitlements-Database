@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.dockaccessoryd</string>
+	<key>com.apple.MFAAuthentication</key>
+	<array>
+		<string>token-auth</string>
+	</array>
+	<key>com.apple.accessoryupdater.uarp</key>
+	<true/>
+	<key>com.apple.application-identifier</key>
+	<string>com.apple.dockaccessoryd</string>
+	<key>com.apple.bluetooth.system</key>
+	<true/>
+	<key>com.apple.frontboard.launchapplications</key>
+	<true/>
+	<key>com.apple.idle-timer-services</key>
+	<true/>
+	<key>com.apple.private.accessories.showallconnections</key>
+	<true/>
+	<key>com.apple.private.tcc.allow</key>
+	<array>
+		<string>kTCCServiceBluetoothAlways</string>
+	</array>
+	<key>com.apple.private.tcc.manager.check-by-audit-token</key>
+	<array>
+		<string>kTCCServiceCamera</string>
+	</array>
+	<key>com.apple.security.iokit-user-client-class</key>
+	<array>
+		<string>IOHIDEventServiceFastPathUserClient</string>
+	</array>
+	<key>com.apple.springboard.remote-alert</key>
+	<true/>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>com.apple.dockaccessoryd.pairing</string>
+	</array>
+</dict>
+</plist>

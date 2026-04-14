@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.smsFilter.extension</string>
+	<key>com.apple.CommCenter.fine-grained</key>
+	<array>
+		<string>spi</string>
+	</array>
+	<key>com.apple.CoreML.adopter</key>
+	<string>73CF80FE-76C7-406B-809B-D6FA768F9602</string>
+	<key>com.apple.developer.coreml.model-deployment</key>
+	<true/>
+	<key>com.apple.private.assets.accessible-asset-types</key>
+	<array>
+		<string>com.apple.MobileAsset.LinguisticData</string>
+	</array>
+	<key>com.apple.proactive.eventtracker</key>
+	<true/>
+	<key>com.apple.security.exception.files.absolute-path.read-write</key>
+	<array>
+		<string>/private/var/mobile/Library/</string>
+		<string>/private/var/mobile/Containers/</string>
+		<string>/System/Library/</string>
+		<string>/private/var/db/com.apple.naturallanguaged/com.apple.e5rt.e5bundlecache/</string>
+	</array>
+	<key>com.apple.security.exception.iokit-user-client-class</key>
+	<array>
+		<string>AGXDeviceUserClient</string>
+		<string>IOSurfaceRootUserClient</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.naturallanguaged</string>
+		<string>com.apple.commcenter.coretelephony.xpc</string>
+		<string>com.apple.TextInput.rdt</string>
+		<string>com.apple.mobileassetd.v2</string>
+		<string>com.apple.MTLCompilerService</string>
+		<string>com.apple.system.notification_center</string>
+		<string>com.apple.logd</string>
+		<string>com.apple.logd.events</string>
+	</array>
+	<key>com.apple.security.network.client</key>
+	<true/>
+	<key>com.apple.trial.client</key>
+	<array>
+		<string>SMS_FILTER_INEN_CLASSIFICATION</string>
+		<string>SMS_FILTER_BRPT_CLASSIFICATION</string>
+		<string>SMS_FILTER_FELIS</string>
+	</array>
+	<key>com.apple.triald.namespace-management</key>
+	<true/>
+	<key>platform-application</key>
+	<true/>
+</dict>
+</plist>

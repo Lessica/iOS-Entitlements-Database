@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.homeenergyd</string>
+	<key>com.apple.accounts.appleaccount.fullaccess</key>
+	<true/>
+	<key>com.apple.chrono.invalidate-timelines</key>
+	<true/>
+	<key>com.apple.chronoservices</key>
+	<true/>
+	<key>com.apple.private.MobileGestalt.AllowedProtectedKeys</key>
+	<array>
+		<string>SerialNumber</string>
+	</array>
+	<key>com.apple.private.sandbox.profile:embedded</key>
+	<string>temporary-sandbox</string>
+	<key>com.apple.private.usernotifications.bundle-identifiers</key>
+	<array>
+		<string>com.apple.Home</string>
+		<string>com.apple.HomeEnergyDaemon</string>
+	</array>
+	<key>com.apple.security.exception.absolute-path.read-write</key>
+	<array>
+		<string>/private/var/mobile/Library/Application Support/com.apple.homeenergyd/</string>
+		<string>/private/var/mobile/Library/homeenergyd/</string>
+		<string>/private/var/mobile/Library/homeenergyd/com.apple.homeenergyd/</string>
+	</array>
+	<key>com.apple.security.exception.files.home-relative-path.read-write</key>
+	<array>
+		<string>/Library/Application Support/com.apple.homeenergyd/</string>
+		<string>/Library/Application Support/homeenergyd/</string>
+		<string>/Library/Application Support/homeenergyd/com.apple.homeenergyd/</string>
+		<string>/Library/homeenergyd/</string>
+		<string>/Library/homeenergyd/com.apple.homeenergyd/</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.symptom_diagnostics</string>
+		<string>com.apple.chronoservices</string>
+		<string>com.apple.chrono.widgetcenterconnection</string>
+		<string>com.apple.usernotifications.listener</string>
+		<string>com.apple.alarm</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-only</key>
+	<array>
+		<string>com.apple.networkd</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.Home</string>
+		<string>com.apple.homeenergyd</string>
+		<string>com.apple.wpc.homeservices.energyservices</string>
+	</array>
+	<key>com.apple.security.network.client</key>
+	<true/>
+	<key>com.apple.security.ts.system-info</key>
+	<array>
+		<string>net.link.addr</string>
+	</array>
+	<key>platform-application</key>
+	<true/>
+</dict>
+</plist>

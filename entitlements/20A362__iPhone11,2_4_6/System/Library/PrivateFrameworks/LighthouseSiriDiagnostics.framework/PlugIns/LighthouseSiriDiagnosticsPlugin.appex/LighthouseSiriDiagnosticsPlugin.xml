@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.LighthouseSiriDiagnostics.LighthouseSiriDiagnosticsPlugin</string>
+	<key>com.apple.coreduetd.allow</key>
+	<true/>
+	<key>com.apple.intents.extension.discovery</key>
+	<true/>
+	<key>com.apple.private.biome.read-write</key>
+	<array>
+		<string>SiriPrivateLearningSELFEvent</string>
+	</array>
+	<key>com.apple.private.dprivacyd.allow</key>
+	<true/>
+	<key>com.apple.private.dprivacyd.metadata.allow</key>
+	<true/>
+	<key>com.apple.proactive.eventtracker</key>
+	<true/>
+	<key>com.apple.runningboard.launchprocess</key>
+	<true/>
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<key>com.apple.security.exception.files.absolute-path.read-write</key>
+	<array>
+		<string>/private/var/tmp/com.apple.assistantd/</string>
+		<string>/private/var/tmp/test-lighthouse-joiner/</string>
+		<string>/private/var/mobile/Library/Logs/com.apple.FeatureStore/biomeStream/</string>
+		<string>/private/var/mobile/Library/Biome/streams/restricted/SiriPrivateLearningSELFEvent</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.siri.analytics.assistant</string>
+		<string>com.apple.triald.namespace-management</string>
+	</array>
+	<key>com.apple.security.exception.process-info</key>
+	<true/>
+	<key>com.apple.security.temporary-exception.files.home-relative-path.read-only</key>
+	<array>
+		<string>/Library/Trial/</string>
+	</array>
+	<key>com.apple.trial.client</key>
+	<array>
+		<string>816</string>
+	</array>
+</dict>
+</plist>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.gamepolicyd</string>
+	<key>com.apple.application-identifier</key>
+	<string>com.apple.gamepolicyd</string>
+	<key>com.apple.backboardd.globalDeferringChainObserver</key>
+	<true/>
+	<key>com.apple.frontboard.launchapplications</key>
+	<true/>
+	<key>com.apple.modelmanager.assertion</key>
+	<true/>
+	<key>com.apple.private.clpc.policy</key>
+	<true/>
+	<key>com.apple.private.security.storage.os_eligibility.readonly</key>
+	<true/>
+	<key>com.apple.private.set-game-mode</key>
+	<true/>
+	<key>com.apple.security.exception.files.absolute-path.read-only</key>
+	<array>
+		<string>/private/var/db/os_eligibility/eligibility.plist</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.modelmanager</string>
+		<string>com.apple.GameOverlayUI</string>
+		<string>com.apple.backboard.hid-services.xpc</string>
+	</array>
+	<key>com.apple.security.iokit-user-client-class</key>
+	<array>
+		<string>AppleCLPCUserClient</string>
+	</array>
+</dict>
+</plist>

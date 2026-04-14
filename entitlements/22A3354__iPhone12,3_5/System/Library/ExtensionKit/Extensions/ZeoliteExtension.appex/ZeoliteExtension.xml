@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.lighthouse.ZeoliteExtension</string>
+	<key>com.apple.private.assets.accessible-asset-types</key>
+	<array>
+		<string>com.apple.MobileAsset.MLHostTask</string>
+	</array>
+	<key>com.apple.private.assets.bypass-asset-types-check</key>
+	<true/>
+	<key>com.apple.private.assets.change-daemon-config</key>
+	<true/>
+	<key>com.apple.private.biome.pruner</key>
+	<array>
+		<string>Zeolite.Ledger.Embedding</string>
+	</array>
+	<key>com.apple.private.biome.writer</key>
+	<array>
+		<string>Zeolite.Ledger.Embedding</string>
+		<string>Lighthouse.Ledger.TaskCustomEvent</string>
+	</array>
+	<key>com.apple.private.dprivacyd.allow</key>
+	<true/>
+	<key>com.apple.private.dprivacyd.metadata.allow</key>
+	<true/>
+	<key>com.apple.private.email</key>
+	<true/>
+	<key>com.apple.private.intelligenceplatform.use-cases</key>
+	<dict>
+		<key>ZeoliteExtension</key>
+		<dict>
+			<key>Streams</key>
+			<array>
+				<string>GenerativeExperiences.TransparencyLog</string>
+				<string>Zeolite.Ledger.Embedding</string>
+				<string>Lighthouse.Ledger.TaskCustomEvent</string>
+			</array>
+		</dict>
+	</dict>
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.email.maild</string>
+		<string>com.apple.mobileasset.autoasset</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-only</key>
+	<array>
+		<string>com.apple.mlhost</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.zeolite</string>
+	</array>
+	<key>com.apple.security.temporary-exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.email.maild</string>
+		<string>com.apple.mobileasset.autoasset</string>
+	</array>
+</dict>
+</plist>

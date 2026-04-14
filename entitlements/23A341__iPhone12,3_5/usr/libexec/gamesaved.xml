@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.gamesaved</string>
+	<key>com.apple.application-identifier</key>
+	<string>com.apple.gamesaved</string>
+	<key>com.apple.authkit.client.internal</key>
+	<true/>
+	<key>com.apple.private.accounts.allaccounts</key>
+	<true/>
+	<key>com.apple.private.librarian.container-proxy</key>
+	<true/>
+	<key>com.apple.private.sandbox.profile:embedded</key>
+	<string>temporary-sandbox</string>
+	<key>com.apple.private.tcc.allow</key>
+	<array>
+		<string>kTCCServiceUbiquity</string>
+	</array>
+	<key>com.apple.private.tcc.manager.check-by-audit-token</key>
+	<array>
+		<string>kTCCServiceUbiquity</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.networkd</string>
+		<string>com.apple.mobile.keybagd.xpc</string>
+		<string>com.apple.ak.auth.xpc</string>
+		<string>com.apple.mobile.keybagd.UserManager.xpc</string>
+	</array>
+	<key>com.apple.security.network.client</key>
+	<true/>
+	<key>com.apple.security.ts.tmpdir</key>
+	<string>com.apple.gamesaved</string>
+	<key>com.apple.security.ts.ubiquity</key>
+	<true/>
+	<key>com.apple.springboard.opensensitiveurl</key>
+	<true/>
+	<key>com.apple.usermanagerd.persona.fetch</key>
+	<true/>
+	<key>platform-application</key>
+	<true/>
+</dict>
+</plist>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.LighthouseAV.LighthouseAVShadowEval</string>
+	<key>com.apple.private.assets.accessible-asset-types</key>
+	<array>
+		<string>com.apple.MobileAsset.MLHostTask</string>
+	</array>
+	<key>com.apple.private.biome.client-identifier</key>
+	<string>com.apple.coreaudio</string>
+	<key>com.apple.private.biome.read-write</key>
+	<array>
+		<string>Device.Audio.AdaptiveVolume</string>
+	</array>
+	<key>com.apple.private.intelligenceplatform.use-cases</key>
+	<dict>
+		<key>LighthouseAVShadowEval</key>
+		<dict>
+			<key>Streams</key>
+			<array>
+				<string>Device.Audio.AdaptiveVolume</string>
+			</array>
+		</dict>
+	</dict>
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<key>com.apple.security.exception.files.absolute-path.read-only</key>
+	<array>
+		<string>/private/var/MobileAsset/AssetsV2/com_apple_MobileAsset_MLHostTask/</string>
+	</array>
+	<key>com.apple.security.exception.files.absolute-path.read-write</key>
+	<array>
+		<string>/private/var/mobile/Documents/</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.biome.access.user</string>
+		<string>com.apple.biome.access.system</string>
+		<string>com.apple.mobileasset.autoasset</string>
+	</array>
+	<key>com.apple.security.temporary-exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.mobileasset.autoasset</string>
+	</array>
+</dict>
+</plist>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.developer.kernel.extended-virtual-addressing</key>
+	<true/>
+	<key>com.apple.private.AppleProcessorTrace.Trace</key>
+	<true/>
+	<key>com.apple.private.host-exception-port-override</key>
+	<true/>
+	<key>com.apple.private.kernel.get-kext-info</key>
+	<true/>
+	<key>com.apple.private.pluginkit.manager</key>
+	<true/>
+	<key>com.apple.private.xpc.role-account</key>
+	<true/>
+	<key>com.apple.private.xpc.service-attach</key>
+	<true/>
+	<key>com.apple.security.iokit-user-client-class</key>
+	<array>
+		<string>AppleHWAccessUserClient</string>
+		<string>AppleProcessorTraceUserClient</string>
+	</array>
+	<key>com.apple.system-task-ports</key>
+	<true/>
+	<key>com.apple.system-task-ports.control</key>
+	<true/>
+</dict>
+</plist>

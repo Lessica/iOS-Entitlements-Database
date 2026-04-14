@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.remotemanagement.AccountSubscriber</string>
+	<key>com.apple.private.accounts.allaccounts</key>
+	<true/>
+	<key>com.apple.private.personas.propagate</key>
+	<true/>
+	<key>com.apple.private.remotemanagement.subscriber</key>
+	<true/>
+	<key>com.apple.private.sandbox.profile:embedded</key>
+	<string>temporary-sandbox</string>
+	<key>com.apple.private.security.storage.Calendar</key>
+	<true/>
+	<key>com.apple.private.security.storage.Mail</key>
+	<true/>
+	<key>com.apple.security.application-groups</key>
+	<array>
+		<string>com.apple.MailPersonaStorage</string>
+	</array>
+	<key>com.apple.security.exception.files.home-relative-path.read-write</key>
+	<array>
+		<string>/Library/Calendar/</string>
+		<string>/Library/UserConfigurationProfiles/</string>
+	</array>
+	<key>com.apple.security.exception.iokit-user-client-class</key>
+	<array>
+		<string>AppleKeyStoreUserClient</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.accountsd.accountmanager</string>
+		<string>com.apple.calaccessd</string>
+		<string>com.apple.contactsd</string>
+		<string>com.apple.mobile.keybagd.UserManager.xpc</string>
+		<string>com.apple.mobile.keybagd.xpc</string>
+		<string>com.apple.mobile.usermanagerd.xpc</string>
+		<string>com.apple.powerlog.plxpclogger.xpc</string>
+		<string>com.apple.remindd</string>
+		<string>com.apple.remotemanagementd.store</string>
+		<string>com.apple.RemoteManagementAgent.store</string>
+		<string>com.apple.securityd</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.mobilecal</string>
+	</array>
+	<key>com.apple.security.system-groups</key>
+	<array>
+		<string>systemgroup.com.apple.configurationprofiles</string>
+	</array>
+	<key>com.apple.security.ts.tmpdir</key>
+	<array>
+		<string>com.apple.remotemanagement.AccountSubscriber</string>
+	</array>
+	<key>com.apple.usermanagerd.persona.background</key>
+	<true/>
+	<key>com.apple.usermanagerd.persona.fetch</key>
+	<true/>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>com.apple.identities</string>
+	</array>
+</dict>
+</plist>

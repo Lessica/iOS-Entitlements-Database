@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.developer.device-information.user-assigned-device-name</key>
+	<true/>
+	<key>com.apple.logd.admin</key>
+	<true/>
+	<key>com.apple.private.AppleProcessorTrace.Trace</key>
+	<true/>
+	<key>com.apple.private.kernel.get-kext-info</key>
+	<true/>
+	<key>com.apple.private.kernel.ktrace-background</key>
+	<true/>
+	<key>com.apple.private.logging.diagnostic</key>
+	<true/>
+	<key>com.apple.private.osanalytics.defaults.allow</key>
+	<true/>
+	<key>com.apple.private.roots-installed-read-only</key>
+	<true/>
+	<key>com.apple.private.security.storage.spindump</key>
+	<true/>
+	<key>com.apple.private.stackshot</key>
+	<true/>
+	<key>com.apple.private.usernotifications.bundle-identifiers</key>
+	<array>
+		<string>com.apple.tailspin.notifications</string>
+	</array>
+	<key>com.apple.security.iokit-user-client-class</key>
+	<array>
+		<string>AppleProcessorTraceUserClient</string>
+	</array>
+	<key>com.apple.security.system-groups</key>
+	<array>
+		<string>systemgroup.com.apple.osanalytics</string>
+	</array>
+	<key>com.apple.system-task-ports.read</key>
+	<true/>
+	<key>com.apple.tailspin.symbolication</key>
+	<true/>
+	<key>com.apple.trial.status.deployment-environment.allow</key>
+	<array>
+		<integer>0</integer>
+	</array>
+</dict>
+</plist>

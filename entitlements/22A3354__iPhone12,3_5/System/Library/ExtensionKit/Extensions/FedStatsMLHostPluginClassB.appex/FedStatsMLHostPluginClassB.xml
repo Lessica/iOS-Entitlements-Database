@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.aiml.mlpt.FedStats.MLHostPluginClassB</string>
+	<key>com.apple.developer.icloud-container-environment</key>
+	<string>Production</string>
+	<key>com.apple.developer.icloud-container-identifiers</key>
+	<array>
+		<string>com.apple.fedstats.carry.container</string>
+		<string>com.apple.fedstats.GM.container</string>
+	</array>
+	<key>com.apple.developer.icloud-services</key>
+	<array>
+		<string>CloudKit</string>
+	</array>
+	<key>com.apple.private.biome.read-only</key>
+	<array>
+		<string>Moments.Stats.EventData</string>
+		<string>Moments.Events.Engagement</string>
+		<string>SensitiveContentAnalysis.UIInteraction</string>
+		<string>SensitiveContentAnalysis.MediaAnalysis</string>
+		<string>Safari.PageLoad</string>
+		<string>Siri.Health.Federated</string>
+	</array>
+	<key>com.apple.private.biome.read-write</key>
+	<array>
+		<string>Lighthouse.Ledger.LighthousePluginEvent</string>
+	</array>
+	<key>com.apple.private.dprivacyd.allow</key>
+	<true/>
+	<key>com.apple.private.dprivacyd.metadata.allow</key>
+	<true/>
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.private.dprivacyd</string>
+		<string>com.apple.biome.PublicStreamAccessService</string>
+		<string>com.apple.biomed</string>
+	</array>
+	<key>com.apple.security.temporary-exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.biome.access.user</string>
+		<string>com.apple.biome.access.system</string>
+		<string>com.apple.triald.namespace-management</string>
+	</array>
+</dict>
+</plist>

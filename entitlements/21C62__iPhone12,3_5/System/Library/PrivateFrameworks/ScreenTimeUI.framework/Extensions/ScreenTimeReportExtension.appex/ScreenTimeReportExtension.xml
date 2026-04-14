@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.ScreenTimeUI.ScreenTimeReportExtension</string>
+	<key>com.apple.bulletinboard.settings</key>
+	<true/>
+	<key>com.apple.private.coreservices.canmaplsdatabase</key>
+	<true/>
+	<key>com.apple.private.sandbox.profile:embedded</key>
+	<string>container</string>
+	<key>com.apple.private.screen-time.persistence</key>
+	<true/>
+</dict>
+</plist>

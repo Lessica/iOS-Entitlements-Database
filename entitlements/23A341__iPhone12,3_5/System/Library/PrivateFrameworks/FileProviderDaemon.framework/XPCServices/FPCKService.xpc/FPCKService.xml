@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.FileProviderDaemon.FPCKService</string>
+	<key>com.apple.apfs.spec_telemetry</key>
+	<true/>
+	<key>com.apple.application-identifier</key>
+	<string>com.apple.FileProviderDaemon.FPCKService</string>
+	<key>com.apple.private.rtcreportingd</key>
+	<true/>
+	<key>com.apple.private.sandbox.profile:embedded</key>
+	<string>temporary-sandbox</string>
+	<key>com.apple.private.security.storage.FileProvider</key>
+	<true/>
+	<key>com.apple.private.tcc.allow</key>
+	<array>
+		<string>kTCCServiceSystemPolicyDesktopFolder</string>
+		<string>kTCCServiceSystemPolicyDocumentsFolder</string>
+		<string>kTCCServiceFileProviderDomain</string>
+	</array>
+	<key>com.apple.private.vfs.authorized-access</key>
+	<true/>
+	<key>com.apple.private.vfs.dataless-manipulation</key>
+	<true/>
+	<key>com.apple.proactive.eventtracker</key>
+	<true/>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.revisiond</string>
+		<string>com.apple.FileCoordination</string>
+		<string>com.apple.rtcreportingd</string>
+	</array>
+	<key>com.apple.security.exception.sysctl.read-write</key>
+	<array>
+		<string>kern.rage_vnode</string>
+		<string>kern.vfsnspace</string>
+	</array>
+	<key>com.apple.trial.client</key>
+	<array>
+		<string>COREOS_FPFS_CONFIG</string>
+		<string>COREOS_FPFS_SPECULATIVE_DOWNLOADS</string>
+	</array>
+	<key>platform-application</key>
+	<true/>
+</dict>
+</plist>

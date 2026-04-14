@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.desktopservices.ArchiveService</string>
+	<key>com.apple.application-identifier</key>
+	<string>com.apple.desktopservices.ArchiveService</string>
+	<key>com.apple.fileprovider.fetch-url</key>
+	<true/>
+	<key>com.apple.private.sandbox.profile:embedded</key>
+	<string>ArchiveService</string>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.bird</string>
+		<string>com.apple.mobile.keybagd.UserManager.xpc</string>
+		<string>com.apple.mobile.usermanagerd.xpc</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-only</key>
+	<array>
+		<string>com.apple.desktopservices</string>
+	</array>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>com.apple.aea.cli</string>
+	</array>
+	<key>platform-application</key>
+	<true/>
+</dict>
+</plist>

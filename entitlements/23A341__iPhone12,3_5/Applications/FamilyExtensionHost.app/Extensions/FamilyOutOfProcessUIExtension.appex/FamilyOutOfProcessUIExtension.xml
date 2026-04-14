@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.family.ageRange</key>
+	<true/>
+	<key>com.apple.familycircled</key>
+	<true/>
+	<key>com.apple.private.contacts</key>
+	<true/>
+	<key>com.apple.private.contactsui</key>
+	<true/>
+	<key>com.apple.private.coreservices.canmaplsdatabase</key>
+	<true/>
+	<key>com.apple.private.familycircle</key>
+	<true/>
+	<key>com.apple.private.screen-time</key>
+	<true/>
+	<key>com.apple.private.security.storage.os_eligibility.readonly</key>
+	<true/>
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<key>com.apple.security.exception.files.absolute-path.read-only</key>
+	<array>
+		<string>/private/var/db/os_eligibility/</string>
+		<string>/private/var/db/os_eligibility/eligibility.plist</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.family.ageRange.xpc</string>
+		<string>com.apple.familycircled</string>
+		<string>com.apple.familycircle.agent</string>
+		<string>com.apple.ScreenTimeAgent.Contacts</string>
+		<string>com.apple.accessibility.AXSpringBoardServer</string>
+	</array>
+	<key>com.apple.security.exception.process-info</key>
+	<true/>
+	<key>com.apple.security.temporary-exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.familycircled</string>
+		<string>com.apple.family.ageRange.xpc</string>
+		<string>com.apple.ScreenTimeAgent.Contacts</string>
+		<string>com.apple.accessibility.AXSpringBoardServer</string>
+	</array>
+	<key>com.apple.security.temporary-exception.sbpl</key>
+	<array>
+		<string>(allow distributed-notification-post)</string>
+	</array>
+	<key>com.apple.springboard.opensensitiveurl</key>
+	<true/>
+</dict>
+</plist>

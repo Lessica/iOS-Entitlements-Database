@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.FitnessIntelligenceInference</string>
+	<key>com.apple.application-identifier</key>
+	<string>com.apple.FitnessIntelligenceInference</string>
+	<key>com.apple.modelmanager.inference</key>
+	<true/>
+	<key>com.apple.nano.nanoregistry.generalaccess</key>
+	<true/>
+	<key>com.apple.private.assets.accessible-asset-types</key>
+	<array>
+		<string>com.apple.MobileAsset.UAF.Siri.TextToSpeech</string>
+	</array>
+	<key>com.apple.private.biome.client-identifier</key>
+	<string>com.apple.FitnessIntelligenceInference</string>
+	<key>com.apple.private.biome.read-write</key>
+	<array>
+		<string>GenerativeModels.GenerativeFunctions.Instrumentation</string>
+	</array>
+	<key>com.apple.private.healthkit</key>
+	<true/>
+	<key>com.apple.private.healthkit.authorization_bypass</key>
+	<true/>
+	<key>com.apple.private.sirittsservice.modify-proxy-assets</key>
+	<true/>
+	<key>com.apple.proactive.eventtracker</key>
+	<true/>
+	<key>com.apple.security.exception.files.absolute-path.read-only</key>
+	<array>
+		<string>/private/var/mobile/Library/com.apple.modelcatalog/</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.triald.namespace-management</string>
+		<string>com.apple.mobileasset.autoasset</string>
+		<string>com.apple.biome.access.user</string>
+		<string>com.apple.healthd.server</string>
+		<string>com.apple.siri.external_request</string>
+		<string>com.apple.sirittsd</string>
+		<string>com.apple.modelcatalog.catalog</string>
+		<string>com.apple.modelmanager</string>
+		<string>com.apple.audio.AudioSession</string>
+		<string>com.apple.nanoprefsync</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-only</key>
+	<array>
+		<string>com.apple.GenerativeFunctions.GenerativeFunctionsInstrumentation</string>
+		<string>kCFPreferencesAnyApplication</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.FitnessIntelligence</string>
+	</array>
+	<key>com.apple.security.network.client</key>
+	<true/>
+	<key>com.apple.siri.external_request</key>
+	<true/>
+	<key>com.apple.trial.client</key>
+	<array>
+		<string>406</string>
+	</array>
+</dict>
+</plist>

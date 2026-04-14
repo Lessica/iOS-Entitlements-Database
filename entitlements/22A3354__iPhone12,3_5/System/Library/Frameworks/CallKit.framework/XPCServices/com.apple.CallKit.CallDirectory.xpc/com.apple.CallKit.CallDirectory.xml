@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.CallKit.call-directory.extension-host</key>
+	<true/>
+	<key>com.apple.livelookup.required-host-entitlement</key>
+	<true/>
+	<key>com.apple.private.ciphermld.allow</key>
+	<true/>
+	<key>com.apple.private.ciphermld.dynamicUseCase.allow</key>
+	<true/>
+	<key>com.apple.private.ids.remotecredentials</key>
+	<true/>
+	<key>com.apple.private.imcore.imremoteurlconnection</key>
+	<true/>
+	<key>com.apple.private.security.storage.AppDataContainers</key>
+	<true/>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.idsremoteurlconnectionagent.embedded.auth</string>
+		<string>com.apple.ciphermld</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.facetime.bag</string>
+	</array>
+	<key>com.apple.springboard.opensensitiveurl</key>
+	<true/>
+	<key>platform-application</key>
+	<true/>
+	<key>seatbelt-profiles</key>
+	<array>
+		<string>callkit.calldirectory</string>
+	</array>
+</dict>
+</plist>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.account.dca.fullaccess</key>
+	<true/>
+	<key>com.apple.application-identifier</key>
+	<string>AAACCOUNTS.com.apple.acdiagnose</string>
+	<key>com.apple.private.accounts.allaccounts</key>
+	<true/>
+	<key>com.apple.private.amfi.version-restriction</key>
+	<integer>1</integer>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>apple</string>
+		<string>appleaccount</string>
+		<string>IMCore</string>
+		<string>InternetAccounts</string>
+	</array>
+</dict>
+</plist>

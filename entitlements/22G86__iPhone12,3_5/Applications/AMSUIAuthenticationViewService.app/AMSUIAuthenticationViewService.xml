@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>abs-client</key>
+	<string>605149881</string>
+	<key>com.apple.accounts.appleaccount.fullaccess</key>
+	<true/>
+	<key>com.apple.appleaccount.custodian</key>
+	<true/>
+	<key>com.apple.authkit.client.internal</key>
+	<true/>
+	<key>com.apple.cdp.recoverykey</key>
+	<true/>
+	<key>com.apple.cdp.statemachine</key>
+	<true/>
+	<key>com.apple.icloud.findmydeviced.access</key>
+	<true/>
+	<key>com.apple.managedconfiguration.profiled-access</key>
+	<true/>
+	<key>com.apple.private.CoreAuthentication.SPI</key>
+	<true/>
+	<key>com.apple.private.LocalAuthentication.CallerName</key>
+	<true/>
+	<key>com.apple.private.MobileGestalt.AllowedProtectedKeys</key>
+	<dict>
+		<key>Item 0</key>
+		<string>UniqueDeviceID</string>
+		<key>Item 1</key>
+		<string>ProvisioningUniqueDeviceID</string>
+		<key>Item 2</key>
+		<string>SerialNumber</string>
+	</dict>
+	<key>com.apple.private.accounts.allaccounts</key>
+	<true/>
+	<key>com.apple.private.adid</key>
+	<true/>
+	<key>com.apple.private.applemediaservices</key>
+	<true/>
+	<key>com.apple.private.hsa-authentication-processing</key>
+	<true/>
+	<key>com.apple.private.managed-settings.effective-read</key>
+	<true/>
+	<key>com.apple.private.octagon</key>
+	<true/>
+	<key>com.apple.private.usage-tracking</key>
+	<true/>
+	<key>com.apple.security.exception.files.home-relative-path.read-only</key>
+	<array>
+		<string>/Library/com.apple.ManagedSettings/EffectiveSettings.plist</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.icloud.findmydeviced</string>
+		<string>com.apple.aa.daemon.xpc</string>
+		<string>com.apple.security.octagon</string>
+		<string>com.apple.cdp.daemon</string>
+		<string>com.apple.xpc.amsaccountsd</string>
+		<string>com.apple.hsa-authentication-server</string>
+		<string>com.apple.mobileactivationd</string>
+		<string>com.apple.fairplayd.versioned</string>
+		<string>com.apple.adid</string>
+		<string>com.apple.absd</string>
+		<string>com.apple.absinthed</string>
+		<string>com.apple.ak.anisette.xpc</string>
+		<string>com.apple.aa.custodian.xpc</string>
+		<string>com.apple.ak.custodian.xpc</string>
+		<string>com.apple.ak.auth.xpc</string>
+		<string>com.apple.mobile.keybagd.xpc</string>
+		<string>com.apple.ak.puffin.xpc</string>
+	</array>
+	<key>com.apple.security.system-groups</key>
+	<array>
+		<string>systemgroup.com.apple.icloud.findmydevice.managed</string>
+		<string>systemgroup.com.apple.DeviceActivity</string>
+	</array>
+</dict>
+</plist>

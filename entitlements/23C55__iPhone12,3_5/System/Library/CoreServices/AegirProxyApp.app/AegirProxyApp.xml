@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.NanoUniverse.AegirProxyApp</string>
+	<key>com.apple.developer.app-management-domain</key>
+	<string>com.apple.Posters</string>
+	<key>com.apple.developer.not-executable</key>
+	<true/>
+	<key>com.apple.private.attribution.implicitly-assumed-identity</key>
+	<dict>
+		<key>type</key>
+		<string>path</string>
+		<key>value</key>
+		<string>/System/Library/CoreServices/AegirProxyApp.app/AegirProxyApp</string>
+	</dict>
+	<key>com.apple.private.data-usage-classification-override</key>
+	<string>app</string>
+	<key>com.apple.private.security.no-container</key>
+	<true/>
+	<key>com.apple.private.security.system-application</key>
+	<true/>
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<key>com.apple.security.network.client</key>
+	<true/>
+	<key>com.apple.security.personal-information.location</key>
+	<true/>
+	<key>platform-application</key>
+	<true/>
+</dict>
+</plist>

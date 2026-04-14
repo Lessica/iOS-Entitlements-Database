@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>aps-connection-initiate</key>
+	<true/>
+	<key>com.apple.frontboard.launchapplications</key>
+	<true/>
+	<key>com.apple.private.launchservices.allowopenwithanyhandler</key>
+	<true/>
+	<key>com.apple.private.launchservices.canspecifysourceapplication</key>
+	<true/>
+	<key>com.apple.private.sandbox.profile</key>
+	<string>com.apple.WebKit.webpushd</string>
+	<key>com.apple.private.security.storage.os_eligibility.readonly</key>
+	<true/>
+	<key>com.apple.private.usernotifications.app-management-domain.proxy</key>
+	<string>com.apple.WebKit.PushBundles</string>
+	<key>com.apple.security.exception.files.absolute-path.read-only</key>
+	<array>
+		<string>/private/var/db/os_eligibility/eligibility.plist</string>
+	</array>
+	<key>com.apple.springboard.opensensitiveurl</key>
+	<true/>
+	<key>com.apple.uikitservices.app.value-access</key>
+	<true/>
+	<key>com.apple.usernotification.notificationschedulerproxy</key>
+	<true/>
+</dict>
+</plist>

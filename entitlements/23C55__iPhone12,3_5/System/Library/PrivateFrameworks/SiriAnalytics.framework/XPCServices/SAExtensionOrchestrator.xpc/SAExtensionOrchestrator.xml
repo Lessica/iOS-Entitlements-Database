@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.lighthouse.host-ole</key>
+	<true/>
+	<key>com.apple.private.biome.writer</key>
+	<array>
+		<string>Lighthouse.Ledger.TaskStatus</string>
+	</array>
+	<key>com.apple.runningboard.process-state</key>
+	<true/>
+	<key>com.apple.runningboard.terminateprocess</key>
+	<true/>
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<key>platform-application</key>
+	<true/>
+</dict>
+</plist>

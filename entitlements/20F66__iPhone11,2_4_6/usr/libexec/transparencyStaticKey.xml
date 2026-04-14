@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.transparencyStaticKey</string>
+	<key>aps-connection-initiate</key>
+	<true/>
+	<key>com.apple.TapToRadarKit.service-access</key>
+	<true/>
+	<key>com.apple.application-identifier</key>
+	<string>com.apple.transparencyStaticKey</string>
+	<key>com.apple.private.aps-connection-initiate</key>
+	<true/>
+	<key>com.apple.private.ids.messaging</key>
+	<array>
+		<string>com.apple.private.alloy.keytransparency.accountkey.pinning</string>
+	</array>
+	<key>com.apple.private.ids.messaging.urgent-priority</key>
+	<array>
+		<string>com.apple.private.alloy.keytransparency.accountkey.pinning</string>
+	</array>
+	<key>com.apple.private.ids.remoteurlconnection</key>
+	<true/>
+	<key>com.apple.private.ids.session</key>
+	<array>
+		<string>com.apple.private.alloy.keytransparency.accountkey.pinning</string>
+	</array>
+	<key>com.apple.private.ids.session-private</key>
+	<array>
+		<string>com.apple.private.alloy.keytransparency.accountkey.pinning</string>
+	</array>
+	<key>com.apple.private.imcore.imremoteurlconnection</key>
+	<true/>
+	<key>com.apple.private.sandbox.profile:embedded</key>
+	<string>transparencyd</string>
+	<key>com.apple.private.security.message-filter</key>
+	<true/>
+	<key>com.apple.private.security.storage.SFAnalytics</key>
+	<true/>
+	<key>com.apple.security.exception.files.absolute-path.read-write</key>
+	<array>
+		<string>/private/var/tmp/com.apple.transparencyStaticKey</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.transparencyd.ids-support</string>
+	</array>
+	<key>com.apple.security.network.client</key>
+	<true/>
+	<key>com.apple.transparency.kt</key>
+	<true/>
+</dict>
+</plist>

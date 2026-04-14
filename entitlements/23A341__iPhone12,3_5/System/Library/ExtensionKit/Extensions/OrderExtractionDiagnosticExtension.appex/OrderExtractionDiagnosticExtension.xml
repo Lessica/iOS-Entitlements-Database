@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.DiagnosticExtensions.extension</key>
+	<true/>
+	<key>com.apple.finance.private</key>
+	<true/>
+	<key>com.apple.private.intelligenceplatform.client-identifier</key>
+	<string>com.apple.finance.OrderExtractionDiagnosticExtension</string>
+	<key>com.apple.private.intelligenceplatform.use-cases</key>
+	<dict>
+		<key>OrderExtractionDiagnosticExtension</key>
+		<dict>
+			<key>Sets</key>
+			<dict>
+				<key>Wallet.PaymentsCommerce.ExtractedOrder</key>
+				<dict>
+					<key>mode</key>
+					<string>read-only</string>
+				</dict>
+			</dict>
+			<key>Streams</key>
+			<dict>
+				<key>WalletPaymentsCommerce.FoundIn.ClassicOrder</key>
+				<dict>
+					<key>mode</key>
+					<string>read-only</string>
+				</dict>
+				<key>WalletPaymentsCommerce.FoundIn.OrderEmail</key>
+				<dict>
+					<key>mode</key>
+					<string>read-only</string>
+				</dict>
+				<key>WalletPaymentsCommerce.FoundIn.TrackedOrder</key>
+				<dict>
+					<key>mode</key>
+					<string>read-only</string>
+				</dict>
+			</dict>
+		</dict>
+	</dict>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.financed.service.coredatastore</string>
+		<string>com.apple.financed.service.store</string>
+		<string>com.apple.financed.service.financestore</string>
+	</array>
+</dict>
+</plist>

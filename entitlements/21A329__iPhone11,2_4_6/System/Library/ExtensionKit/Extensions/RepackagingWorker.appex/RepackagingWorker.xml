@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.aiml.RepackagingWorker</string>
+	<key>com.apple.intents.extension.discovery</key>
+	<true/>
+	<key>com.apple.runningboard.launchprocess</key>
+	<true/>
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.triald.namespace-management </string>
+		<string>com.apple.siri.analytics.assistant</string>
+	</array>
+	<key>com.apple.security.exception.process-info</key>
+	<true/>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.aiml.InstrumentationStreams.RepackagingPlugin</string>
+	</array>
+	<key>com.apple.siri.analytics.assistant</key>
+	<array>
+		<string>runtime.introspection</string>
+		<string>publish.unordered</string>
+		<string>plugin.state</string>
+	</array>
+</dict>
+</plist>

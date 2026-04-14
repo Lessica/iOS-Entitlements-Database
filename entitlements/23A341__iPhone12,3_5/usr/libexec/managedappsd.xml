@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.devicemanagementclient.managedappsd</string>
+	<key>com.apple.private.remotemanagement.subscriber</key>
+	<true/>
+	<key>com.apple.private.sandbox.profile:embedded</key>
+	<string>temporary-sandbox</string>
+	<key>com.apple.private.system-keychain</key>
+	<true/>
+	<key>com.apple.security.exception.files.absolute-path.read-write</key>
+	<array>
+		<string>/private/var/Managed Preferences/</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.devicemanagementclient.managedappsd</string>
+	</array>
+	<key>com.apple.security.system-container</key>
+	<true/>
+	<key>com.apple.security.ts.tmpdir</key>
+	<array>
+		<string>com.apple.devicemanagementclient.managedappsd</string>
+	</array>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>com.apple.managedappsd</string>
+	</array>
+	<key>platform-application</key>
+	<true/>
+</dict>
+</plist>

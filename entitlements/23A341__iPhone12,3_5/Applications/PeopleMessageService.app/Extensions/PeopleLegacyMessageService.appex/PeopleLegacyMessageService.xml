@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.private.biome.client-identifier</key>
+	<true/>
+	<key>com.apple.private.biome.read-only</key>
+	<array>
+		<string>FindMyLocationChange</string>
+		<string>AppLaunch</string>
+		<string>AskToBuy</string>
+		<string>ScreenTimeRequest</string>
+		<string>Family.ScreenTime.ChildState</string>
+		<string>UserStatusChange</string>
+		<string>AppIntent</string>
+		<string>ReadMessage</string>
+	</array>
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.familycircle.agent</string>
+		<string>com.apple.biome.PublicStreamAccessService</string>
+		<string>com.apple.biome.access.user</string>
+		<string>com.apple.coreduetd.people</string>
+	</array>
+	<key>com.apple.security.network.client</key>
+	<true/>
+</dict>
+</plist>

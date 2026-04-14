@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CARCapableApp</key>
+	<true/>
+	<key>com.apple.developer.carp</key>
+	<true/>
+	<key>com.apple.private.CarAssetUtils.variants</key>
+	<true/>
+	<key>com.apple.private.CarPlayUIServices.punch-through</key>
+	<true/>
+	<key>com.apple.private.RequiredVehicleAccessories</key>
+	<array>
+		<string>Seat</string>
+		<string>VehicleVariants</string>
+		<string>AutomakerSettings</string>
+		<string>PositionTracker</string>
+		<string>Climate</string>
+	</array>
+	<key>com.apple.private.carp</key>
+	<true/>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.CarPlayApp.punch-through-service</string>
+		<string>com.apple.caraccessoryframework.cardata</string>
+		<string>com.apple.CarAssetUtils.variants</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.CarClimate</string>
+	</array>
+</dict>
+</plist>

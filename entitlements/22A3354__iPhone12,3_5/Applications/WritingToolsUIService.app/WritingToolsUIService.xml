@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.WritingToolsUIService</string>
+	<key>com.apple.feedbackd.remote-evaluation</key>
+	<true/>
+	<key>com.apple.generativeexperiences.generativeexperiencessession</key>
+	<true/>
+	<key>com.apple.generativeexperiences.summarization</key>
+	<true/>
+	<key>com.apple.generativeexperiences.textcomposition</key>
+	<true/>
+	<key>com.apple.modelmanager.inference</key>
+	<true/>
+	<key>com.apple.private.feedback.drafting</key>
+	<true/>
+	<key>com.apple.runningboard.trustedtarget</key>
+	<true/>
+	<key>com.apple.sage.summarization</key>
+	<true/>
+	<key>com.apple.sage.textcomposition</key>
+	<true/>
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.extensionkitservice</string>
+		<string>com.apple.feedbackd.centralized-feedback</string>
+		<string>com.apple.generativeexperiences.summarization</string>
+		<string>com.apple.generativeexperiences.textcomposition</string>
+		<string>com.apple.modelmanager</string>
+		<string>com.apple.sage.summarization</string>
+		<string>com.apple.sage.textcomposition</string>
+		<string>com.apple.generativeexperiences.generativeexperiencessession</string>
+		<string>com.apple.siri.activation.service</string>
+	</array>
+	<key>com.apple.security.files.user-selected.read-only</key>
+	<true/>
+	<key>com.apple.siri.activation.service</key>
+	<true/>
+</dict>
+</plist>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>allow-obliterate-device</key>
+	<true/>
+	<key>com.apple.developer.nfc.readersession.formats</key>
+	<array>
+		<string>NDEF</string>
+		<string>ISO15693</string>
+		<string>VAS</string>
+		<string>TAG</string>
+	</array>
+	<key>com.apple.nfcd.hwmanager</key>
+	<true/>
+	<key>com.apple.nfcd.seshat</key>
+	<true/>
+	<key>com.apple.osanalytics.otatasking-service-access</key>
+	<true/>
+	<key>com.apple.private.RemoteServiceDiscovery.device-admin</key>
+	<true/>
+	<key>com.apple.private.lockdown.finegrained-get</key>
+	<array>
+		<string>com.apple.PurpleBuddy/SetupDone</string>
+		<string>com.apple.PurpleBuddy/SetupFinishedAllSteps</string>
+		<string>com.apple.PurpleBuddy/SetupState</string>
+		<string>com.apple.lockdown.datamigrator/MigrationDone</string>
+	</array>
+	<key>com.apple.security.iokit-user-client-class</key>
+	<array>
+		<string>RootDomainUserClient</string>
+	</array>
+	<key>com.apple.security.network.client</key>
+	<true/>
+</dict>
+</plist>

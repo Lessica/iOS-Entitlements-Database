@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.AudioAccessoryServices</key>
+	<true/>
+	<key>com.apple.afk.shmem-user</key>
+	<true/>
+	<key>com.apple.afk.user</key>
+	<true/>
+	<key>com.apple.application-identifier</key>
+	<string>com.apple.sensingpredictd</string>
+	<key>com.apple.bluetooth.system</key>
+	<true/>
+	<key>com.apple.polaris.client</key>
+	<true/>
+	<key>com.apple.private.exclaves.conclave-host</key>
+	<true/>
+	<key>com.apple.private.tcc.allow</key>
+	<array>
+		<string>kTTCServiceBluetoothPeripheral</string>
+		<string>kTCCServiceBluetoothAlways</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.AudioAccessoryServices</string>
+	</array>
+	<key>seatbelt-profiles</key>
+	<array>
+		<string>temporary-sandbox</string>
+	</array>
+</dict>
+</plist>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.accessibility.systemvoiceprovider</key>
+	<true/>
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.accessibility.voices</string>
+		<string>com.apple.audio.AudioConverterService</string>
+		<string>com.apple.logd</string>
+		<string>com.apple.system.notification_center</string>
+		<string>com.apple.audio.AudioComponentRegistrar</string>
+		<string>com.apple.audio.AudioUnitServer</string>
+		<string>com.apple.mobileassetd.v2</string>
+		<string>com.apple.SiriTTSService.TrialProxy</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-only</key>
+	<array>
+		<string>com.apple.SpeakSelection</string>
+	</array>
+	<key>com.apple.security.temporary-exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.accessibility.voices</string>
+		<string>com.apple.audio.AudioConverterService</string>
+		<string>com.apple.logd</string>
+		<string>com.apple.system.notification_center</string>
+		<string>com.apple.audio.AudioComponentRegistrar</string>
+		<string>com.apple.audio.AudioUnitServer</string>
+		<string>com.apple.mobileassetd.v2</string>
+		<string>com.apple.SiriTTSService.TrialProxy</string>
+	</array>
+	<key>com.apple.security.temporary-exception.shared-preference.read-only</key>
+	<array>
+		<string>com.apple.SpeakSelection</string>
+	</array>
+	<key>com.apple.security.ts.ipc-posix-shm</key>
+	<array>
+		<string>apple.shm.notification_center</string>
+	</array>
+</dict>
+</plist>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CARCapableApp</key>
+	<true/>
+	<key>application-identifier</key>
+	<string>com.apple.AutoSettings</string>
+	<key>com.apple.avfoundation.allow-system-wide-context</key>
+	<true/>
+	<key>com.apple.developer.carp</key>
+	<true/>
+	<key>com.apple.private.CarAssetUtils.variants</key>
+	<true/>
+	<key>com.apple.private.CarPlayUIServices.punch-through</key>
+	<true/>
+	<key>com.apple.private.CarPlayUIServices.volume-notification</key>
+	<true/>
+	<key>com.apple.private.RequiredVehicleAccessories</key>
+	<array>
+		<string>AutomakerNotificationHistory</string>
+		<string>AudioSettings</string>
+		<string>PositionTracker</string>
+		<string>AutomakerSettings</string>
+		<string>Vehicle</string>
+	</array>
+	<key>com.apple.private.attribution.implicitly-assumed-identity</key>
+	<dict>
+		<key>type</key>
+		<string>path</string>
+		<key>value</key>
+		<string>/Applications/AutoSettings.app/AutoSettings</string>
+	</dict>
+	<key>com.apple.private.carkit</key>
+	<true/>
+	<key>com.apple.private.carp</key>
+	<true/>
+	<key>com.apple.private.carp.wake</key>
+	<true/>
+	<key>com.apple.private.externalaccessory.showallaccessories</key>
+	<true/>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.carkit.service</string>
+		<string>com.apple.CarPlayApp.volume-notification-service</string>
+		<string>com.apple.caraccessoryframework.cardata</string>
+		<string>com.apple.CarPlayApp.punch-through-service</string>
+		<string>com.apple.CarAssetUtils.variants</string>
+	</array>
+</dict>
+</plist>

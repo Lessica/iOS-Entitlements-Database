@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.DiagnosticExtensions.IMDiagnosticExtension</string>
+	<key>com.apple.DiagnosticExtensions.extension</key>
+	<true/>
+	<key>com.apple.application-identifier</key>
+	<string>com.apple.DiagnosticExtensions.IMDiagnosticExtension</string>
+	<key>com.apple.private.imcore.imagent</key>
+	<true/>
+	<key>com.apple.private.imcore.imdpersistence.database-access</key>
+	<true/>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.IMCoreSpotlight</string>
+	</array>
+</dict>
+</plist>

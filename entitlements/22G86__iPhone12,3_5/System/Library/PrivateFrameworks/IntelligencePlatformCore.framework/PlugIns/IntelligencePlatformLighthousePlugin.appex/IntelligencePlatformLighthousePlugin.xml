@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.intelligenceplatform.IntelligencePlatformCore.IntelligencePlatformLighthousePlugin</string>
+	<key>com.apple.intelligenceplatform.Lighthouse</key>
+	<true/>
+	<key>com.apple.intents.extension.discovery</key>
+	<true/>
+	<key>com.apple.proactive.eventtracker</key>
+	<true/>
+	<key>com.apple.runningboard.launchprocess</key>
+	<true/>
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<key>com.apple.security.exception.files.absolute-path.read-only</key>
+	<array>
+		<string>/var/mobile/Library/Trial/Treatments/default_factors_1150.pb</string>
+		<string>/Library/Trial/</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.intelligenceplatform.Lighthouse</string>
+	</array>
+	<key>com.apple.trial.client</key>
+	<array>
+		<string>1150</string>
+	</array>
+	<key>com.apple.trial.status.deployment-environment.allow</key>
+	<true/>
+	<key>com.apple.trial.status.namespace-name.allow</key>
+	<true/>
+	<key>com.apple.triald.internal</key>
+	<true/>
+</dict>
+</plist>

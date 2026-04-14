@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.ciphermld</string>
+	<key>com.apple.CipherMLService.allow</key>
+	<true/>
+	<key>com.apple.application-identifier</key>
+	<string>com.apple.ciphermld</string>
+	<key>com.apple.developer.ubiquity-kvstore-identifier</key>
+	<string>com.apple.ciphermld</string>
+	<key>com.apple.private.applemediaservices</key>
+	<true/>
+	<key>com.apple.private.sandbox.profile:embedded</key>
+	<string>temporary-sandbox</string>
+	<key>com.apple.private.security.daemon-container</key>
+	<true/>
+	<key>com.apple.security.exception.files.home-relative-path.read-write</key>
+	<array>
+		<string>/Library/Caches/com.apple.ciphermld/</string>
+		<string>/Library/HTTPStorages/com.apple.ciphermld/</string>
+		<string>/Library/Caches/com.apple.AppleMediaServices/</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.kvsd</string>
+		<string>com.apple.CipherMLService</string>
+		<string>com.apple.fairplayd.versioned</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-only</key>
+	<array>
+		<string>com.apple.itunesstored</string>
+	</array>
+	<key>com.apple.security.network.client</key>
+	<true/>
+	<key>com.apple.security.ts.daemon-container</key>
+	<true/>
+	<key>com.apple.security.ts.tmpdir</key>
+	<string>com.apple.ciphermld</string>
+	<key>platform-application</key>
+	<true/>
+</dict>
+</plist>

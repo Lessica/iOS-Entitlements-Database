@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key> com.apple.private.spindump.cli</key>
+	<true/>
+	<key>com.apple.CompanionLink</key>
+	<true/>
+	<key>com.apple.bluetooth.system</key>
+	<true/>
+	<key>com.apple.corecapture.manager-access</key>
+	<true/>
+	<key>com.apple.developer.device-information.user-assigned-device-name</key>
+	<true/>
+	<key>com.apple.developer.driverkit.userclient-access</key>
+	<array>
+		<string>com.apple.DriverKit-AppleBCMWLAN</string>
+	</array>
+	<key>com.apple.managedconfiguration.profiled.profile-list-read</key>
+	<true/>
+	<key>com.apple.private.corewifi.bssid</key>
+	<true/>
+	<key>com.apple.private.corewifi.countrycode</key>
+	<true/>
+	<key>com.apple.private.corewifi.internal</key>
+	<true/>
+	<key>com.apple.private.diagnostics</key>
+	<true/>
+	<key>com.apple.private.logging.admin</key>
+	<true/>
+	<key>com.apple.private.sysdiagnose</key>
+	<true/>
+	<key>com.apple.private.wifianalytics</key>
+	<true/>
+	<key>com.apple.security.iokit-user-client-class</key>
+	<array>
+		<string>IOUserUserClient</string>
+		<string>IO80211APIUserClient</string>
+		<string>IOUserUserClient</string>
+	</array>
+	<key>com.apple.security.network.client</key>
+	<true/>
+	<key>com.apple.security.network.server</key>
+	<true/>
+	<key>com.apple.wifi.manager-access</key>
+	<true/>
+	<key>com.apple.wlan.authentication</key>
+	<true/>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>wifianalyticsd</string>
+		<string>apple</string>
+	</array>
+</dict>
+</plist>

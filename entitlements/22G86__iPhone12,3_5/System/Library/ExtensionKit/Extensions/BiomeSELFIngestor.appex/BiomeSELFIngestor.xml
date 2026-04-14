@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.lighthouse.BiomeSELFIngestor</string>
+	<key>com.apple.application-identifier</key>
+	<string>com.apple.lighthouse.BiomeSELFIngestor</string>
+	<key>com.apple.private.intelligenceplatform.use-cases</key>
+	<dict>
+		<key>DillSELFMapper</key>
+		<dict>
+			<key>Streams</key>
+			<array>
+				<string>IntelligenceFlow.Transcript.Datastream</string>
+				<string>IntelligenceFlow.Experimentation</string>
+				<string>IntelligenceFlow.JointResolverTelemetry</string>
+				<string>IntelligenceFlow.PlanResolutionTelemetry</string>
+				<string>IntelligenceFlow.QueryDecorationTelemetry</string>
+				<string>IntelligenceFlow.ResponseGeneration</string>
+				<string>IntelligenceFlow.SearchToolTelemetry</string>
+				<string>IntelligenceFlow.ExecutorTelemetry</string>
+				<string>IntelligenceFlow.IFRequestTelemetry</string>
+				<string>IntelligenceFlow.PlanGenerationTelemetry</string>
+			</array>
+		</dict>
+	</dict>
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.biome.access.user</string>
+		<string>com.apple.siri.analytics.assistant</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.lighthouse.dill.BiomeSELFIngestor</string>
+	</array>
+	<key>com.apple.security.temporary-exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.biome.access.user</string>
+		<string>com.apple.siri.analytics.assistant</string>
+	</array>
+	<key>com.apple.siri.analytics.assistant</key>
+	<array>
+		<string>publish.unordered</string>
+	</array>
+</dict>
+</plist>

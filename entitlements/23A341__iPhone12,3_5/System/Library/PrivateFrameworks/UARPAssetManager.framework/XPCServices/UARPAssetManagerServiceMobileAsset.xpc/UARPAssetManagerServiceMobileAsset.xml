@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.UARPAssetManagerServiceMobileAsset</string>
+	<key>com.apple.CommCenter.fine-grained</key>
+	<array>
+		<string>spi</string>
+		<string>cellular-plan</string>
+		<string>public-cellular-plan</string>
+	</array>
+	<key>com.apple.private.MobileGestalt.AllowedProtectedKeys</key>
+	<array>
+		<string>InverseDeviceID</string>
+	</array>
+	<key>com.apple.private.assets.accessible-asset-types</key>
+	<array>
+		<string>com.apple.MobileAsset.UARP.*</string>
+		<string>com.apple.MobileAsset.DarwinAccessoryUpdate.*</string>
+	</array>
+	<key>com.apple.private.assets.change-daemon-config</key>
+	<true/>
+	<key>com.apple.private.xpc.launchd.per-user-lookup</key>
+	<true/>
+	<key>com.apple.security.exception.files.absolute-path.read-write</key>
+	<array>
+		<string>/private/var/db/accessoryupdater/</string>
+		<string>/private/var/run/</string>
+		<string>/private/var/root/Library/Caches/</string>
+		<string>/private/var/root/Library/HTTPStorages/</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.mobileassetd.v2</string>
+		<string>com.apple.commcenter.coretelephony.xpc</string>
+		<string>com.apple.frontboard.systemappservices</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-only</key>
+	<array>
+		<string>com.apple.ACMobileShim</string>
+		<string>com.apple.GEO</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.accessoryupdaterd</string>
+		<string>com.apple.AUDeveloperSettings</string>
+		<string>com.apple.security</string>
+	</array>
+	<key>com.apple.security.network.client</key>
+	<true/>
+	<key>com.apple.security.ts.asset-access</key>
+	<true/>
+	<key>com.apple.springboard.CFUserNotification</key>
+	<true/>
+	<key>com.apple.system.diagnostics.iokit-properties</key>
+	<true/>
+	<key>platform-application</key>
+	<true/>
+</dict>
+</plist>

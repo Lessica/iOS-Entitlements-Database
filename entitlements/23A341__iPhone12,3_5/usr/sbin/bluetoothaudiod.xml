@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.bluetoothaudiod</string>
+	<key>com.apple.BTServer.allowRestrictedServices</key>
+	<true/>
+	<key>com.apple.BTServer.le.att</key>
+	<true/>
+	<key>com.apple.accessories.transport.allowauth</key>
+	<true/>
+	<key>com.apple.application-identifier</key>
+	<string>com.apple.bluetoothaudiod</string>
+	<key>com.apple.bluetooth.custom.properties.writable</key>
+	<true/>
+	<key>com.apple.bluetooth.pairedInfoSecurity</key>
+	<true/>
+	<key>com.apple.bluetooth.system</key>
+	<true/>
+	<key>com.apple.bluetoothaudiod.cb</key>
+	<true/>
+	<key>com.apple.donotdisturb.service</key>
+	<true/>
+	<key>com.apple.mediaremote.full-now-playing-read-access</key>
+	<true/>
+	<key>com.apple.private.donotdisturb.state.request.client-identifiers</key>
+	<array>
+		<string>com.apple.BTLEServer.ANCS</string>
+	</array>
+	<key>com.apple.private.tcc.allow</key>
+	<array>
+		<string>kTCCServiceAddressBook</string>
+		<string>kTCCServiceBluetoothPeripheral</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array/>
+	<key>com.apple.security.iokit-user-client-class</key>
+	<array>
+		<string>RootDomainUserClient</string>
+	</array>
+	<key>com.apple.symptom_diagnostics.report</key>
+	<true/>
+	<key>com.apple.telephonyutilities.callservicesd</key>
+	<array>
+		<string>access-calls</string>
+		<string>modify-calls</string>
+	</array>
+</dict>
+</plist>

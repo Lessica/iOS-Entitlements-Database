@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.finance.private</key>
+	<true/>
+	<key>com.apple.mobileactivationd.spi</key>
+	<true/>
+	<key>com.apple.security.attestation.access</key>
+	<true/>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.mobileactivationd</string>
+		<string>com.apple.financed.service.coredatastore</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-only</key>
+	<array>
+		<string>com.apple.FinanceKit</string>
+	</array>
+	<key>com.apple.security.system-groups</key>
+	<array>
+		<string>systemgroup.com.apple.mobileactivationd</string>
+	</array>
+	<key>com.apple.trial.client</key>
+	<array>
+		<string>1290</string>
+	</array>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>com.apple.FinanceKit</string>
+	</array>
+</dict>
+</plist>

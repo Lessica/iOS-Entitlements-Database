@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.jetpackassetd</string>
+	<key>aps-connection-initiate</key>
+	<true/>
+	<key>aps-environment</key>
+	<string>development</string>
+	<key>com.apple.private.applemediaservices</key>
+	<true/>
+	<key>com.apple.private.coreservices.canmaplsdatabase</key>
+	<true/>
+	<key>com.apple.private.logging.diagnostic</key>
+	<true/>
+	<key>com.apple.private.network.socket-delegate</key>
+	<true/>
+	<key>com.apple.private.sandbox.profile:embedded</key>
+	<string>temporary-sandbox</string>
+	<key>com.apple.private.security.daemon-container</key>
+	<true/>
+	<key>com.apple.private.security.restricted-application-groups</key>
+	<array>
+		<string>group.com.apple.jetpackassetd</string>
+	</array>
+	<key>com.apple.private.security.storage.os_eligibility.readonly</key>
+	<true/>
+	<key>com.apple.private.sqlite.sqlite-encryption</key>
+	<true/>
+	<key>com.apple.runningboard.jetengine</key>
+	<true/>
+	<key>com.apple.security.application-groups</key>
+	<array>
+		<string>group.com.apple.jetpackassetd</string>
+	</array>
+	<key>com.apple.security.exception.files.absolute-path.read-only</key>
+	<array>
+		<string>/Library/Application Support/CrashReporter/DiagnosticMessagesHistory.plist</string>
+		<string>/private/var/db/os_eligibility/eligibility.plist</string>
+	</array>
+	<key>com.apple.security.exception.files.home-relative-path.read-write</key>
+	<array>
+		<string>/Library/Caches/com.apple.jetpackassetd/</string>
+		<string>/Library/Caches/com.apple.AppleMediaServices/</string>
+		<string>/Library/com.apple.itunesstored/</string>
+		<string>/Library/HTTPStorages/com.apple.jetpackassetd/</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.managedconfiguration.profiled</string>
+		<string>com.apple.SBUserNotification</string>
+		<string>com.apple.usernotifications.usernotificationservice</string>
+		<string>com.apple.apsd</string>
+		<string>com.apple.dasd</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.jetpackassetd</string>
+		<string>com.apple.itunesstored</string>
+		<string>com.apple.AppleMediaServices</string>
+	</array>
+	<key>com.apple.security.network.client</key>
+	<true/>
+	<key>com.apple.security.ts.daemon-container</key>
+	<true/>
+	<key>com.apple.security.ts.tmpdir</key>
+	<string>com.apple.jetpackassetd</string>
+	<key>platform-application</key>
+	<true/>
+</dict>
+</plist>

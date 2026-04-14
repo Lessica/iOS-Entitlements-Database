@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.aned.private.allow</key>
+	<true/>
+	<key>com.apple.modelcatalog.full-access</key>
+	<true/>
+	<key>com.apple.private.ane.allow-set-client-hints</key>
+	<true/>
+	<key>com.apple.private.ane.allow-share-coalition-hints</key>
+	<true/>
+	<key>com.apple.private.assets.accessible-asset-types</key>
+	<array>
+		<string>com.apple.MobileAsset.UAF.Photos.SpatialPhotosRelive</string>
+	</array>
+	<key>com.apple.private.memory.ownership_transfer</key>
+	<true/>
+	<key>com.apple.private.security.no-sandbox</key>
+	<true/>
+	<key>com.apple.security.exception.files.absolute-path.read-only</key>
+	<array>
+		<string>/private/var/MobileAsset/AssetsV2/</string>
+		<string>/System/Library/PreinstalledAssetsV2/</string>
+		<string>/private/var/mobile/Library/Application Support/com.apple.Alchemist/</string>
+		<string>/private/var/mobile/Library/com.apple.modelcatalog/sideload/</string>
+		<string>/private/var/mobile/Library/com.apple.modelcatalog/compiled/e5bundlecache/</string>
+	</array>
+	<key>com.apple.security.exception.files.absolute-path.read-write</key>
+	<array>
+		<string>/private/var/tmp/</string>
+		<string>/private/var/mobile/examplemodel/</string>
+		<string>/Library/Caches/com.apple.AlchemistInferenceProvider/</string>
+		<string>/private/var/mobile/Library/Caches/com.apple.AlchemistInferenceProvider/</string>
+	</array>
+	<key>com.apple.security.exception.iokit-user-client-class</key>
+	<array>
+		<string>AGXDeviceUserClient</string>
+		<string>IOSurfaceRootUserClient</string>
+		<string>IOSurfaceAcceleratorClient</string>
+		<string>ANEClientHintsUserClient</string>
+		<string>H11ANEInDirectPathClient</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.appleneuralengine</string>
+		<string>com.apple.modelcatalog.catalog</string>
+		<string>com.apple.tests.callbackService</string>
+		<string>com.apple.powerlog.plxpclogger.xpc</string>
+		<string>com.apple.PerfPowerTelemetryClientRegistrationService</string>
+		<string>com.apple.mobileactivationd</string>
+		<string>com.apple.mobileassetd.v2</string>
+		<string>com.apple.mobileasset.autoasset</string>
+		<string>com.apple.siri.uaf.service</string>
+		<string>com.apple.mediaanalysisd.service.public</string>
+	</array>
+	<key>com.apple.security.iokit-user-client-class</key>
+	<array>
+		<string>AGXDeviceUserClient</string>
+		<string>IOSurfaceRootUserClient</string>
+		<string>IOSurfaceAcceleratorClient</string>
+		<string>ANEClientHintsUserClient</string>
+		<string>H11ANEInDirectPathClient</string>
+	</array>
+	<key>com.apple.security.temporary-exception.files.absolute-path.read-only</key>
+	<array>
+		<string>/private/var/MobileAsset/AssetsV2/</string>
+		<string>/System/Library/PreinstalledAssetsV2/</string>
+		<string>/Library/Application Support/com.apple.Alchemist/</string>
+		<string>/private/var/db/com.apple.modelcatalog/protected/compiled/e5bundlecache/</string>
+		<string>/private/var/db/com.apple.modelcatalog/sideload/</string>
+	</array>
+	<key>com.apple.security.temporary-exception.files.absolute-path.read-write</key>
+	<array>
+		<string>/Library/Caches/com.apple.AlchemistInferenceProvider/</string>
+		<string>/Library/Caches/com.apple.modelmanager.homedirworkaround/</string>
+	</array>
+	<key>com.apple.system.diagnostics.iokit-properties</key>
+	<true/>
+</dict>
+</plist>

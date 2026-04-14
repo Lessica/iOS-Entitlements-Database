@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.fitcore</key>
+	<true/>
+	<key>com.apple.private.healthkit</key>
+	<true/>
+	<key>com.apple.private.healthkit.authorization_bypass</key>
+	<true/>
+	<key>com.apple.private.healthkit.source_override</key>
+	<string>com.apple.private.health.localdevice</string>
+	<key>com.apple.security.exception.files.absolute-path.read-write</key>
+	<array>
+		<string>/var/mobile/tmp</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.FitnessIntelligenceSnapshotService</string>
+		<string>com.apple.seymour</string>
+		<string>com.apple.healthd.server</string>
+	</array>
+	<key>com.apple.security.temporary-exception.sbpl</key>
+	<array>
+		<string>(allow syscall-unix
+            (syscall-number SYS_open_dprotected_np
+            SYS_rmdir
+            SYS_getattrlistbulk
+            SYS_listxattr
+            ))
+        </string>
+	</array>
+</dict>
+</plist>

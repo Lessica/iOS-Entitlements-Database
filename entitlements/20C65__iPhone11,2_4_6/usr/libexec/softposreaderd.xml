@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.softposreaderd</string>
+	<key>com.apple.accounts.appleaccount.fullaccess</key>
+	<true/>
+	<key>com.apple.developer.nfc.readersession.formats</key>
+	<array>
+		<string>VAS</string>
+		<string>NDEF</string>
+		<string>TAG</string>
+	</array>
+	<key>com.apple.nfcd.hwmanager</key>
+	<true/>
+	<key>com.apple.nfcd.session.reader.internal</key>
+	<true/>
+	<key>com.apple.nfcd.session.se</key>
+	<true/>
+	<key>com.apple.private.applesse.allow</key>
+	<true/>
+	<key>com.apple.security.exception.iokit-user-client-class</key>
+	<array>
+		<string>AppleSSEUserClient</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.nfcd.hwmanager</string>
+	</array>
+	<key>com.apple.seserviced.key</key>
+	<true/>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>com.apple.softposreader</string>
+		<string>com.apple.applesse</string>
+	</array>
+</dict>
+</plist>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.QuartzCore.secure-mode</key>
+	<true/>
+	<key>com.apple.SystemConfiguration.SCNetworkInterfaceSetAdvisory</key>
+	<true/>
+	<key>com.apple.UIKit.vends-view-services</key>
+	<true/>
+	<key>com.apple.airplay.discoverybroker.allow</key>
+	<true/>
+	<key>com.apple.airplay.receiverservices</key>
+	<true/>
+	<key>com.apple.avfoundation.allow-identifying-output-device-details</key>
+	<true/>
+	<key>com.apple.avfoundation.allow-system-wide-context</key>
+	<true/>
+	<key>com.apple.avfoundation.allows-access-to-device-list</key>
+	<true/>
+	<key>com.apple.avfoundation.allows-set-output-device</key>
+	<true/>
+	<key>com.apple.captive.private</key>
+	<true/>
+	<key>com.apple.frontboard.launchapplications</key>
+	<true/>
+	<key>com.apple.intelligentrouting.recommendationservice</key>
+	<true/>
+	<key>com.apple.private.corewifi</key>
+	<true/>
+	<key>com.apple.private.driverkit.driver-access</key>
+	<array>
+		<string>com.apple.private.wifi.driverkit</string>
+	</array>
+	<key>com.apple.private.rtcreportingd</key>
+	<true/>
+	<key>com.apple.proactive.eventtracker</key>
+	<true/>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.airplay.discoverybroker</string>
+		<string>com.apple.SystemConfiguration.IPMonitorControl</string>
+		<string>com.apple.intelligentroutingd.xpc.media</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.airplay</string>
+	</array>
+	<key>com.apple.springboard.opensensitiveurl</key>
+	<true/>
+	<key>com.apple.springboard.remote-alert</key>
+	<true/>
+	<key>com.apple.trial.client</key>
+	<array>
+		<string>313</string>
+	</array>
+	<key>com.apple.wifi.events</key>
+	<true/>
+	<key>com.apple.wifi.events.private</key>
+	<true/>
+	<key>com.apple.wlan.authentication</key>
+	<true/>
+</dict>
+</plist>

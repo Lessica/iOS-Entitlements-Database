@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>MachServices</key>
+	<dict>
+		<key>com.apple.HangHUD</key>
+		<true/>
+	</dict>
+	<key>com.apple.HangHUD</key>
+	<true/>
+	<key>com.apple.QuartzCore.debug</key>
+	<true/>
+	<key>com.apple.QuartzCore.displayable-context</key>
+	<true/>
+	<key>com.apple.QuartzCore.secure-mode</key>
+	<true/>
+	<key>com.apple.appletv.pbs.allow-user-interface-style-change</key>
+	<true/>
+	<key>com.apple.osanalytics.otatasking-service-access</key>
+	<true/>
+	<key>com.apple.private.coreservices.canmaplsdatabase</key>
+	<true/>
+	<key>com.apple.private.kernel.get-kext-info</key>
+	<true/>
+	<key>com.apple.private.logging.admin</key>
+	<true/>
+	<key>com.apple.private.logging.stream</key>
+	<true/>
+	<key>com.apple.private.osanalytics.defaults.allow</key>
+	<true/>
+	<key>com.apple.private.usernotifications.bundle-identifiers</key>
+	<array>
+		<string>com.apple.hangtracerd.usernotifications</string>
+	</array>
+	<key>com.apple.private.xpc.launchd.service-stats</key>
+	<true/>
+	<key>com.apple.runningboard.assertions.angeltarget</key>
+	<true/>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.HangHUD</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-only</key>
+	<array>
+		<string>com.apple.Accessibility</string>
+	</array>
+	<key>com.apple.security.system-groups</key>
+	<array>
+		<string>systemgroup.com.apple.ReportMemoryException</string>
+	</array>
+	<key>com.apple.signpostsupport.notification.listen</key>
+	<true/>
+	<key>com.apple.springboard.opensensitiveurl</key>
+	<true/>
+	<key>com.apple.springboard.openurlswhenlocked</key>
+	<true/>
+	<key>com.apple.tailspin.config-apply</key>
+	<true/>
+	<key>com.apple.tailspin.dump-output</key>
+	<true/>
+</dict>
+</plist>

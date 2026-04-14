@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.PerfPowerServices.data-donation</key>
+	<true/>
+	<key>com.apple.PerfPowerServices.data-read-xpc</key>
+	<true/>
+	<key>com.apple.coreduetd.context</key>
+	<true/>
+	<key>com.apple.private.powersource-read</key>
+	<true/>
+	<key>com.apple.private.usernotifications.bundle-identifiers</key>
+	<array>
+		<string>com.apple.batteryintelligence-notifications</string>
+	</array>
+	<key>com.apple.proactive.eventtracker</key>
+	<true/>
+	<key>com.apple.security.exception.files.absolute-path.read-only</key>
+	<array>
+		<string>/usr/libexec/</string>
+	</array>
+	<key>com.apple.security.exception.files.absolute-path.read-write</key>
+	<array>
+		<string>/private/var/tmp/com.apple.batteryintelligenced/</string>
+		<string>/private/var/db/Battery/BDC/</string>
+		<string>/private/var/db/Battery/BI/</string>
+		<string>/private/var/root/Library/Preferences/</string>
+		<string>/private/var/db/Battery/BI/com.apple.batteryintelligence.batteryalgorithms</string>
+	</array>
+	<key>com.apple.security.exception.iokit-user-client-class</key>
+	<array>
+		<string>AGXDeviceUserClient</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.coreduetd.context</string>
+		<string>com.apple.powerlog.plxpclogger.xpc</string>
+		<string>com.apple.appleneuralengine</string>
+		<string>com.apple.appleneuralengine.private</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.batteryintelligence.internal</string>
+	</array>
+	<key>com.apple.security.temporary-exception.files.home-relative-path.read-only</key>
+	<string>/Library/Trial/</string>
+	<key>com.apple.trial.client</key>
+	<array>
+		<string>1910</string>
+	</array>
+	<key>platform-application</key>
+	<true/>
+	<key>seatbelt-profiles</key>
+	<array>
+		<string>temporary-sandbox</string>
+	</array>
+</dict>
+</plist>

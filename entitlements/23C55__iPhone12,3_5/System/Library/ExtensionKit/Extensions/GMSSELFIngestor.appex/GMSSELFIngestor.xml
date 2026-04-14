@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.siri.GMSSELFIngestor</string>
+	<key>com.apple.private.intelligenceplatform.use-cases</key>
+	<dict>
+		<key>GMSLogging.StreamMapper</key>
+		<dict>
+			<key>Streams</key>
+			<array>
+				<string>GenerativeModels.GenerativeFunctions.Instrumentation</string>
+			</array>
+		</dict>
+	</dict>
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<key>com.apple.security.application-groups</key>
+	<array>
+		<string>group.com.apple.siri.GMSSELFIngestor</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.biome.access.user</string>
+		<string>com.apple.siri.analytics.assistant</string>
+	</array>
+	<key>com.apple.security.temporary-exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.biome.access.user</string>
+		<string>com.apple.siri.analytics.assistant</string>
+	</array>
+	<key>com.apple.siri.analytics.assistant</key>
+	<array>
+		<string>publish.unordered</string>
+	</array>
+</dict>
+</plist>

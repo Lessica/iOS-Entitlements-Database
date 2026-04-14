@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.appplaceholdersyncd.replicatorclient</key>
+	<true/>
+	<key>com.apple.appprotectiond.read.access</key>
+	<true/>
+	<key>com.apple.private.mobileinstall.allowedSPI</key>
+	<array>
+		<string>InstallForInstallCoordination</string>
+		<string>CreateSerializedPlaceholder</string>
+	</array>
+	<key>com.apple.private.replicator.dataProvider</key>
+	<true/>
+	<key>com.apple.private.replicator.stateCapturer</key>
+	<true/>
+	<key>com.apple.private.sandbox.profile:embedded</key>
+	<string>temporary-sandbox</string>
+	<key>com.apple.private.security.daemon-container</key>
+	<true/>
+	<key>com.apple.private.security.storage.os_eligibility.readonly</key>
+	<true/>
+	<key>com.apple.private.sharing.unlock-manager</key>
+	<true/>
+	<key>com.apple.security.application-groups</key>
+	<array>
+		<string>com.apple.private.app_placeholders</string>
+	</array>
+	<key>com.apple.security.exception.files.absolute-path.read-only</key>
+	<array>
+		<string>/private/var/db/os_eligibility/eligibility.plist</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.replicatorservices</string>
+		<string>com.apple.mobile.installd</string>
+		<string>com.apple.appprotectiond.read</string>
+		<string>com.apple.sharingd.nsxpc</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.appplaceholdersyncd</string>
+	</array>
+	<key>com.apple.security.ts.daemon-container</key>
+	<true/>
+	<key>com.apple.security.ts.read-any-bundle</key>
+	<true/>
+	<key>platform-application</key>
+	<true/>
+</dict>
+</plist>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.mobilesafari.SafariWidgetExtension</string>
+	<key>com.apple.private.appintents-attribution-override</key>
+	<true/>
+	<key>com.apple.private.safari.can-use-bookmarks-sync-agent</key>
+	<true/>
+	<key>com.apple.private.security.container-required</key>
+	<string>com.apple.mobilesafari</string>
+	<key>com.apple.private.security.storage.Safari</key>
+	<true/>
+	<key>com.apple.security.application-groups</key>
+	<array>
+		<string>group.com.apple.safari</string>
+	</array>
+	<key>com.apple.security.exception.files.home-relative-path.read-only</key>
+	<array>
+		<string>/Library/Safari/</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.SafariBookmarksSyncAgent</string>
+	</array>
+	<key>com.apple.security.exception.shared-preference.read-write</key>
+	<array>
+		<string>com.apple.mobilesafarishared</string>
+		<string>kCFPreferencesAnyApplication</string>
+		<string>com.apple.WebUI</string>
+	</array>
+	<key>platform-application</key>
+	<true/>
+</dict>
+</plist>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.BreathingAlgorithms.BDADiagnosticExtension</string>
+	<key>com.apple.DiagnosticExtensions.extension</key>
+	<true/>
+	<key>com.apple.developer.healthkit</key>
+	<true/>
+	<key>com.apple.private.healthkit</key>
+	<true/>
+	<key>com.apple.private.healthkit.feature-availability.read</key>
+	<array>
+		<string>SleepApneaNotifications</string>
+	</array>
+	<key>com.apple.private.healthkit.read_authorization_bypass</key>
+	<array>
+		<string>HKQuantityTypeIdentifierAppleSleepingBreathingDisturbances</string>
+	</array>
+	<key>com.apple.security.ts.tmpdir</key>
+	<string>com.apple.BreathingAlgorithms</string>
+</dict>
+</plist>

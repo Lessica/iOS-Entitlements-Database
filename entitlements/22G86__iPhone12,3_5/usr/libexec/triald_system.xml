@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.triald.system</string>
+	<key>com.apple.application-identifier</key>
+	<string>com.apple.triald.system</string>
+	<key>com.apple.duet.activityscheduler.allow</key>
+	<true/>
+	<key>com.apple.private.assets.accessible-asset-types</key>
+	<array>
+		<string>com.apple.MobileAsset.Trial.Siri.SiriResponseFrameworkFiles</string>
+		<string>com.apple.MobileAsset.Trial.Siri.SiriUnderstandingAttentionAssets</string>
+		<string>com.apple.MobileAsset.Trial.Siri.SiriUnderstandingNLOverrides</string>
+		<string>com.apple.MobileAsset.Trial.Siri.SiriDictationAssets</string>
+		<string>com.apple.MobileAsset.Trial.Siri.SiriUnderstandingNL</string>
+		<string>com.apple.MobileAsset.Trial.Siri.SiriUnderstandingAsrHammer</string>
+		<string>com.apple.MobileAsset.Trial.Siri.SiriExperienceCam</string>
+		<string>com.apple.MobileAsset.Trial.Siri.SiriInferredHelpfulness</string>
+		<string>com.apple.MobileAsset.Trial.Siri.SiriTextToSpeech</string>
+		<string>com.apple.MobileAsset.Trial.Siri.SiriUnderstandingAsrAssistant</string>
+		<string>com.apple.MobileAsset.Trial.Siri.SiriFindMyConfigurationFiles</string>
+		<string>com.apple.MobileAsset.Trial.Siri.SiriUnderstandingAsrUaap</string>
+		<string>com.apple.MobileAsset.Trial.Siri.SiriUnderstandingMorphun</string>
+		<string>com.apple.MobileAsset.Trial.Siri.SiriDialogAssets</string>
+	</array>
+	<key>com.apple.private.assets.bypass-asset-types-check</key>
+	<true/>
+	<key>com.apple.private.assets.change-daemon-config</key>
+	<true/>
+	<key>com.apple.private.security.restricted-application-groups</key>
+	<array>
+		<string>group.com.apple.siri.userfeedbacklearning</string>
+	</array>
+	<key>com.apple.private.security.storage.triald</key>
+	<true/>
+	<key>com.apple.security.application-groups</key>
+	<array>
+		<string>group.com.apple.siri.userfeedbacklearning</string>
+	</array>
+</dict>
+</plist>

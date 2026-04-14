@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PRWantsLocation</key>
+	<true/>
+	<key>com.apple.QuartzCore.secure-mode</key>
+	<true/>
+	<key>com.apple.locationd.effective_bundle</key>
+	<true/>
+	<key>com.apple.locationd.prompt_behavior</key>
+	<true/>
+	<key>com.apple.locationd.prompt_from_background</key>
+	<true/>
+	<key>com.apple.locationd.usage_oracle</key>
+	<true/>
+	<key>com.apple.posterkit.enhanced-memory-limits</key>
+	<true/>
+	<key>com.apple.posterkit.provider</key>
+	<true/>
+	<key>com.apple.security.exception.files.absolute-path.read-only</key>
+	<array>
+		<string>/Library/Wallpaper/Mercury/</string>
+	</array>
+	<key>com.apple.security.personal-information.location</key>
+	<true/>
+</dict>
+</plist>

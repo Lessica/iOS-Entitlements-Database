@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.appleidsetupd</string>
+	<key>com.apple.authkit.client.private</key>
+	<true/>
+	<key>com.apple.managedconfiguration.profiled.configurationprofiles</key>
+	<array>
+		<string>Removal</string>
+	</array>
+	<key>com.apple.private.accounts.allaccounts</key>
+	<true/>
+	<key>com.apple.private.ids.registration</key>
+	<array>
+		<string>com.apple.ess</string>
+		<string>com.apple.madrid</string>
+	</array>
+	<key>com.apple.private.managedclient.mdm.unenroll</key>
+	<true/>
+	<key>com.apple.private.sandbox.profile:embedded</key>
+	<string>temporary-sandbox</string>
+	<key>com.apple.security.exception.files.absolute-path.read-only</key>
+	<array>
+		<string>/private/var/mobile/</string>
+	</array>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.ak.auth.xpc</string>
+		<string>com.apple.identityservicesd.embedded.auth</string>
+		<string>com.apple.commcenter.coretelephony.xpc</string>
+		<string>com.apple.accountsd.accountmanager</string>
+		<string>com.apple.managedconfiguration.profiled</string>
+	</array>
+	<key>platform-application</key>
+	<true/>
+</dict>
+</plist>

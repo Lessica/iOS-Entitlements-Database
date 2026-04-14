@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.driver.SPMI.device.user-access</key>
+	<true/>
+	<key>com.apple.security.iokit-user-client-class</key>
+	<array>
+		<string>AppleARMSPMIUserClient</string>
+		<string>AppleSMCClient</string>
+		<string>ApplePTDUserClient</string>
+	</array>
+	<key>com.apple.private.applesmc.user-access</key>
+	<true/>
+	<key>com.apple.driver.PTD.device.user-access</key>
+	<true/>
+</dict>
+</plist>

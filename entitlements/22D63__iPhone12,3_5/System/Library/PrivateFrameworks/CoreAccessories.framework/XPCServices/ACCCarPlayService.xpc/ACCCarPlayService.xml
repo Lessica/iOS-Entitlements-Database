@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>com.apple.internal.CoreAccessories.ACCCarPlayService</string>
+	<key>com.apple.internal.seserviced.all.endpoints.and.cas</key>
+	<true/>
+	<key>com.apple.private.CarPlayServices.icon-layout</key>
+	<true/>
+	<key>com.apple.private.carkit</key>
+	<true/>
+	<key>com.apple.private.carkit.carconnectiontime</key>
+	<true/>
+	<key>com.apple.security.exception.mach-lookup.global-name</key>
+	<array>
+		<string>com.apple.carkit.reconnectiontime.service</string>
+	</array>
+</dict>
+</plist>
